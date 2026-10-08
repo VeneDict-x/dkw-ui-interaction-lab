@@ -1,0 +1,28 @@
+{
+  "name": "dkw-ui-interaction-lab",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "check": "tsc --noEmit",
+    "test": "node --import tsx --test --test-isolation=none tests/core.test.ts",
+    "test:e2e": "playwright test",
+    "test:static": "node scripts/verify-static.mjs",
+    "format": "prettier --write src tests scripts/verify-static.mjs *.ts *.json index.html",
+    "package": "python3 scripts/package.py"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^24.0.0",
+    "prettier": "^3.9.9",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0",
+    "vite": "^7.1.0"
+  }
+}

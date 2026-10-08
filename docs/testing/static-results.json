@@ -1,0 +1,44 @@
+{
+  "environment": "local HTTP server of production dist under /lab/; Chromium; not a real-device or HTTPS test",
+  "time": "2026-10-08T23:04:36.845Z",
+  "results": [
+    {
+      "id": "STATIC-CAROUSEL",
+      "status": "PASS"
+    },
+    {
+      "id": "STATIC-ACTIONS",
+      "status": "PASS"
+    },
+    {
+      "id": "STATIC-BUTTONS",
+      "status": "PASS"
+    },
+    {
+      "id": "STATIC-NAVIGATION",
+      "status": "PASS"
+    },
+    {
+      "id": "STATIC-RESIZE",
+      "status": "PASS"
+    },
+    {
+      "id": "STATIC-RELEASE",
+      "status": "PASS"
+    },
+    {
+      "id": "STATIC-CONFIG-PERSISTENCE",
+      "status": "PASS"
+    },
+    {
+      "id": "STATIC-MOBILE-WIDTH",
+      "status": "PASS"
+    },
+    {
+      "id": "STATIC-ASSETS-RUNTIME",
+      "status": "PASS"
+    }
+  ],
+  "passed": 9,
+  "failed": 0
+}

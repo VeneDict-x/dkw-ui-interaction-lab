@@ -1,0 +1,12 @@
+{
+  "source_zip_integrity": "PASS",
+  "static_zip_integrity": "PASS",
+  "handoff_files_byte_preserved": 6,
+  "recovery_npm_ci": "PASS (offline local cache; authorized execution capabilities)",
+  "recovery_unit_tests": {
+    "passed": 17,
+    "failed": 0
+  },
+  "recovery_production_build": "PASS",
+  "restored_dist_byte_identical": true
+}
