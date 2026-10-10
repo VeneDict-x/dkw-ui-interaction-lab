@@ -110,6 +110,753 @@
   },
   "suites": [
     {
+      "title": "bugfix-02.spec.ts",
+      "file": "bugfix-02.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Task 02 ReleaseButton",
+          "file": "bugfix-02.spec.ts",
+          "line": 33,
+          "column": 6,
+          "specs": [
+            {
+              "title": "01 Down then Up inside activates exactly once",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1349,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T20:44:35.797Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ae56bd5f93bda7cb0d32-fceebd48a2d4798e77a1",
+              "file": "bugfix-02.spec.ts",
+              "line": 34,
+              "column": 3
+            },
+            {
+              "title": "02 Down without Up never activates",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1737,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T20:44:37.736Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ae56bd5f93bda7cb0d32-9d791f413588e2347958",
+              "file": "bugfix-02.spec.ts",
+              "line": 39,
+              "column": 3
+            },
+            {
+              "title": "03 movement inside beyond Slop stays pressed and activates once",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1038,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T20:44:39.487Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ae56bd5f93bda7cb0d32-f7cc0b417220e3702f97",
+              "file": "bugfix-02.spec.ts",
+              "line": 45,
+              "column": 3
+            },
+            {
+              "title": "04 Outside then Up outside never activates",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1055,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T20:44:40.543Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ae56bd5f93bda7cb0d32-624d4a0a7e0ebb734b09",
+              "file": "bugfix-02.spec.ts",
+              "line": 53,
+              "column": 3
+            },
+            {
+              "title": "05 Outside then Inside then Up inside activates once",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1582,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T20:44:41.616Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ae56bd5f93bda7cb0d32-a2fa0d54aba73dfc028c",
+              "file": "bugfix-02.spec.ts",
+              "line": 60,
+              "column": 3
+            },
+            {
+              "title": "06 repeated exits and returns remain reversible",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1513,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T20:44:43.247Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ae56bd5f93bda7cb0d32-16575e8c5adc9fb31c9a",
+              "file": "bugfix-02.spec.ts",
+              "line": 69,
+              "column": 3
+            },
+            {
+              "title": "07 large excursion beyond Slop then return activates once",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1054,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T20:44:44.797Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ae56bd5f93bda7cb0d32-2246e1f3787e9f20aa78",
+              "file": "bugfix-02.spec.ts",
+              "line": 81,
+              "column": 3
+            },
+            {
+              "title": "08 synthetic PointerCancel clears state and never activates on later Up",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1114,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T20:44:45.881Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ae56bd5f93bda7cb0d32-93bed5f1875f322fcb02",
+              "file": "bugfix-02.spec.ts",
+              "line": 89,
+              "column": 3
+            },
+            {
+              "title": "09 capture preserves immediate PRESSED RELEASED PRESSED visuals and fixed position",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1379,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T20:44:47.011Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ae56bd5f93bda7cb0d32-8b036d60f3e74b57fc3a",
+              "file": "bugfix-02.spec.ts",
+              "line": 105,
+              "column": 3
+            },
+            {
+              "title": "10 compatibility click and repeated Up cannot double activate",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1066,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T20:44:48.401Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ae56bd5f93bda7cb0d32-c4ffc2af55ea4f202045",
+              "file": "bugfix-02.spec.ts",
+              "line": 132,
+              "column": 3
+            },
+            {
+              "title": "functional top edge stays inside during press translation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1019,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T20:44:49.489Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ae56bd5f93bda7cb0d32-c3e3b1a2bf1be8a73ed6",
+              "file": "bugfix-02.spec.ts",
+              "line": 142,
+              "column": 3
+            },
+            {
+              "title": "lost capture ends release candidate without activation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1058,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T20:44:50.524Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ae56bd5f93bda7cb0d32-02e2e55bb93950cbebd1",
+              "file": "bugfix-02.spec.ts",
+              "line": 156,
+              "column": 3
+            },
+            {
+              "title": "nested lab Release action uses the same geometry policy",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1116,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T20:44:51.605Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ae56bd5f93bda7cb0d32-df2c8a272c45029b732d",
+              "file": "bugfix-02.spec.ts",
+              "line": 169,
+              "column": 3
+            },
+            {
+              "title": "Chromium touch exits and returns under capture; touchEnd performs 1 action",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2225,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T20:44:52.739Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ae56bd5f93bda7cb0d32-681383d0b0cefc40781f",
+              "file": "bugfix-02.spec.ts",
+              "line": 181,
+              "column": 5
+            },
+            {
+              "title": "Chromium touch exits and returns under capture; touchCancel performs 0 action",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2215,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T20:44:54.991Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ae56bd5f93bda7cb0d32-4071facc358b70762479",
+              "file": "bugfix-02.spec.ts",
+              "line": 181,
+              "column": 5
+            }
+          ]
+        },
+        {
+          "title": "Task 02 Nested Gestures",
+          "file": "bugfix-02.spec.ts",
+          "line": 223,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Option 3 touch drag clears temporary states and preserves None",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1971,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T20:44:57.262Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ae56bd5f93bda7cb0d32-79e1ce7357fc6c6544f9",
+              "file": "bugfix-02.spec.ts",
+              "line": 224,
+              "column": 3
+            },
+            {
+              "title": "Safari-compatible sticky hover regression (forced pseudo-state in Chromium)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1169,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T20:44:59.252Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ae56bd5f93bda7cb0d32-1763d5a7d8f3d0653817",
+              "file": "bugfix-02.spec.ts",
+              "line": 267,
+              "column": 3
+            },
+            {
+              "title": "drag and cancel preserve an actual Option selection and clear the source card",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1437,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T20:45:00.437Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ae56bd5f93bda7cb0d32-255c381036e3b43b94c5",
+              "file": "bugfix-02.spec.ts",
+              "line": 294,
+              "column": 3
+            },
+            {
+              "title": "mouse hover and keyboard focus are separate from selected and pressed",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 997,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T20:45:01.894Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ae56bd5f93bda7cb0d32-b6868205443096ec98a1",
+              "file": "bugfix-02.spec.ts",
+              "line": 320,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "title": "Task 02 Gesture Slop",
+          "file": "bugfix-02.spec.ts",
+          "line": 339,
+          "column": 6,
+          "specs": [
+            {
+              "title": "touch slop increases by 25% without changing mouse threshold (synthetic Pointer Events)",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1180,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T20:45:02.916Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ae56bd5f93bda7cb0d32-f722434448db694a6d04",
+              "file": "bugfix-02.spec.ts",
+              "line": 340,
+              "column": 3
+            },
+            {
+              "title": "touch coefficient is experimental, editable and persists with existing settings",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1199,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-10T20:45:04.109Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "ae56bd5f93bda7cb0d32-bf0905dc8a0faad38590",
+              "file": "bugfix-02.spec.ts",
+              "line": 384,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
       "title": "lab.spec.ts",
       "file": "lab.spec.ts",
       "column": 0,
@@ -131,12 +878,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1644,
+                  "duration": 1404,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:04:59.136Z",
+                  "startTime": "2026-10-10T20:45:05.355Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -165,12 +912,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1058,
+                  "duration": 979,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:01.389Z",
+                  "startTime": "2026-10-10T20:45:06.771Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -199,12 +946,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1064,
+                  "duration": 1008,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:02.468Z",
+                  "startTime": "2026-10-10T20:45:07.765Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -233,12 +980,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 936,
+                  "duration": 901,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:03.549Z",
+                  "startTime": "2026-10-10T20:45:08.804Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -252,7 +999,7 @@
           "column": 1
         },
         {
-          "title": "drag then return cannot resurrect a button tap",
+          "title": "ordinary Basic button retains irreversible Slop cancellation",
           "ok": true,
           "tags": [],
           "tests": [
@@ -267,12 +1014,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 923,
+                  "duration": 968,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:04.504Z",
+                  "startTime": "2026-10-10T20:45:09.722Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -280,7 +1027,7 @@
               "status": "expected"
             }
           ],
-          "id": "d60a0d352cedb73bd581-d5db030f6271edf7f907",
+          "id": "d60a0d352cedb73bd581-74050c7c575101c9fa7a",
           "file": "lab.spec.ts",
           "line": 70,
           "column": 1
@@ -301,12 +1048,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1961,
+                  "duration": 2015,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:05.440Z",
+                  "startTime": "2026-10-10T20:45:10.708Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -316,7 +1063,7 @@
           ],
           "id": "d60a0d352cedb73bd581-af3973b3722b45e571ac",
           "file": "lab.spec.ts",
-          "line": 81,
+          "line": 82,
           "column": 1
         },
         {
@@ -335,12 +1082,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 865,
+                  "duration": 911,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:07.419Z",
+                  "startTime": "2026-10-10T20:45:12.748Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -350,7 +1097,7 @@
           ],
           "id": "d60a0d352cedb73bd581-81d953ec683081d41ee6",
           "file": "lab.spec.ts",
-          "line": 103,
+          "line": 104,
           "column": 1
         },
         {
@@ -369,12 +1116,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1733,
+                  "duration": 1734,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:08.302Z",
+                  "startTime": "2026-10-10T20:45:13.668Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -384,7 +1131,7 @@
           ],
           "id": "d60a0d352cedb73bd581-6db627f66bc2238d9926",
           "file": "lab.spec.ts",
-          "line": 108,
+          "line": 109,
           "column": 1
         },
         {
@@ -403,12 +1150,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1996,
+                  "duration": 2038,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:10.057Z",
+                  "startTime": "2026-10-10T20:45:15.422Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -418,7 +1165,7 @@
           ],
           "id": "d60a0d352cedb73bd581-f31085fa83894ff80fe2",
           "file": "lab.spec.ts",
-          "line": 128,
+          "line": 129,
           "column": 1
         },
         {
@@ -437,12 +1184,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1533,
+                  "duration": 1562,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:12.065Z",
+                  "startTime": "2026-10-10T20:45:17.475Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -452,7 +1199,7 @@
           ],
           "id": "d60a0d352cedb73bd581-79628e1bd025ad7c3926",
           "file": "lab.spec.ts",
-          "line": 156,
+          "line": 157,
           "column": 1
         },
         {
@@ -471,12 +1218,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1761,
+                  "duration": 1874,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:13.609Z",
+                  "startTime": "2026-10-10T20:45:19.053Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -486,7 +1233,7 @@
           ],
           "id": "d60a0d352cedb73bd581-3c6aea31f0c55bd01deb",
           "file": "lab.spec.ts",
-          "line": 166,
+          "line": 167,
           "column": 1
         },
         {
@@ -505,12 +1252,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1085,
+                  "duration": 1215,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:15.391Z",
+                  "startTime": "2026-10-10T20:45:20.945Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -520,7 +1267,7 @@
           ],
           "id": "d60a0d352cedb73bd581-6e5918eeeabb9fa54d48",
           "file": "lab.spec.ts",
-          "line": 183,
+          "line": 184,
           "column": 1
         },
         {
@@ -539,12 +1286,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1965,
+                  "duration": 2070,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:16.490Z",
+                  "startTime": "2026-10-10T20:45:22.178Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -554,7 +1301,7 @@
           ],
           "id": "d60a0d352cedb73bd581-e495c77e6c4e7c350d5f",
           "file": "lab.spec.ts",
-          "line": 199,
+          "line": 200,
           "column": 1
         },
         {
@@ -573,12 +1320,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1168,
+                  "duration": 1589,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:18.466Z",
+                  "startTime": "2026-10-10T20:45:24.264Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -588,7 +1335,7 @@
           ],
           "id": "d60a0d352cedb73bd581-c327fe133fbc664f329b",
           "file": "lab.spec.ts",
-          "line": 218,
+          "line": 219,
           "column": 1
         },
         {
@@ -607,12 +1354,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1056,
+                  "duration": 1622,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:19.653Z",
+                  "startTime": "2026-10-10T20:45:25.871Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -622,7 +1369,7 @@
           ],
           "id": "d60a0d352cedb73bd581-97f005b42656e9da6993",
           "file": "lab.spec.ts",
-          "line": 234,
+          "line": 235,
           "column": 1
         },
         {
@@ -641,12 +1388,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 932,
+                  "duration": 2057,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:20.723Z",
+                  "startTime": "2026-10-10T20:45:27.546Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -656,7 +1403,7 @@
           ],
           "id": "d60a0d352cedb73bd581-c13df570a31ac1feb000",
           "file": "lab.spec.ts",
-          "line": 254,
+          "line": 255,
           "column": 1
         },
         {
@@ -675,12 +1422,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 926,
+                  "duration": 1116,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:21.667Z",
+                  "startTime": "2026-10-10T20:45:29.672Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -690,7 +1437,7 @@
           ],
           "id": "d60a0d352cedb73bd581-eec8d7e9e310e816f90c",
           "file": "lab.spec.ts",
-          "line": 272,
+          "line": 273,
           "column": 1
         },
         {
@@ -709,12 +1456,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1088,
+                  "duration": 1191,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:22.615Z",
+                  "startTime": "2026-10-10T20:45:30.823Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -724,7 +1471,7 @@
           ],
           "id": "d60a0d352cedb73bd581-2b1d9d24fb68fab7dccc",
           "file": "lab.spec.ts",
-          "line": 284,
+          "line": 285,
           "column": 1
         },
         {
@@ -743,12 +1490,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1166,
+                  "duration": 1240,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:23.716Z",
+                  "startTime": "2026-10-10T20:45:32.029Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -758,7 +1505,7 @@
           ],
           "id": "d60a0d352cedb73bd581-347ab986899707cdaaf0",
           "file": "lab.spec.ts",
-          "line": 302,
+          "line": 303,
           "column": 1
         },
         {
@@ -777,12 +1524,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1298,
+                  "duration": 1211,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:24.901Z",
+                  "startTime": "2026-10-10T20:45:33.297Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -792,7 +1539,7 @@
           ],
           "id": "d60a0d352cedb73bd581-c7fc2e4aa77769802c3e",
           "file": "lab.spec.ts",
-          "line": 321,
+          "line": 322,
           "column": 1
         },
         {
@@ -811,12 +1558,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1043,
+                  "duration": 978,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:26.211Z",
+                  "startTime": "2026-10-10T20:45:34.521Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -826,7 +1573,7 @@
           ],
           "id": "d60a0d352cedb73bd581-a69bee82672e5bfe1c74",
           "file": "lab.spec.ts",
-          "line": 343,
+          "line": 344,
           "column": 1
         },
         {
@@ -845,12 +1592,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1137,
+                  "duration": 1105,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:27.267Z",
+                  "startTime": "2026-10-10T20:45:35.518Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -860,7 +1607,7 @@
           ],
           "id": "d60a0d352cedb73bd581-7726f2abae6af410b48c",
           "file": "lab.spec.ts",
-          "line": 355,
+          "line": 356,
           "column": 1
         },
         {
@@ -879,12 +1626,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1555,
+                  "duration": 1614,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:28.418Z",
+                  "startTime": "2026-10-10T20:45:36.645Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -894,7 +1641,7 @@
           ],
           "id": "d60a0d352cedb73bd581-d29043270bcdf87b234d",
           "file": "lab.spec.ts",
-          "line": 371,
+          "line": 372,
           "column": 1
         },
         {
@@ -913,12 +1660,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1593,
+                  "duration": 1529,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:29.988Z",
+                  "startTime": "2026-10-10T20:45:38.290Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -928,7 +1675,7 @@
           ],
           "id": "d60a0d352cedb73bd581-959bc6639614c5707cc4",
           "file": "lab.spec.ts",
-          "line": 389,
+          "line": 390,
           "column": 1
         },
         {
@@ -947,12 +1694,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1025,
+                  "duration": 1067,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:31.597Z",
+                  "startTime": "2026-10-10T20:45:39.851Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -962,7 +1709,7 @@
           ],
           "id": "d60a0d352cedb73bd581-5761b047bb163cab52de",
           "file": "lab.spec.ts",
-          "line": 412,
+          "line": 413,
           "column": 1
         },
         {
@@ -981,12 +1728,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1258,
+                  "duration": 1325,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:32.633Z",
+                  "startTime": "2026-10-10T20:45:40.935Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -996,7 +1743,7 @@
           ],
           "id": "d60a0d352cedb73bd581-e052862a19cc777f0e4c",
           "file": "lab.spec.ts",
-          "line": 424,
+          "line": 425,
           "column": 1
         },
         {
@@ -1015,12 +1762,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2641,
+                  "duration": 2664,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:33.910Z",
+                  "startTime": "2026-10-10T20:45:42.274Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1030,7 +1777,7 @@
           ],
           "id": "d60a0d352cedb73bd581-a6d26a00b60c947c9ddd",
           "file": "lab.spec.ts",
-          "line": 452,
+          "line": 453,
           "column": 1
         },
         {
@@ -1049,12 +1796,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 969,
+                  "duration": 975,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:36.569Z",
+                  "startTime": "2026-10-10T20:45:44.953Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1064,7 +1811,7 @@
           ],
           "id": "d60a0d352cedb73bd581-1b13095302b8d66c140e",
           "file": "lab.spec.ts",
-          "line": 476,
+          "line": 477,
           "column": 1
         },
         {
@@ -1083,12 +1830,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1570,
+                  "duration": 1641,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:37.548Z",
+                  "startTime": "2026-10-10T20:45:45.941Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1098,7 +1845,7 @@
           ],
           "id": "d60a0d352cedb73bd581-240aa6076a189da53517",
           "file": "lab.spec.ts",
-          "line": 490,
+          "line": 491,
           "column": 1
         },
         {
@@ -1117,12 +1864,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1760,
+                  "duration": 1829,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:39.131Z",
+                  "startTime": "2026-10-10T20:45:47.608Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1132,7 +1879,7 @@
           ],
           "id": "d60a0d352cedb73bd581-96c3d967c4f851c6d9b2",
           "file": "lab.spec.ts",
-          "line": 517,
+          "line": 518,
           "column": 1
         },
         {
@@ -1151,12 +1898,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1540,
+                  "duration": 1608,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:40.903Z",
+                  "startTime": "2026-10-10T20:45:49.447Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1166,7 +1913,7 @@
           ],
           "id": "d60a0d352cedb73bd581-6612a57e9d45fc1c0f6d",
           "file": "lab.spec.ts",
-          "line": 534,
+          "line": 535,
           "column": 1
         },
         {
@@ -1185,12 +1932,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1978,
+                  "duration": 1991,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:42.455Z",
+                  "startTime": "2026-10-10T20:45:51.069Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1200,7 +1947,7 @@
           ],
           "id": "d60a0d352cedb73bd581-18d34f5224ac6aadc50d",
           "file": "lab.spec.ts",
-          "line": 550,
+          "line": 551,
           "column": 1
         },
         {
@@ -1219,12 +1966,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1807,
+                  "duration": 1857,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:44.444Z",
+                  "startTime": "2026-10-10T20:45:53.080Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1234,7 +1981,7 @@
           ],
           "id": "d60a0d352cedb73bd581-4deb95a660f70f3044c6",
           "file": "lab.spec.ts",
-          "line": 566,
+          "line": 567,
           "column": 1
         },
         {
@@ -1253,12 +2000,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1068,
+                  "duration": 1038,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:46.266Z",
+                  "startTime": "2026-10-10T20:45:54.952Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1268,7 +2015,7 @@
           ],
           "id": "d60a0d352cedb73bd581-29aa0f3150eddf99f5d1",
           "file": "lab.spec.ts",
-          "line": 613,
+          "line": 614,
           "column": 1
         },
         {
@@ -1287,12 +2034,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2031,
+                  "duration": 2009,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:47.351Z",
+                  "startTime": "2026-10-10T20:45:56.010Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1302,7 +2049,7 @@
           ],
           "id": "d60a0d352cedb73bd581-4a57df76bf44fdd9b6fd",
           "file": "lab.spec.ts",
-          "line": 631,
+          "line": 632,
           "column": 1
         },
         {
@@ -1321,12 +2068,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1095,
+                  "duration": 1239,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:49.393Z",
+                  "startTime": "2026-10-10T20:45:58.037Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1336,7 +2083,7 @@
           ],
           "id": "d60a0d352cedb73bd581-4dae57bd88962d3c260f",
           "file": "lab.spec.ts",
-          "line": 648,
+          "line": 649,
           "column": 1
         },
         {
@@ -1355,12 +2102,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 824,
+                  "duration": 1116,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-08T23:05:50.496Z",
+                  "startTime": "2026-10-10T20:45:59.295Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1370,7 +2117,7 @@
           ],
           "id": "d60a0d352cedb73bd581-45720a50579cdfbd1e46",
           "file": "lab.spec.ts",
-          "line": 667,
+          "line": 668,
           "column": 1
         }
       ]
@@ -1378,9 +2125,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-10-08T23:04:57.621Z",
-    "duration": 53829.577000000005,
-    "expected": 37,
+    "startTime": "2026-10-10T20:44:33.006Z",
+    "duration": 87599.261,
+    "expected": 58,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

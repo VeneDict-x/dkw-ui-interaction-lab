@@ -67,16 +67,17 @@ test('Up outside cancels even below slop', async ({ page }) => {
   await page.mouse.up();
   await expect(page.locator('#action-count')).toHaveText('0');
 });
-test('drag then return cannot resurrect a button tap', async ({ page }) => {
-  await open(page, 'actions');
-  const p = await point(page, '#release-button');
+test('ordinary Basic button retains irreversible Slop cancellation', async ({ page }) => {
+  // Task 02 changed only declared ReleaseButtons; this old contract still applies to Basic.
+  await open(page, 'buttons');
+  const p = await point(page, '[data-action="basic"]');
   await page.mouse.move(p.x, p.y);
   await page.mouse.down();
   await page.mouse.move(p.x + 30, p.y);
   await page.mouse.move(p.x, p.y);
-  await expect(page.locator('#release-button')).toHaveAttribute('data-pressed', 'false');
+  await expect(page.locator('[data-action="basic"]')).toHaveAttribute('data-pressed', 'false');
   await page.mouse.up();
-  await expect(page.locator('#action-count')).toHaveText('0');
+  await expect(page.locator('#basic-count')).toHaveText('0 actions');
 });
 test('simulated PointerCancel resets without activation and lost capture interrupts hold', async ({
   page,
@@ -667,8 +668,8 @@ test('large experimental UI scale protects action bounds and does not overlap ca
 test('visualizer shows start, slop boundary, path and permanently cancelled tap', async ({
   page,
 }) => {
-  await open(page, 'actions');
-  const p = await point(page, '#release-button');
+  await open(page, 'carousel');
+  const p = await point(page, '#carousel-0 [data-card="Option 1"]');
   await page.mouse.move(p.x, p.y);
   await page.mouse.down();
   await expect(page.locator('#gesture-overlay')).toBeVisible();

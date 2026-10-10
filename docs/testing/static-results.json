@@ -1,6 +1,6 @@
 {
   "environment": "local HTTP server of production dist under /lab/; Chromium; not a real-device or HTTPS test",
-  "time": "2026-10-08T23:04:36.845Z",
+  "time": "2026-10-10T20:45:30.141Z",
   "results": [
     {
       "id": "STATIC-CAROUSEL",

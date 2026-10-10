@@ -2,6 +2,7 @@ export const fields = {
   uiScale: [1, 0.8, 1.5, 0.05, 'UI scale'],
   referenceUnit: [48, 44, 100, 1, 'Interaction reference unit · px'],
   slopRatio: [0.16, 0.01, 1, 0.01, 'Gesture Slop Ratio'],
+  touchSlopMultiplier: [1.25, 0.5, 3, 0.05, 'Touch Slop multiplier'],
   slopMin: [4, 1, 50, 1, 'Slop Min · px'],
   slopMax: [18, 1, 100, 1, 'Slop Max · px'],
   holdDelay: [450, 80, 2000, 10, 'HoldDelay · ms'],
@@ -65,8 +66,15 @@ export function sanitize(input: unknown): Config {
   return c;
 }
 export const clamp = (n: number, min: number, max: number) => Math.max(min, Math.min(max, n));
-export const slop = (c: Config) =>
-  clamp(c.referenceUnit * c.uiScale * c.slopRatio, c.slopMin, c.slopMax);
+export const slop = (c: Config, pointerType = 'mouse') =>
+  clamp(
+    c.referenceUnit *
+      c.uiScale *
+      c.slopRatio *
+      (pointerType === 'touch' ? c.touchSlopMultiplier : 1),
+    c.slopMin,
+    c.slopMax,
+  );
 export function loadConfig(): Config {
   try {
     return sanitize(JSON.parse(localStorage.getItem('dkw-lab-v1') || 'null'));

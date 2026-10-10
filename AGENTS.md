@@ -2,13 +2,23 @@
 
 Read all six files in `docs/handoff`, beginning with START_HERE_CODEX.md. Adaptive
 Window Geometry v0.2.1 is the architecture source of truth.
+Read docs/BUGFIX_TASK_02.md for the owner's approved ReleaseButton exception and
+the experimental touch-only Slop adjustment; it supersedes the original release
+policy for explicitly declared ReleaseButtons only.
 
 Non-negotiable contracts:
 - Pointer Events are the primary input; keyboard activation is an additional accessible path.
 - Ordinary actions activate on valid release, never PointerDown.
-- Slop crossing permanently cancels the current tap. In carousel cards,
+- Declared ReleaseButtons track untransformed functional bounds under pointer
+  capture: inside -> PRESSED, outside -> RELEASED, any return -> PRESSED.
+  Up inside activates once, Up outside/cancel never activates; Slop cannot cancel
+  this candidate. Keep the button in place; press-depth feedback is independent.
+- Other taps remain permanently cancelled after Slop crossing. In carousel cards,
   abs(dx) >= abs(dy) selects CAROUSEL (including exact 45 degrees); otherwise
   MODULES. Ownership locks until up/cancel. Background belongs to MODULES.
+- Card selection, temporary press/drag, mouse hover and keyboard focus are separate.
+  End/cancel/interrupt clears temporary states, never the real selection. Native
+  sticky :hover must not highlight touch cards.
 - Before recognition, leaving/re-entering can unpress/repress a valid candidate.
   Recognized hold survives movement anywhere; up anywhere/cancel terminates.
 - Interaction and availability are independent. Unavailable hold pauses without

@@ -1,9 +1,9 @@
 export const cases: Record<string, string> = {
   'BTN-DOWN': 'Down: визуальное нажатие, без действия',
   'BTN-UP': 'Валидный Up: ровно одно действие',
-  'BTN-RETURN': 'Уход и возврат до slop: unpress / repress',
+  'BTN-RETURN': 'Уход и возврат: unpress / repress по политике кнопки',
   'BTN-OUT': 'Up вне границ: без действия',
-  'BTN-DRAG': 'После drag возврат не восстанавливает tap',
+  'BTN-DRAG': 'Обычная кнопка: drag отменяет tap; ReleaseButton использует геометрию',
   'BTN-CANCEL': 'Cancel: без действия, визуальный сброс',
   'HOLD-OUT': 'Распознанный Hold сохраняется вне кнопки',
   'HOLD-END': 'Hold Up вне / Cancel завершает сессию',

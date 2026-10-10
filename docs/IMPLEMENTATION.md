@@ -26,7 +26,12 @@ none` so custom arbitration can keep ownership after recognition; the surroundin
 page remains scrollable. Wheel deltas are routed by dominant axis to Carousel or
 Modules; line/page delta modes are converted to local distances.
 
-Slop = clamp(referenceUnit × uiScale × Ratio, Min, Max). The web exposes no reliable
+Slop = clamp(referenceUnit × uiScale × Ratio × pointerCoefficient, Min, Max).
+pointerCoefficient is the editable EXPERIMENTAL touchSlopMultiplier (initial 1.25)
+for actual pointerType=touch, and 1 for mouse/pen/other. Older saved configs receive
+only the missing coefficient, preserving all existing tuning. Baseline 7.68 px becomes
+9.60 px for touch; mouse/pen stay 7.68 px. Min/Max still cap custom profiles.
+The web exposes no reliable
 native Slop threshold; the displayed source explicitly says UI-relative fallback.
 Euclidean distance must **exceed** Slop; equality remains a tap candidate.
 Exact axis tie after crossing selects Carousel. Axis ownership never transfers.
@@ -34,11 +39,27 @@ No-overflow carousel has neither scroll nor elastic displacement. Overflow permi
 bounded elastic pull and spring return. Inertia retention is normalized to frame
 time; browser rendering/timer cadence is not a hardware performance guarantee.
 
-Buttons use PointerDown as a candidate, PointerUp as activation. Before hold,
+Declared ReleaseButtons (`release`, `lab-release`) use releasePolicy=geometry.
+Pointer capture changes the event target, not hit testing: each movement/Up reads
+client coordinates and functional bounds, subtracting the press translation from
+the rendered rectangle. Inside/outside press visuals remain reversible regardless
+of Slop. Up inside activates once; Up outside/cancel never activates. Capture loss,
+blur, hiding or test-window navigation ends the candidate. The target never follows
+pointer position. See the owner's approved override in BUGFIX_TASK_02.md.
+
+Other buttons use PointerDown as a candidate, PointerUp as activation. Before hold,
 leaving disarms recognition; returning inside below Slop restarts the HoldDelay.
 Standalone drag cancellation uses the same Slop rule as other controls. This is a
 reversible provisional interpretation. Buttons/arrows within Modules arbitrate to
 Modules after Slop; arrows are distinct hit targets and never become card areas.
+
+Card SELECTED remains aria-pressed/model selection. Source-card data-pressed and
+data-dragging are separate, synchronous temporary states cleared on Up/Cancel/lost
+capture/blur/navigation. The source card is recorded at Down, not re-inferred from
+the old screen coordinate after content moves. Native :hover does not style cards:
+fine-pointer mouse movement owns data-hovered, cleared on gesture start/end/out.
+Keyboard focus-visible remains independent; iOS native tap highlight is suppressed
+only on cards. Forced sticky :hover is tested in Chromium, not claimed as iOS QA.
 
 Hold recognizes after HoldDelay and performs one initial tick, then schedules
 single ticks with interval max(initialMs / (1 + acceleration × seconds), 1000 /
@@ -107,5 +128,5 @@ need measured tuning. Sanitization normalizes invalid values and dependent bound
 - Haptics/audio policy is open; this bench deliberately emits neither.
 - Optional page swipe is not enabled or implemented; required buttons and dots work.
 - Trackpad testing uses Chromium wheel input, not a physical trackpad.
-- No HTTP(S) deployment exists. Formal v1 acceptance remains pending public HTTPS
-  and real-device tests, despite the ready-to-deploy static build.
+- The repository's owner configured an existing GitHub Pages workflow. Deployment
+  status must be checked per commit; it does not certify physical Safari behavior.

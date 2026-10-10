@@ -41,7 +41,7 @@ const panels = [
     'Actions',
     '02',
     'Press mechanics',
-    'Down не активирует. Уход / возврат работают до Slop. После drag tap отменён.',
+    'ReleaseButton: Inside → PRESSED, Outside → RELEASED. Возврат работает независимо от Slop. Up внутри активирует один раз.',
   ],
   [
     'buttons',
@@ -71,8 +71,8 @@ root.innerHTML = `
 <div class="app-grid"><aside class="index"><div class="section-label">COMPONENT TEST CHAMBER</div><nav aria-label="Тестовые окна">${panels.map(([id, name, n]) => `<button class="nav-item" data-open="${id}"><span>${n}</span>${name}<span class="nav-arrow">↗</span></button>`).join('')}</nav><div class="future"><span>EXPERIMENTS / TBC</span><p>Место для будущих модулей.<br>Без спекулятивной реализации.</p></div><div class="index-note">Все настройки калибровки —<br><b>EXPERIMENTAL</b></div></aside>
 <main id="main"><section id="home" class="panel home"><span class="eyebrow">INTERACTION WORKBENCH</span><h2>Выберите эксперимент</h2><p>Откройте тестовое окно, выполните сценарий и смотрите события и наблюдаемые результаты. <code>NOT RUN</code> означает, что проверка ещё не выполнялась.</p><div class="home-grid">${panels.map(([id, name, n, , desc]) => `<button class="experiment-card" data-open="${id}"><span class="experiment-number">${n}</span><strong>${name}</strong><small>${desc}</small><span>Открыть →</span></button>`).join('')}</div></section>
 <section id="test-shell" class="panel" hidden><div class="shell-bar"><button id="back-index" class="quiet">← Индекс</button><span id="test-code" class="eyebrow"></span><button id="close-test" class="quiet">Закрыть тест ×</button></div><div class="test-heading"><div><h2 id="test-title"></h2><p id="instructions"></p></div><span class="live-badge"><i></i> LIVE OBSERVATION</span></div>
-<div id="carousel" class="test-panel" hidden><div class="control-strip"><label>Modules <input id="module-count" type="number" min="1" max="30" value="8"></label><label>Cards / row <input id="card-count" type="number" min="1" max="16" value="7"></label><label>Draft <input id="draft" value="Reference draft"></label></div><div id="workspace-host"><article id="workspace" class="workspace"><header class="workspace-head"><strong>Adaptive Window</strong><output id="geometry-label"></output></header><div id="workspace-body"><div class="preview-frame"><svg id="preview-content" viewBox="0 0 280 180" role="img" aria-label="Нейтральный образец с фиксированным aspect ratio"><rect x="1" y="1" width="278" height="178" rx="12" fill="#212e38" stroke="#49616b"/><path d="M20 90H260M140 20V160" stroke="#49616b" stroke-dasharray="4 6"/><rect x="94" y="40" width="92" height="100" rx="6" fill="#3c5860"/><circle cx="140" cy="80" r="18" fill="#8cbbb6"/><text x="140" y="165" text-anchor="middle" fill="#b4c8cc" font-size="11">REFERENCE · 280 × 180</text></svg><span id="selection-summary"></span></div><div id="modules" class="gesture-modules" aria-label="Вертикальные Modules" tabindex="0"></div></div><footer class="workspace-actions"><button data-action="clear-selection">Clear selections</button><button data-action="lab-release">Release action <span id="lab-count">0</span></button></footer></article></div><p class="hint">В Cards Area: |dx| ≥ |dy| → Carousel, включая 45°. Вне карточек → Modules. Владение блокируется до Up / Cancel. Wheel / trackpad также доступны.</p></div>
-<div id="actions" class="test-panel" hidden><div class="demo-surface action-stage"><span class="surface-label">PRESS / RELEASE TARGET</span><button id="release-button" data-action="release" class="primary large-target">Release Button</button><p class="hint">Для ухода до Slop начинайте рядом с краем кнопки. Большое перемещение отменяет tap.</p></div><div class="state-grid"><div><span>ACTIVATIONS</span><output id="action-count">0</output></div><div><span>INTERACTION</span><output id="release-state">IDLE</output></div><div><span>PRESS VISUALS</span><output class="experimental">EXPERIMENTAL</output></div></div></div>
+<div id="carousel" class="test-panel" hidden><div class="control-strip"><label>Modules <input id="module-count" type="number" min="1" max="30" value="8"></label><label>Cards / row <input id="card-count" type="number" min="1" max="16" value="7"></label><label>Draft <input id="draft" value="Reference draft"></label></div><div id="workspace-host"><article id="workspace" class="workspace"><header class="workspace-head"><strong>Adaptive Window</strong><output id="geometry-label"></output></header><div id="workspace-body"><div class="preview-frame"><svg id="preview-content" viewBox="0 0 280 180" role="img" aria-label="Нейтральный образец с фиксированным aspect ratio"><rect x="1" y="1" width="278" height="178" rx="12" fill="#212e38" stroke="#49616b"/><path d="M20 90H260M140 20V160" stroke="#49616b" stroke-dasharray="4 6"/><rect x="94" y="40" width="92" height="100" rx="6" fill="#3c5860"/><circle cx="140" cy="80" r="18" fill="#8cbbb6"/><text x="140" y="165" text-anchor="middle" fill="#b4c8cc" font-size="11">REFERENCE · 280 × 180</text></svg><span id="selection-summary"></span></div><div id="modules" class="gesture-modules" aria-label="Вертикальные Modules" tabindex="0"></div></div><footer class="workspace-actions"><button data-action="clear-selection">Clear selections</button><button data-action="lab-release" data-release-policy="geometry">Release action <span id="lab-count">0</span></button></footer></article></div><p class="hint">В Cards Area: |dx| ≥ |dy| → Carousel, включая 45°. Вне карточек → Modules. Владение блокируется до Up / Cancel. Wheel / trackpad также доступны.</p></div>
+<div id="actions" class="test-panel" hidden><div class="demo-surface action-stage"><span class="surface-label">PRESS / RELEASE TARGET</span><button id="release-button" data-action="release" data-release-policy="geometry" class="primary large-target">Release Button</button><p class="hint">Внутри — PRESSED, снаружи — RELEASED. Возвращайтесь сколько угодно раз; Slop не отменяет ReleaseButton. Up внутри — одно действие.</p></div><div class="state-grid"><div><span>ACTIVATIONS</span><output id="action-count">0</output></div><div><span>INTERACTION</span><output id="release-state">IDLE</output></div><div><span>PRESS VISUALS</span><output class="experimental">EXPERIMENTAL</output></div></div></div>
 <div id="buttons" class="test-panel" hidden><div class="gallery"><section class="demo-card"><span class="section-label">01 / BASIC ACTION</span><button data-action="basic">Basic action</button><output id="basic-count">0 actions</output></section><section class="demo-card"><span class="section-label">02 / BOUNDED STEPS</span><div class="control-strip"><label>Min<input id="step-min" type="number" value="0"></label><label>Max<input id="step-max" type="number" value="10"></label><label>Current<input id="step-value" type="number" value="5"></label></div><div class="button-row"><button id="minus" data-action="minus" aria-label="Уменьшить">−</button><output id="step-display">5</output><button id="plus" data-action="plus" aria-label="Увеличить">+</button></div></section><section class="demo-card"><span class="section-label">03 / GENERIC REPEAT</span><button id="repeat-button" data-action="repeat">Tap + repeat</button><output id="repeat-count">0 actions</output><output id="repeat-state">IDLE · READY</output></section><section class="demo-card"><span class="section-label">04 / STANDALONE ARROWS</span><div class="button-row"><button data-action="arrow-left" aria-label="Standalone left arrow">←</button><output id="arrow-count">0</output><button data-action="arrow-right" aria-label="Standalone right arrow">→</button></div><p class="hint">Работают без карусели.</p></section><section class="demo-card hold-card"><span class="section-label">05 / TAP + HOLD SESSION + REPEAT</span><button id="hold-button" data-action="hold" class="primary large-target">Tap / Hold / Repeat</button><label class="toggle"><input id="availability" type="checkbox" checked> Action availability · READY</label><div class="control-strip"><button data-action="pause-after">Pause in 0.8 s → resume in 1.6 s</button></div><p class="hint">Эта кнопка планирует локальный тест availability перед Hold. После распознавания уход указателя не заканчивает сессию.</p><div class="state-grid"><div><span>ACTIONS / TICKS</span><output id="hold-count">0</output></div><div><span>INTERACTION / AVAILABILITY</span><output id="hold-state">IDLE · READY</output></div><div><span>HOLD / EFFECTIVE RATE</span><output id="hold-time">0 ms · 0 Hz</output></div></div></section></div></div>
 <div id="navigation" class="test-panel" hidden><div class="control-strip"><label>Scenario<select id="nav-scenario"><option value="both">Back + Next</option><option value="back">Back only</option></select></label><label>Boundary<select id="nav-boundary"><option value="disabled">Disabled</option><option value="hidden">Hidden</option></select></label><label>Faction<select id="nav-faction"><option>Light</option><option>Dark</option></select></label></div><div id="mini-window" class="mini-window"><header><strong>Placeholder sequence</strong><button data-action="mini-close" aria-label="Закрыть мини-окно">×</button></header><div class="mini-content"><span class="eyebrow">TEST CONTENT · NOT OFFICIAL LORE</span><h3 id="page-title">Page 1 / 5</h3><p id="page-copy"></p></div><footer><button id="page-back" data-action="page-back">← Back</button><button id="page-next" data-action="page-next">Next →</button></footer></div><button id="reopen" data-action="mini-reopen" hidden>Reopen mini-window</button><nav id="dots" class="dots" aria-label="Страницы мини-окна">${[1, 2, 3, 4, 5].map((n) => `<button data-action="page-${n}" aria-label="Страница ${n}" class="dot"><span>${n}</span></button>`).join('')}</nav><output id="page-state"></output></div>
 <div id="resize" class="test-panel" hidden><div class="control-strip"><label>Mock width · px<input id="mock-width" type="number" min="240" max="1000" value="520"></label><label>Mock height · px<input id="mock-height" type="number" min="220" max="700" value="350"></label><label>Draft<input id="resize-draft" value="State survives resize"></label></div><div id="resize-surface" class="resize-surface"><div class="mock-world" aria-hidden="true"><span>REFERENCE GRID</span><div></div></div><div id="backdrop" class="backdrop"></div><article id="mock-window" class="mock-window"><header>Functional Bounds <span id="mock-mode"></span></header><div class="mock-body"><div class="mock-preview">Preview<br><span>aspect ratio preserved</span></div><div class="mock-modules">Modules<br><span>Geometry ≠ editor state</span><input id="mock-selection" type="checkbox"><label for="mock-selection">Persist selection</label></div></div><footer><span id="mock-dimensions"></span><button id="resize-handle" aria-label="Изменить размер окна" title="Drag to resize; use numeric inputs on touch">↘</button></footer></article></div><div class="state-grid"><div><span>VIEWPORT</span><output id="actual-viewport"></output></div><div><span>RESIZE LIFECYCLE</span><output id="resize-state">SETTLED</output></div><div><span>FINAL VALIDATION</span><output id="resize-validation">NOT RUN</output></div></div><p class="hint">На узком экране mock-размер ограничен доступной поверхностью. Resize-end: pointerup для ручки; для остальных событий — экспериментальный debounce, браузер не гарантирует resize-end API.</p><div class="preset-row">${[
@@ -97,7 +97,7 @@ root.innerHTML = `
     '',
   )}</select></label><label>Причина<input id="inconclusive-reason" placeholder="Ограничение устройства / наблюдения"></label><button id="record-inconclusive">Record INCONCLUSIVE</button></div><output id="inconclusive-status" class="hint"></output></details><div id="results-list"></div></details>
 <details class="panel event-panel"><summary>Event log <span id="log-count">0 / 150</span></summary><div id="event-log" role="log" aria-label="События взаимодействий"></div></details></main>
-<aside class="debug"><details class="panel" id="debug-details" open><summary>Debug Panel <span class="experimental">EXPERIMENTAL</span></summary><p class="hint">Все значения — рабочие гипотезы. Сохраняются в localStorage; Reset возвращает стартовый профиль, не production defaults.</p><div id="environment" class="environment"></div><div class="slop-value"><span>Effective Gesture Slop</span><strong id="effective-slop"></strong><small>UI-relative fallback · native threshold недоступен</small></div><label class="toggle"><input id="snapshot-toggle" type="checkbox"> Low-cost live resize presentation</label><div id="config-fields">${Object.entries(
+<aside class="debug"><details class="panel" id="debug-details" open><summary>Debug Panel <span class="experimental">EXPERIMENTAL</span></summary><p class="hint">Все значения — рабочие гипотезы. Сохраняются в localStorage; Reset возвращает стартовый профиль, не production defaults.</p><div id="environment" class="environment"></div><div class="slop-value"><span>Effective Gesture Slop</span><strong id="effective-slop"></strong><small id="slop-policy"></small></div><label class="toggle"><input id="snapshot-toggle" type="checkbox"> Low-cost live resize presentation</label><div id="config-fields">${Object.entries(
   fields,
 )
   .map(
@@ -136,6 +136,12 @@ function environment() {
     userAgent: navigator.userAgent,
     pointerType: controller?.current?.pointerType || 'not observed',
     nativeSlop: 'not exposed by web platform',
+    gestureSlop: {
+      baseline: slop(config),
+      touch: slop(config, 'touch'),
+      touchMultiplier: config.touchSlopMultiplier,
+      status: 'EXPERIMENTAL',
+    },
     resizeEnd: 'pointerup for handle; debounce fallback for viewport / numeric input',
   };
 }
@@ -175,7 +181,13 @@ function queueUI() {
 }
 diag.onChange = queueUI;
 controller.onChange = queueUI;
-function register(id: string, run: () => void, hold = false, available?: () => boolean) {
+function register(
+  id: string,
+  run: () => void,
+  hold = false,
+  available?: () => boolean,
+  releasePolicy?: 'geometry',
+) {
   controller.register(id, {
     run: () => {
       run();
@@ -183,10 +195,11 @@ function register(id: string, run: () => void, hold = false, available?: () => b
     },
     hold,
     available,
+    releasePolicy,
   });
 }
-register('release', () => model.actionCount++);
-register('lab-release', () => model.actionCount++);
+register('release', () => model.actionCount++, false, undefined, 'geometry');
+register('lab-release', () => model.actionCount++, false, undefined, 'geometry');
 register('basic', () => model.basicCount++);
 register(
   'repeat',
@@ -416,7 +429,7 @@ function renderModules() {
   $('modules').innerHTML = Array.from(
     { length: model.count },
     (_, i) =>
-      `<section class="module-row"><div class="module-title"><strong>Module ${String(i + 1).padStart(2, '0')}</strong><span id="selected-${i}">None</span><div><button data-action="left-${i}" aria-label="Module ${i + 1} left">←</button><button data-action="right-${i}" aria-label="Module ${i + 1} right">→</button></div></div><div class="carousel" id="carousel-${i}" data-row="${i}" aria-label="Carousel ${i + 1}"><div class="carousel-track">${Array.from({ length: model.cards }, (_, j) => `<button class="selection-card" data-card="${j === 0 ? 'None' : `Option ${j}`}" aria-label="Module ${i + 1}: ${j === 0 ? 'None' : `Option ${j}`}" aria-pressed="false"><span class="card-thumbnail ${j === 0 ? 'none-mark' : ''}">${j === 0 ? '×' : String(j).padStart(2, '0')}</span><span>${j === 0 ? 'None' : `Option ${j}`}</span></button>`).join('')}</div></div></section>`,
+      `<section class="module-row"><div class="module-title"><strong>Module ${String(i + 1).padStart(2, '0')}</strong><span id="selected-${i}">None</span><div><button data-action="left-${i}" aria-label="Module ${i + 1} left">←</button><button data-action="right-${i}" aria-label="Module ${i + 1} right">→</button></div></div><div class="carousel" id="carousel-${i}" data-row="${i}" aria-label="Carousel ${i + 1}"><div class="carousel-track">${Array.from({ length: model.cards }, (_, j) => `<button class="selection-card" data-pressed="false" data-dragging="false" data-hovered="false" data-card="${j === 0 ? 'None' : `Option ${j}`}" aria-label="Module ${i + 1}: ${j === 0 ? 'None' : `Option ${j}`}" aria-pressed="false"><span class="card-thumbnail ${j === 0 ? 'none-mark' : ''}">${j === 0 ? '×' : String(j).padStart(2, '0')}</span><span>${j === 0 ? 'None' : `Option ${j}`}</span></button>`).join('')}</div></div></section>`,
   ).join('');
   for (let i = 0; i < model.count; i++) {
     const el = $(`carousel-${i}`);
@@ -852,7 +865,9 @@ function renderUI() {
   $('gesture-metrics').innerHTML = Object.entries(metrics)
     .map(([k, val]) => `<div><span>${k}</span><output>${htmlEscape(val)}</output></div>`)
     .join('');
-  $('effective-slop').textContent = `${slop(config).toFixed(2)} px`;
+  $('effective-slop').textContent = `${slop(config, v?.pointerType).toFixed(2)} px`;
+  $('slop-policy').textContent =
+    `Mouse / pen / other ${slop(config).toFixed(2)} px · Touch ${slop(config, 'touch').toFixed(2)} px ×${config.touchSlopMultiplier} · EXPERIMENTAL · UI-relative fallback, native threshold недоступен`;
   $('environment').textContent =
     `Viewport ${innerWidth} × ${innerHeight} · DPR ${devicePixelRatio}\nUI scale ${config.uiScale} · unit ${config.referenceUnit}px\n${geometryState ? `${geometryState.layout} · ${geometryState.stage}` : 'Geometry awaits lab window'}`;
   const rows = Object.values(diag.results);

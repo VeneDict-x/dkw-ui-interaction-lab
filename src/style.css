@@ -48,7 +48,7 @@ button {
     filter var(--press-duration) ease,
     box-shadow var(--press-duration) ease;
 }
-button:hover {
+button:not(.selection-card):hover {
   border-color: #75918f;
 }
 button:focus-visible,
@@ -63,6 +63,10 @@ button[data-pressed='true'] {
   transform: translateY(var(--press-depth));
   filter: brightness(var(--press-brightness));
   box-shadow: var(--press-shadow);
+}
+button[data-release-policy='geometry'] {
+  touch-action: none;
+  user-select: none;
 }
 button:disabled,
 button[aria-disabled='true'] {
@@ -946,6 +950,19 @@ summary span:last-child {
   user-select: none;
   touch-action: none;
   font-size: 10px;
+  -webkit-tap-highlight-color: transparent;
+}
+@media (hover: hover) and (pointer: fine) {
+  .selection-card[data-hovered='true'] {
+    border-color: #75918f;
+  }
+}
+.selection-card[data-pressed='true'] {
+  background: #263b47;
+}
+.selection-card[data-dragging='true'] {
+  outline: 1px dashed #49616b;
+  outline-offset: -3px;
 }
 .selection-card[aria-pressed='true'] {
   border-color: #93c3ad;

@@ -30,6 +30,44 @@ test('invalid persisted parameters cannot corrupt constraints', () => {
   assert.equal(c.cr2, 4);
   assert.equal(c.holdDelay, 450);
 });
+test('experimental touch coefficient adds 25 percent; other pointer thresholds stay unchanged', () => {
+  const c = defaults();
+  assert.equal(c.touchSlopMultiplier, 1.25);
+  assert.equal(slop(c, 'touch'), 9.6);
+  for (const type of ['mouse', 'pen', '', 'unknown']) assert.equal(slop(c, type), 7.68);
+  c.uiScale = 1.5;
+  assert.ok(Math.abs(slop(c, 'touch') - 14.4) < 1e-12);
+  assert.equal(slop(c, 'mouse'), 11.52);
+});
+test('touch Slop keeps the original clamps and remains adjustable', () => {
+  const c = defaults();
+  c.slopRatio = 1;
+  assert.equal(slop(c, 'touch'), 18);
+  c.slopRatio = 0.001;
+  assert.equal(slop(c, 'touch'), 4);
+  c.slopRatio = 0.16;
+  c.touchSlopMultiplier = 1;
+  assert.equal(slop(c, 'touch'), slop(c, 'mouse'));
+  c.touchSlopMultiplier = 1.5;
+  assert.equal(slop(c, 'touch'), 11.52);
+});
+test('older persisted settings gain only the touch coefficient and retain custom tuning', () => {
+  const legacy = {
+    slopRatio: 0.2,
+    slopMin: 3,
+    slopMax: 20,
+    holdDelay: 720,
+    inertia: 0.7,
+    pressDepth: 3,
+    visualizer: false,
+    snapshot: false,
+  };
+  const c = sanitize(legacy);
+  assert.equal(c.touchSlopMultiplier, 1.25);
+  for (const [key, value] of Object.entries(legacy)) assert.equal(c[key as keyof typeof c], value);
+  assert.equal(sanitize({ ...legacy, touchSlopMultiplier: 100 }).touchSlopMultiplier, 3);
+  assert.equal(sanitize({ ...legacy, touchSlopMultiplier: -1 }).touchSlopMultiplier, 0.5);
+});
 test('repeat accelerates gradually and never exceeds the max rate', () => {
   const c = defaults();
   assert.equal(repeatInterval(0, c), 240);

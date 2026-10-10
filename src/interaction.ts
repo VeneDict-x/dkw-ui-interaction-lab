@@ -17,11 +17,17 @@ export type PointerState = {
   path: [number, number][];
   slop: number;
 };
-export type Action = { run: () => void; available?: () => boolean; hold?: boolean };
+export type Action = {
+  run: () => void;
+  available?: () => boolean;
+  hold?: boolean;
+  releasePolicy?: 'geometry';
+};
 type Session = {
   view: PointerState;
   target: HTMLElement;
   button: HTMLElement | null;
+  card: HTMLElement | null;
   carousel: HTMLElement | null;
   modules: HTMLElement | null;
   action?: Action;
@@ -55,12 +61,19 @@ export class InteractionController {
   private repeatTimer = 0;
   private inertiaFrame = 0;
   private cardActivations = 0;
+  private hoveredCard: HTMLElement | null = null;
   constructor(
     private root: HTMLElement,
     private config: () => Config,
     private diag: Diagnostics,
   ) {
     root.addEventListener('pointerdown', this.down);
+    // Actual mouse movement owns hover; capture changes and sticky native :hover do not.
+    root.addEventListener('pointermove', this.hover);
+    root.addEventListener('pointerout', (e) => {
+      if (!(e.relatedTarget instanceof Node && this.hoveredCard?.contains(e.relatedTarget)))
+        this.clearHover();
+    });
     window.addEventListener('pointermove', this.move, { passive: false });
     window.addEventListener('pointerup', this.up);
     window.addEventListener('pointercancel', this.cancelEvent);
@@ -104,12 +117,33 @@ export class InteractionController {
     });
   }
   private pressed(s: Session, yes: boolean) {
-    if (s.button) s.button.dataset.pressed = String(yes);
+    const target = s.button || s.card;
+    if (target) target.dataset.pressed = String(yes);
     this.onChange();
   }
-  private inside(b: HTMLElement, x: number, y: number) {
+  private clearHover() {
+    if (this.hoveredCard) this.hoveredCard.dataset.hovered = 'false';
+    this.hoveredCard = null;
+  }
+  private hover = (e: PointerEvent) => {
+    const card =
+      e.pointerType === 'mouse' && !this.active
+        ? (e.target as Element).closest<HTMLElement>('.selection-card')
+        : null;
+    if (card === this.hoveredCard) return;
+    this.clearHover();
+    if (card) {
+      card.dataset.hovered = 'true';
+      this.hoveredCard = card;
+    }
+  };
+  private inside(b: HTMLElement, x: number, y: number, functional = false) {
     const r = b.getBoundingClientRect();
-    return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
+    const transform = functional ? getComputedStyle(b).transform : 'none';
+    const offset = transform === 'none' ? null : new DOMMatrixReadOnly(transform);
+    const tx = offset?.m41 || 0,
+      ty = offset?.m42 || 0;
+    return x >= r.left - tx && x <= r.right - tx && y >= r.top - ty && y <= r.bottom - ty;
   }
   private down = (e: PointerEvent) => {
     if (this.active || !e.isPrimary || e.button !== 0) return;
@@ -128,13 +162,15 @@ export class InteractionController {
     )
       return;
     e.preventDefault();
+    this.clearHover();
     cancelAnimationFrame(this.inertiaFrame);
     document.querySelectorAll<HTMLElement>('.carousel-track').forEach((t) => {
       t.style.transition = 'none';
       t.style.transform = '';
     });
     const capture = button || carousel || modules!;
-    const threshold = slop(this.config());
+    const threshold = slop(this.config(), e.pointerType);
+    const card = carousel ? target.closest<HTMLElement>('[data-card]') : null;
     const view: PointerState = {
       pointerType: e.pointerType,
       id: e.pointerId,
@@ -146,7 +182,10 @@ export class InteractionController {
       dy: 0,
       distance: 0,
       owner: modules && !carousel && !button ? 'MODULES' : 'NONE',
-      phase: 'TAP_CANDIDATE',
+      phase:
+        action?.releasePolicy === 'geometry' && !action.hold
+          ? 'RELEASE_CANDIDATE'
+          : 'TAP_CANDIDATE',
       valid: true,
       path: [[e.clientX, e.clientY]],
       slop: threshold,
@@ -156,6 +195,7 @@ export class InteractionController {
       view,
       target: capture,
       button,
+      card,
       carousel,
       modules,
       action,
@@ -180,6 +220,7 @@ export class InteractionController {
       cardCountBefore: this.cardActivations,
     };
     this.active = s;
+    if (card) card.dataset.dragging = 'false';
     try {
       capture.setPointerCapture(e.pointerId);
     } catch {
@@ -274,6 +315,24 @@ export class InteractionController {
     v.path.push([v.x, v.y]);
     if (v.path.length > 180) v.path.splice(1, 1);
     if (s.button) {
+      if (s.action?.releasePolicy === 'geometry' && !s.action.hold) {
+        // Pointer capture retargets events; coordinates and functional bounds remain authoritative.
+        s.inside = this.inside(s.button, v.x, v.y, true);
+        v.phase = s.inside ? 'RELEASE_CANDIDATE' : 'RELEASE_OUTSIDE';
+        this.pressed(s, s.inside);
+        if (!s.inside) s.left = true;
+        else if (s.left) {
+          s.returned = true;
+          s.left = false;
+          this.diag.check(
+            'BTN-RETURN',
+            s.button.dataset.pressed === 'true',
+            'geometry release: unpress then repress, independent of Slop',
+            { returned: true, pressed: s.button.dataset.pressed, distance: v.distance },
+          );
+        }
+        return;
+      }
       s.inside = this.inside(s.button, v.x, v.y);
       if (s.holding) {
         this.pressed(s, true);
@@ -302,6 +361,7 @@ export class InteractionController {
         s.left = false;
       }
     }
+    if (s.card && v.phase === 'TAP_CANDIDATE') this.pressed(s, this.inside(s.card, v.x, v.y, true));
     if (v.phase === 'TAP_CANDIDATE' && v.distance > s.threshold) {
       v.valid = false;
       v.phase = 'SLOP_CROSSED';
@@ -315,6 +375,7 @@ export class InteractionController {
       s.lockedOwner = v.owner;
       clearTimeout(this.holdTimer);
       this.pressed(s, false);
+      if (s.card) s.card.dataset.dragging = 'true';
       if (s.carousel && Math.abs(v.dx) === Math.abs(v.dy))
         this.diag.check('GEST-45', v.owner === 'CAROUSEL', 'CAROUSEL at exact 45°', v.owner);
       this.diag.log('slop-crossed', {
@@ -442,12 +503,12 @@ export class InteractionController {
           });
       }
     } else if (s.carousel) {
+      this.pressed(s, false);
+      if (s.card) s.card.dataset.dragging = 'false';
+      this.clearHover();
       if (!cancelled && wasValid) {
         const card = document.elementFromPoint(v.x, v.y)?.closest<HTMLElement>('[data-card]');
-        const initial = document
-          .elementFromPoint(v.startX, v.startY)
-          ?.closest<HTMLElement>('[data-card]');
-        if (card && card === initial && s.carousel.contains(card)) {
+        if (card && card === s.card && s.carousel.contains(card)) {
           this.cardActivations++;
           card.dispatchEvent(
             new CustomEvent('card-select', { bubbles: true, detail: { value: card.dataset.card } }),
@@ -512,7 +573,13 @@ export class InteractionController {
     const s = this.active;
     return s?.button?.dataset.action === id
       ? {
-          interaction: s.holding ? 'HOLDING' : s.view.valid && s.inside ? 'PRESSED' : 'IDLE',
+          interaction: s.holding
+            ? 'HOLDING'
+            : s.view.valid && s.inside
+              ? 'PRESSED'
+              : s.action?.releasePolicy === 'geometry' && !s.action.hold
+                ? 'RELEASED'
+                : 'IDLE',
           availability: this.available(s.action!) ? 'READY' : 'WAITING',
           ticks: s.ticks,
           duration: s.holding ? performance.now() - s.holdStart : 0,

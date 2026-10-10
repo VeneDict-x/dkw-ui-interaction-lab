@@ -3,6 +3,10 @@
 Статическая лаборатория Pointer Events и адаптивной геометрии. Это инженерный
 стенд, а не игра. Все параметры калибровки помечены EXPERIMENTAL.
 
+Актуальное исключение ReleaseButton и результаты Bugfix Task 02 описаны в
+[отчёте](docs/BUGFIX_TASK_02.md). Шесть исходных файлов ТЗ сохранены; утверждённое
+новое правило заменяет старую Slop-отмену только для ReleaseButton.
+
 ## Восстановление разработки
 
 Исходники: [VeneDict-x/dkw-ui-interaction-lab](https://github.com/VeneDict-x/dkw-ui-interaction-lab).
@@ -46,7 +50,8 @@ Chrome/Chromium, например `CHROMIUM_PATH=/path/to/chromium npm run test:
   Navigation закрывает только мини-окно; Reopen сохраняет выбранную страницу.
 - Pointer Events — основной путь действий. Клавиатура и assistive activation
   поддерживаются дополнительным путём; pointer click не дублирует PointerUp.
-- Debug Panel содержит Slop, HoldDelay, bounded repeat, inertia / elasticity,
+- Debug Panel содержит Slop и отдельный EXPERIMENTAL touch multiplier (стартовый
+  коэффициент 1.25), HoldDelay, bounded repeat, inertia / elasticity,
   press feedback, staged geometry, hysteresis, settle debounce, blur и dim.
 - Параметры сохраняются в localStorage. Config reset возвращает **стартовый
   экспериментальный профиль**, не окончательные production defaults.
@@ -61,9 +66,14 @@ Chrome/Chromium, например `CHROMIUM_PATH=/path/to/chromium npm run test:
 - Журнал хранит последние 150 событий; в панели видны последние 40. JSON
   содержит все сохранённые 150. Никакой автоматической отправки данных нет.
 
-До распознавания Hold или drag уход и возврат могут unpress / repress кнопку.
-Для проверки этого сценария начните у края: движение должно оставаться меньше
-Slop. После Slop tap отменён до следующего Down. Распознанный Hold сохраняется
+ReleaseButton в Actions и Release action в Nested gestures следят за функциональными
+границами: Inside → PRESSED, Outside → RELEASED; возвращаться можно сколько угодно
+раз, независимо от Slop. Up внутри даёт ровно одно действие, Up снаружи / Cancel — ноль.
+Press-depth feedback не сдвигает область hit-test и не заставляет кнопку следовать указателю.
+
+У других кнопок и карточек после Slop tap отменён до следующего Down. До
+распознавания Hold уход и возврат ниже Slop могут unpress / repress кнопку.
+Распознанный Hold сохраняется
 вне кнопки и прекращается по Up где угодно / Cancel / lost capture / blur /
 скрытию документа. Недоступность останавливает ticks, сохраняя саму сессию.
 
@@ -80,9 +90,10 @@ Slop. После Slop tap отменён до следующего Down. Рас�
 `npm ci`. Также сохраните JSON настроек и результатов отдельных испытаний.
 
 GitHub хранит исходники, тесты и документацию; зависимости и сборка восстанавливаются
-локально. Публикация сайта требует отдельного разрешения. GitHub Pages не включены.
+локально. Владелец настроил существующий GitHub Pages workflow: push в main запускает
+проверку и статический deployment. Его результат проверяется в GitHub Actions.
 
-## Публикация после отдельного разрешения
+## Статическая сборка и публикация
 
 Архив `DKW_UI_INTERACTION_LAB_static.zip` содержит `index.html` и `assets/` в корне.
 Распакуйте его и загрузите содержимое на статический HTTPS-хостинг. Backend,
@@ -96,8 +107,9 @@ OpenAI API key, домен, база данных и авторизация не
 
 Откройте выданный HTTPS-адрес в Safari на настоящем iPhone. `localhost` облачной
 среды не доступен с телефона. Открытие index.html через file:// не заменяет HTTP(S)
-и может блокировать загрузку ES modules. До публикации условие Acceptance Criteria
-«public HTTPS URL on real devices» остаётся **NOT RUN**.
+и может блокировать загрузку ES modules. Успешный deployment и тесты Chromium не
+подтверждают работу Safari на устройстве: повторная проверка исправлений требует
+отдельных наблюдений из iPhone-чек-листа.
 
 См. [REPORT.md](REPORT.md), [implementation](docs/IMPLEMENTATION.md),
 [physical iPhone checklist](docs/IPHONE_CHECKLIST.md) и исходное ТЗ в docs/handoff.
