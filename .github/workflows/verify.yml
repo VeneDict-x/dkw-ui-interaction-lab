@@ -1,0 +1,41 @@
+name: Verify UI Interaction Lab
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  chromium-regressions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm test
+      - name: Install test Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Select Playwright Chromium
+        run: node --input-type=module -e "import {chromium} from '@playwright/test'; console.log('CHROMIUM_PATH=' + chromium.executablePath())" >> "$GITHUB_ENV"
+      - run: npm run test:e2e
+      - run: npm run build
+      - run: npm run test:static
+      - name: Retain browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: chromium-evidence
+          path: artifacts/testing/
+          retention-days: 7

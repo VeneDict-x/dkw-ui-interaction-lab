@@ -55,3 +55,39 @@ earlier defect observations do not count as verification of these fixes.
 
 Record model, iOS/Safari version, URL/build, config and observations. Do not mark
 these checks PASS from Chromium's touch or forced-hover automation.
+
+
+## Bugfix Task 03 — physical Safari acceptance PENDING
+
+All items below require an actual iPhone; Chromium/CDP is not physical Safari.
+
+1. Generic Repeat: long touch without native text selection/callout; move outside
+   after recognition; release anywhere stops. Repeat before/after recognition,
+   OS interruption, background, call/return; no orphan count or stuck HOLDING.
+2. Toggle section 05 availability repeatedly; section 03 is unaffected and all
+   controls recover without reload. Check pause at 2.0 s, resume at 4.0 s.
+   Select experimental initial-delay multiplier 1.0–2.5; Bounded Steps unchanged.
+3. Navigation Hidden first/last pages: stable slots, absent hit targets, Strict Tap
+   exit/reentry cancels. ReleaseButton exit/reentry remains reversible.
+4. Carousels: real partial Peek, exact final full card/insets, no trailing gap,
+   arrows disappear entirely, drag never selects, diminishing unlimited pull,
+   two-finger continuation/handoff and springback on last lift. Outer page scroll.
+5. Window 240×220, portrait/landscape rotation, repeated numeric/handle resize:
+   reachable Modules and checkbox, preview aspect, retained text/selection,
+   requested/applied/clamping diagnostics, model presets do not resize browser.
+   Reset 05 preserves all other modules and invalidates pending resize.
+6. Draft: all geometric options and layers, Large=None unavailable Apply with
+   working autosave; responsive Current, durable lower label, changing latency.
+   Apply/Discard during save never resurrect Draft. Save for later waits for
+   confirmed success; injected failure and Retry; out-of-order burst saves.
+7. True reload, Safari restart after confirmed save, simulated crashes before/
+   after save: only durable values recover; live return has no recovery prompt.
+   Draft found → Continue / Not now / Delete with second confirmation; Applied
+   remains distinct. Real iOS browser/process eviction cannot be forced by lab.
+8. Modal focus, Escape/external keyboard, VoiceOver, overlay hit testing and mobile
+   scrolling: no accidental discard. Diagnostic text/input remain selectable;
+   exports work. IndexedDB persistence/error paths and explicit cleanup isolated.
+
+Record device/iOS version, URL/commit and observation for each PASS/FAIL. Clearing
+site data intentionally removes local Draft/Applied; private-mode/eviction policies
+and browser quota require device confirmation.

@@ -1,0 +1,29 @@
+{
+  "baselineCommit": "0bfcf30812f267c955ad51344619a83184ff0db4",
+  "coverage": "Chromium before implementation, not physical Safari",
+  "stats": {
+    "startTime": "2026-10-13T05:55:55.464Z",
+    "duration": 24786.852,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  },
+  "cases": [
+    {
+      "title": "BF03 Strict Tap permits large movement wholly inside",
+      "status": "failed",
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#basic-count')\nExpected: \u001b[32m\"\u001b[7m1\u001b[27m actions\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7m0\u001b[27m actions\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('#basic-count') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#basic-count')\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <output id=\"basic-count\">0 actions</output>\u001b[22m\n\u001b[2m       - unexpected value \"0 actions\"\u001b[22m\n"
+    },
+    {
+      "title": "BF03 repeat availability isolated from hold availability",
+      "status": "failed",
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#repeat-state')\nExpected: \u001b[32m\"HOLDING \u00b7 \u001b[7mREADY\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"HOLDING \u00b7 \u001b[7mWAITING\u001b[27m\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('#repeat-state') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#repeat-state')\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <output id=\"repeat-state\">HOLDING \u00b7 WAITING</output>\u001b[22m\n\u001b[2m       - unexpected value \"HOLDING \u00b7 WAITING\"\u001b[22m\n"
+    },
+    {
+      "title": "BF03 Hidden keeps Next in independent right slot",
+      "status": "failed",
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeCloseTo\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m, \u001b[22mprecision\u001b[2m)\u001b[22m\n\nExpected: \u001b[32m865.640625\u001b[39m\nReceived: \u001b[31m276\u001b[39m\n\nExpected precision:    1\nExpected difference: < \u001b[32m0.05\u001b[39m\nReceived difference:   \u001b[31m589.640625\u001b[39m"
+    }
+  ]
+}

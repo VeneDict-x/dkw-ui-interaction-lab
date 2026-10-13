@@ -1428,3 +1428,168 @@ summary span:last-child {
     transition: none;
   }
 }
+/* BF03: scoped native suppression, stable slots, count-independent peek. */
+button[data-action],
+.selection-card {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  touch-action: none;
+}
+.mini-window footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+#page-back {
+  grid-column: 1;
+  justify-self: start;
+}
+#page-next {
+  grid-column: 2;
+  justify-self: end;
+}
+.carousel-shell {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
+  gap: 4px;
+  align-items: center;
+}
+.carousel-shell .carousel {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+}
+.carousel-arrow {
+  padding: 4px;
+  min-width: 44px;
+  min-height: 44px;
+  box-shadow: none;
+}
+.carousel-arrow.left {
+  grid-column: 1;
+  grid-row: 1;
+}
+.carousel-arrow.right {
+  grid-column: 3;
+  grid-row: 1;
+}
+.selection-card {
+  width: var(--card-width, 108px);
+}
+/* Compact 05: scroll the whole body, keeping full target sizes. */
+.mock-window header {
+  flex-shrink: 0;
+}
+.mock-window[data-compact='true'] .mock-body {
+  flex-direction: column;
+}
+.mock-window[data-compact='true'] .mock-preview {
+  flex: 0 0 auto;
+  width: 84px;
+  min-width: 0;
+  min-height: 0;
+  height: 56px;
+  max-height: none;
+  font-size: 10px;
+}
+.mock-window[data-compact='true'] .mock-modules {
+  flex: 0 0 auto;
+  min-height: max-content;
+  overflow: visible;
+}
+.mock-modules input[type='checkbox'] {
+  min-width: 44px;
+  min-height: 44px;
+  align-self: start;
+}
+#mock-feedback {
+  display: block;
+  margin-top: 12px;
+}
+.draft-window {
+  border: 1px solid #51616a;
+  border-radius: 10px;
+  padding: 12px;
+}
+.draft-preview {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+}
+#draft-composition {
+  width: min(100%, 280px);
+  aspect-ratio: 1.4;
+  background: #14202a;
+}
+.draft-preview output {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+}
+.draft-modules {
+  max-height: 400px;
+  margin: 14px 0;
+  overflow-y: auto;
+}
+.card-thumbnail svg {
+  width: 100%;
+  height: 100%;
+}
+.draft-tests,
+.draft-dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+.draft-diagnostics pre {
+  font-size: 11px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+#draft-events {
+  max-height: 260px;
+  overflow-y: auto;
+  font-size: 11px;
+  padding-left: 20px;
+}
+#draft-dialog {
+  color: #dce5ea;
+  background: #1e2b33;
+  border: 1px solid #8ac2ac;
+  border-radius: 12px;
+  max-width: min(580px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+}
+#draft-dialog::backdrop {
+  background: #081016aa;
+}
+#draft-dialog p {
+  font-size: 13px;
+  line-height: 1.5;
+}
+#draft-save-state[data-state='SAVE_FAILED'] {
+  color: #ef9c96;
+}
+.carousel-track {
+  gap: var(--card-gap, 10px);
+  padding: 4px var(--edge-inset, 4px);
+}
+.mock-window[data-mode='V']:not([data-compact='true']) .mock-preview {
+  width: min(70%, 135px);
+  height: auto;
+  min-height: 0;
+  max-height: none;
+  aspect-ratio: 1.5;
+}
+.carousel-shell {
+  grid-template-columns: max(44px, calc(44px * var(--ui-scale))) minmax(0, 1fr) max(
+      44px,
+      calc(44px * var(--ui-scale))
+    );
+}
+.carousel-arrow {
+  min-width: max(44px, calc(44px * var(--ui-scale)));
+  min-height: max(44px, calc(44px * var(--ui-scale)));
+}

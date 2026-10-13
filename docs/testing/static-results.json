@@ -1,6 +1,6 @@
 {
   "environment": "local HTTP server of production dist under /lab/; Chromium; not a real-device or HTTPS test",
-  "time": "2026-10-10T20:45:30.141Z",
+  "time": "2026-10-13T06:39:05.337Z",
   "results": [
     {
       "id": "STATIC-CAROUSEL",
@@ -23,6 +23,10 @@
       "status": "PASS"
     },
     {
+      "id": "STATIC-DRAFT-RECOVERY",
+      "status": "PASS"
+    },
+    {
       "id": "STATIC-RELEASE",
       "status": "PASS"
     },
@@ -39,6 +43,6 @@
       "status": "PASS"
     }
   ],
-  "passed": 9,
+  "passed": 10,
   "failed": 0
 }

@@ -202,3 +202,141 @@ test('inconclusive never substitutes an observed result', () => {
   assert.equal(d.inconclusive('BTN-UP', 'cannot overwrite'), false);
   assert.equal(d.results['BTN-UP'].status, 'PASS');
 });
+
+import { cardGeometry, rubberBand } from '../src/carousel.ts';
+import {
+  DraftEditor,
+  emptySelection,
+  type Repository,
+  type Stored,
+  type Draft,
+  type Selection,
+} from '../src/draft.ts';
+test('BF03 canonical 3.5 geometry is count independent and has exact symmetric ends', () => {
+  const g = cardGeometry(411); // 2*4 + 3.5*108 + 2.5*10
+  assert.equal(g.capacity, 3.5);
+  assert.equal(g.width, 108);
+  for (const n of [1, 2, 3]) assert.ok(2 * g.inset + n * g.width + (n - 1) * g.gap < 411);
+  const content = 2 * g.inset + 4 * g.width + 3 * g.gap,
+    max = content - 411;
+  assert.equal(content - max, 411);
+  assert.equal(content - (g.inset + 4 * g.width + 3 * g.gap), g.inset);
+});
+test('BF03 logarithmic overscroll remains unbounded with decreasing increments', () => {
+  const k = 32;
+  let previous = 0;
+  for (const x of [100, 1000, 10000, 1e6, 1e12]) {
+    const d = rubberBand(x, k);
+    assert.ok(Number.isFinite(d) && d > previous);
+    assert.equal(rubberBand(-x, k), -d);
+    previous = d;
+  }
+  assert.ok(rubberBand(200, k) - rubberBand(100, k) > rubberBand(300, k) - rubberBand(200, k));
+  assert.equal(rubberBand(100, 0), 0);
+  assert.equal(rubberBand(0, k), 0);
+});
+test('BF03 delay slider has sixteen sanitized tenths, existing cadence frozen', () => {
+  const base = defaults();
+  for (let v = 10; v <= 25; v++) {
+    const c = sanitize({ ...base, repeatDelayTenths: v });
+    assert.equal(c.repeatDelayTenths, v);
+    for (const elapsed of [0, 1000, 6000])
+      assert.equal(repeatInterval(elapsed, c), repeatInterval(elapsed, base));
+  }
+  assert.equal(sanitize({ ...base, repeatDelayTenths: 12.6 }).repeatDelayTenths, 13);
+});
+class MemoryRepository implements Repository {
+  value: Stored = { applied: emptySelection(), draft: null, activeSession: null };
+  async read() {
+    return structuredClone(this.value);
+  }
+  async begin(session: string) {
+    this.value.activeSession = session;
+    return this.read();
+  }
+  async save(session: string, version: number, selection: Selection): Promise<Draft | null> {
+    if (
+      this.value.activeSession !== session ||
+      (this.value.draft?.session === session && this.value.draft.version >= version)
+    )
+      return null;
+    const draft = {
+      session,
+      version,
+      selection: structuredClone(selection),
+      time: new Date().toISOString(),
+    };
+    this.value.draft = draft;
+    return structuredClone(draft);
+  }
+  async finish(session: string, applied?: Selection) {
+    if (this.value.activeSession !== session) throw Error('superseded');
+    if (applied) this.value.applied = { ...applied };
+    this.value.activeSession = null;
+    this.value.draft = null;
+    return this.read();
+  }
+  async invalidate() {
+    this.value.activeSession = null;
+    return this.read();
+  }
+  async deleteDraft() {
+    this.value.activeSession = null;
+    this.value.draft = null;
+    return this.read();
+  }
+  async clear() {
+    this.value = { applied: emptySelection(), draft: null, activeSession: null };
+    return this.read();
+  }
+}
+test('BF03 repository guard rejects stale sessions and older versions', async () => {
+  const r = new MemoryRepository();
+  await r.begin('a');
+  await r.save('a', 2, { large: 'Square', small: 'Circle', number: '3' });
+  assert.equal(await r.save('a', 1, emptySelection()), null);
+  await r.finish('a', { large: 'Square', small: 'None', number: 'None' });
+  assert.equal(await r.save('a', 3, emptySelection()), null);
+  assert.equal(r.value.draft, null);
+  await r.begin('b');
+  assert.equal(await r.save('a', 99, emptySelection()), null);
+});
+test('BF03 draft editor separates live and committed state, immediate apply invalidates delay', async (t) => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  const repo = new MemoryRepository(),
+    e = new DraftEditor(repo);
+  await e.initialize();
+  await e.start();
+  e.latencyFor = () => 1500;
+  e.select('large', 'Square');
+  assert.equal(e.current.large, 'Square');
+  assert.equal(e.draft, null);
+  assert.equal(e.applied.large, 'None');
+  await e.apply();
+  t.mock.timers.tick(5000);
+  await Promise.resolve();
+  assert.equal(e.applied.large, 'Square');
+  assert.equal(repo.value.draft, null);
+  assert.equal(e.editing, false);
+  assert.equal(e.outcome, 'APPLIED');
+  t.mock.timers.reset();
+});
+test('BF03 discard pending save cannot resurrect deleted draft', async (t) => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  const r = new MemoryRepository(),
+    e = new DraftEditor(r);
+  await e.initialize();
+  await e.start();
+  e.select('large', 'Triangle');
+  await e.discard();
+  t.mock.timers.tick(5000);
+  await Promise.resolve();
+  assert.equal(r.value.draft, null);
+  assert.equal(e.current.large, 'None');
+  assert.equal(e.outcome, 'CANCELLED');
+  t.mock.timers.reset();
+});
+test('BF03 configured Peek fraction changes capacity instead of freezing one half', () => {
+  assert.ok(Math.abs(cardGeometry(411, 108, 10, 4, 0.2).capacity - 3.2) < 1e-12);
+  assert.ok(Math.abs(cardGeometry(411, 108, 10, 4, 0.8).capacity - 2.8) < 1e-12);
+});

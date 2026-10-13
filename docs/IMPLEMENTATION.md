@@ -8,7 +8,7 @@
 | src/geometry.ts | Pure staged allocation, class and H/V hysteresis |
 | src/interaction.ts | Pointer capture, arbitration, release, hold, repeat, inertia |
 | src/diagnostics.ts | Performed assertions, bounded event history, JSON download |
-| src/main.ts | Five persistent test panels, navigation, resize observers, rendering |
+| src/main.ts | Six persistent test panels, navigation, resize observers, rendering |
 | src/style.css | Neutral skin, safe-area padding, protected touch targets |
 | tests/core.test.ts | Geometry, Slop and repeat invariants |
 | tests/browser/lab.spec.ts | Playwright input / cancellation / layout scenarios |
@@ -21,7 +21,9 @@ does not invent Banner Composer production art.
 
 ## Input controller
 
-One primary pointer is accepted per session. Touch zones declare `touch-action:
+One source is active per controller. Carousel touch sessions additionally track
+active touches on that carousel; ownership transfers to a remaining touch without
+reclassification or displacement jump. Last release/cancellation ends the gesture. Touch zones declare `touch-action:
 none` so custom arbitration can keep ownership after recognition; the surrounding
 page remains scrollable. Wheel deltas are routed by dominant axis to Carousel or
 Modules; line/page delta modes are converted to local distances.
@@ -36,7 +38,7 @@ native Slop threshold; the displayed source explicitly says UI-relative fallback
 Euclidean distance must **exceed** Slop; equality remains a tap candidate.
 Exact axis tie after crossing selects Carousel. Axis ownership never transfers.
 No-overflow carousel has neither scroll nor elastic displacement. Overflow permits
-bounded elastic pull and spring return. Inertia retention is normalized to frame
+logarithmic elastic pull without a finite clamp and spring return. Inertia retention is normalized to frame
 time; browser rendering/timer cadence is not a hardware performance guarantee.
 
 Declared ReleaseButtons (`release`, `lab-release`) use releasePolicy=geometry.
@@ -47,11 +49,14 @@ of Slop. Up inside activates once; Up outside/cancel never activates. Capture lo
 blur, hiding or test-window navigation ends the candidate. The target never follows
 pointer position. See the owner's approved override in BUGFIX_TASK_02.md.
 
+Ordinary non-Hold controls use Strict Tap: arbitrary movement inside is valid;
+first exit irrevocably cancels, including sub-Slop exit/reentry. ReleaseButtons
+keep their Task 02 exception. Hold candidates retain Slop recognition semantics.
+All utility buttons now share Pointer Events and keyboard activation.
 Other buttons use PointerDown as a candidate, PointerUp as activation. Before hold,
 leaving disarms recognition; returning inside below Slop restarts the HoldDelay.
-Standalone drag cancellation uses the same Slop rule as other controls. This is a
-reversible provisional interpretation. Buttons/arrows within Modules arbitrate to
-Modules after Slop; arrows are distinct hit targets and never become card areas.
+Ordinary standalone arrows are Strict Tap and never repeat. Ordinary buttons/arrows within Modules retain Strict Tap and never become card
+areas; Hold candidates can cancel after Slop. Modules background retains Y ownership.
 
 Card SELECTED remains aria-pressed/model selection. Source-card data-pressed and
 data-dragging are separate, synchronous temporary states cleared on Up/Cancel/lost
@@ -64,7 +69,10 @@ only on cards. Forced sticky :hover is tested in Chromium, not claimed as iOS QA
 Hold recognizes after HoldDelay and performs one initial tick, then schedules
 single ticks with interval max(initialMs / (1 + acceleration × seconds), 1000 /
 maxRate). Timers round **up**, so rounding cannot exceed the rate ceiling. There
-is no catch-up queue. Availability can change independently of interaction; even
+is no catch-up queue. Generic Repeat and Tap/Hold/Repeat share integer-tenths
+initial-delay multiplier 10–25. Recognition and its initial action remain at
+HoldDelay; first subsequent repeat waits repeatMs × multiplier. Further intervals
+and Bounded Steps retain the original repeatInterval formula. Availability can change independently of interaction; even
 plus/minus reaching a bound does not destroy an existing Hold Session. Ordinary
 release never adds an action to a recognized hold. Keyboard activation is one
 action, not a fabricated hardware hold.
@@ -100,7 +108,9 @@ settled pass starts. The expensive-behind-window engine is future scope.
 
 Selection, draft, step, page and relevant scroll remain separate from layout.
 Scroll can clamp if the new content range is shorter; this is reported. Parameters
-persist; editor state and session diagnostics are intentionally session-scoped.
+persist; the original editor state and session diagnostics are session-scoped. Module 06
+additionally stores Applied and unfinished Draft in IndexedDB; its Current is
+volatile and only persisted values survive restart.
 
 ## Diagnostics
 
@@ -130,3 +140,12 @@ need measured tuning. Sanitization normalizes invalid values and dependent bound
 - Trackpad testing uses Chromium wheel input, not a physical trackpad.
 - The repository's owner configured an existing GitHub Pages workflow. Deployment
   status must be checked per commit; it does not certify physical Safari behavior.
+
+## Task 03 additions
+
+See BUGFIX_TASK_03.md for lifecycle terminal paths, content-driven compact
+geometry, card sizing, logarithmic resistance, IndexedDB transactions,
+session/version guards, crash controls, and exact performed checks.
+New source boundaries: carousel.ts (shared geometry/binding), draft.ts
+(repository + editor lifecycle), draft-ui.ts (sixth panel, native modal, SVG).
+Physical Safari acceptance remains PENDING.

@@ -3,6 +3,10 @@
 Статическая лаборатория Pointer Events и адаптивной геометрии. Это инженерный
 стенд, а не игра. Все параметры калибровки помечены EXPERIMENTAL.
 
+Bugfix Task 03 добавляет исправления lifecycle, Strict Tap, N + Peek карусели и
+реальное локальное сохранение в шестом модуле. Полное задание и актуальные
+заметки реализации: [BUGFIX_TASK_03.md](docs/BUGFIX_TASK_03.md).
+
 Актуальное исключение ReleaseButton и результаты Bugfix Task 02 описаны в
 [отчёте](docs/BUGFIX_TASK_02.md). Шесть исходных файлов ТЗ сохранены; утверждённое
 новое правило заменяет старую Slop-отмену только для ReleaseButton.
@@ -45,7 +49,7 @@ Chrome/Chromium, например `CHROMIUM_PATH=/path/to/chromium npm run test:
 
 ## Работа со стендом
 
-- Индекс открывает **Nested gestures, Actions, Buttons, Navigation, Window & Resize**.
+- Индекс открывает **Nested gestures, Actions, Buttons, Navigation, Window & Resize, Draft & Recovery**.
 - Back / Close общего тестового окна возвращает в индекс. Close мини-окна
   Navigation закрывает только мини-окно; Reopen сохраняет выбранную страницу.
 - Pointer Events — основной путь действий. Клавиатура и assistive activation
@@ -55,7 +59,10 @@ Chrome/Chromium, например `CHROMIUM_PATH=/path/to/chromium npm run test:
   press feedback, staged geometry, hysteresis, settle debounce, blur и dim.
 - Параметры сохраняются в localStorage. Config reset возвращает **стартовый
   экспериментальный профиль**, не окончательные production defaults.
-- Reset test обнуляет общую диагностику и счётчики лаборатории. Сами параметры
+- В модуле 05 Reset test сбрасывает только mock width/height, Draft, Persist
+  selection и локальные временные состояния. В модуле 06 Reset открывает
+  подтверждение удаления локальных данных. В остальных окнах сохранён
+  прежний Reset диагностики и счётчиков. Сами параметры
   сбрасываются отдельно. Состояние тестов сохраняется при переходах между окнами
   и при resize, но не предназначено для восстановления после перезагрузки страницы.
 - Настройки можно Copy / Export JSON. Диагностика экспортирует environment,
@@ -71,7 +78,9 @@ ReleaseButton в Actions и Release action в Nested gestures следят за 
 раз, независимо от Slop. Up внутри даёт ровно одно действие, Up снаружи / Cancel — ноль.
 Press-depth feedback не сдвигает область hit-test и не заставляет кнопку следовать указателю.
 
-У других кнопок и карточек после Slop tap отменён до следующего Down. До
+Обычные кнопки (включая Navigation и utility controls) используют Strict Tap:
+первый выход необратимо отменяет нажатие, движение внутри не ограничено Slop.
+У карточек и кандидатов Hold после Slop tap отменён до следующего Down. До
 распознавания Hold уход и возврат ниже Slop могут unpress / repress кнопку.
 Распознанный Hold сохраняется
 вне кнопки и прекращается по Up где угодно / Cancel / lost capture / blur /
@@ -81,6 +90,22 @@ Press-depth feedback не сдвигает область hit-test и не за�
 числовые поля. Mock-размер ограничен безопасной поверхностью; запрошенные и
 фактические размеры различаются на маленьком экране. Presets рассчитывают модель,
 но не эмулируют устройство и не заменяют actual viewport.
+
+## Draft & Recovery — шестой модуль
+
+Current обновляется немедленно; Draft меняется только после завершения записи
+IndexedDB; Applied меняется только по Apply. Large=None блокирует Apply,
+но допускает autosave. EXPERIMENTAL latency mode: variable 1.5–2.5 s или
+детерминированная задержка/гонка для теста. Cancel открывает три безопасных
+варианта: Discard changes, Save for later, Continue editing.
+
+После reload сохранённый Draft восстанавливается только по выбору Continue editing
+в дружелюбном Draft found prompt. Not now оставляет Draft, Delete требует
+отдельного подтверждения. Simulated crash уничтожает временное состояние и
+читает IndexedDB заново; это не принудительное завершение Safari.
+
+IndexedDB принадлежит браузеру и origin. Очистка данных сайта/эвикция удаляет
+локальный Draft; удалённой синхронизации нет. Ошибки записи видны и доступны Retry.
 
 ## Сохранение между сессиями
 

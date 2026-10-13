@@ -1,0 +1,22 @@
+{
+  "coverage": "Chromium viewport emulation only, not physical Safari",
+  "readings": [
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "scrollWidth": 390,
+      "currentPreserved": true
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "scrollWidth": 844,
+      "currentPreserved": true
+    }
+  ],
+  "runtimeErrors": []
+}

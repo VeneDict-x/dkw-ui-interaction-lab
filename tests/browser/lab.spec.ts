@@ -20,10 +20,10 @@ test.beforeEach(async ({ page }) => {
 });
 test('entry, chambers, NOT RUN assertions and no default PASS', async ({ page }) => {
   await expect(page).toHaveTitle(/DKW/);
-  await expect(page.locator('.index [data-open]')).toHaveCount(5);
+  await expect(page.locator('.index [data-open]')).toHaveCount(6);
   await expect(page.locator('.status.pass')).toHaveCount(0);
   await expect(page.locator('.status.not-run')).toHaveCount(26);
-  for (const id of ['carousel', 'actions', 'buttons', 'navigation', 'resize']) {
+  for (const id of ['carousel', 'actions', 'buttons', 'navigation', 'resize', 'draft-recovery']) {
     await open(page, id);
     await page.locator('#close-test').click();
     await expect(page.locator('#home')).toBeVisible();
@@ -67,13 +67,13 @@ test('Up outside cancels even below slop', async ({ page }) => {
   await page.mouse.up();
   await expect(page.locator('#action-count')).toHaveText('0');
 });
-test('ordinary Basic button retains irreversible Slop cancellation', async ({ page }) => {
-  // Task 02 changed only declared ReleaseButtons; this old contract still applies to Basic.
+test('ordinary Basic Strict Tap retains irreversible exit cancellation', async ({ page }) => {
+  // Task 03 owner contract: an actual exit cancels Strict Tap; movement inside does not.
   await open(page, 'buttons');
   const p = await point(page, '[data-action="basic"]');
   await page.mouse.move(p.x, p.y);
   await page.mouse.down();
-  await page.mouse.move(p.x + 30, p.y);
+  await page.mouse.move(p.x + p.width + 30, p.y);
   await page.mouse.move(p.x, p.y);
   await expect(page.locator('[data-action="basic"]')).toHaveAttribute('data-pressed', 'false');
   await page.mouse.up();
@@ -257,7 +257,7 @@ test('vertical intent inside carousel scrolls modules and keeps horizontal posit
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await open(page, 'carousel');
-  const p = await point(page, '#carousel-0 [data-card="Option 1"]');
+  const p = await point(page, '#carousel-0 [data-card="None"]');
   await page.mouse.move(p.x, p.y);
   await page.mouse.down();
   await page.mouse.move(p.x - 10, p.y - 50);
@@ -300,7 +300,7 @@ test('no overflow means no scroll or elastic movement, edge arrows unavailable',
     'matrix(1, 0, 0, 1, 0, 0)',
   );
 });
-test('overflow has bounded elastic pull and spring return', async ({ page }) => {
+test('overflow has logarithmic resistant pull and spring return', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await open(page, 'carousel');
   await setConfig(page, 'inertia', 0);
@@ -312,7 +312,7 @@ test('overflow has bounded elastic pull and spring return', async ({ page }) => 
     .locator('#carousel-0 .carousel-track')
     .evaluate((el) => new DOMMatrix(getComputedStyle(el).transform).m41);
   expect(tx).toBeGreaterThan(0);
-  expect(tx).toBeLessThanOrEqual(32);
+  expect(tx).toBeCloseTo(32 * Math.log1p(100 / 32), 1); // BF03 replaces the old hard clamp.
   await page.mouse.up();
   await expect(page.locator('#carousel-0 .carousel-track')).toHaveCSS(
     'transform',
@@ -466,7 +466,7 @@ test('layout fits 360 px, targets retain safe size, 30 modules remain scrollable
   }
   await page.locator('#module-count').fill('30');
   await page.locator('#module-count').dispatchEvent('change');
-  await expect(page.locator('.module-row')).toHaveCount(30);
+  await expect(page.locator('#modules .module-row')).toHaveCount(30);
   expect(
     await page.locator('#modules').evaluate((el) => el.scrollHeight > el.clientHeight),
   ).toBeTruthy();

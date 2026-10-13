@@ -1,4 +1,5 @@
 import { clamp, slop, repeatInterval, type Config } from './config';
+import { rubberBand } from './carousel';
 import type { Diagnostics } from './diagnostics';
 type Owner = 'NONE' | 'CAROUSEL' | 'MODULES' | 'DRAG' | 'HOLD_SESSION';
 export type PointerState = {
@@ -21,6 +22,8 @@ export type Action = {
   run: () => void;
   available?: () => boolean;
   hold?: boolean;
+  repeatDelay?: boolean;
+  instrument?: boolean;
   releasePolicy?: 'geometry';
 };
 type Session = {
@@ -61,40 +64,94 @@ export class InteractionController {
   private repeatTimer = 0;
   private inertiaFrame = 0;
   private cardActivations = 0;
+  private pointers = new Map<number, { x: number; y: number }>();
+  private abort = new AbortController();
+  private observer: MutationObserver;
+  private disposed = false;
   private hoveredCard: HTMLElement | null = null;
   constructor(
     private root: HTMLElement,
     private config: () => Config,
     private diag: Diagnostics,
   ) {
-    root.addEventListener('pointerdown', this.down);
+    root.addEventListener('pointerdown', this.down, { signal: this.abort.signal });
     // Actual mouse movement owns hover; capture changes and sticky native :hover do not.
-    root.addEventListener('pointermove', this.hover);
-    root.addEventListener('pointerout', (e) => {
-      if (!(e.relatedTarget instanceof Node && this.hoveredCard?.contains(e.relatedTarget)))
-        this.clearHover();
+    root.addEventListener('pointermove', this.hover, { signal: this.abort.signal });
+    root.addEventListener(
+      'pointerout',
+      (e) => {
+        if (!(e.relatedTarget instanceof Node && this.hoveredCard?.contains(e.relatedTarget)))
+          this.clearHover();
+      },
+      { signal: this.abort.signal },
+    );
+    window.addEventListener('pointermove', this.move, {
+      passive: false,
+      signal: this.abort.signal,
     });
-    window.addEventListener('pointermove', this.move, { passive: false });
-    window.addEventListener('pointerup', this.up);
-    window.addEventListener('pointercancel', this.cancelEvent);
-    root.addEventListener('lostpointercapture', (e) => {
-      if (this.active?.view.id === e.pointerId) this.end(true, 'lostpointercapture');
+    window.addEventListener('pointerup', this.up, { signal: this.abort.signal });
+    window.addEventListener('pointercancel', this.cancelEvent, { signal: this.abort.signal });
+    root.addEventListener(
+      'lostpointercapture',
+      (e) => {
+        if (this.pointers.has(e.pointerId)) this.terminal(e, true);
+      },
+      { signal: this.abort.signal },
+    );
+    window.addEventListener('blur', () => this.end(true, 'window blur'), {
+      signal: this.abort.signal,
     });
-    window.addEventListener('blur', () => this.end(true, 'window blur'));
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) this.end(true, 'document hidden');
+    document.addEventListener(
+      'visibilitychange',
+      () => {
+        if (document.hidden) this.end(true, 'document hidden');
+      },
+      { signal: this.abort.signal },
+    );
+    root.addEventListener(
+      'click',
+      (e) => {
+        const b = (e.target as Element).closest<HTMLElement>('[data-action]');
+        if (!b) return;
+        e.preventDefault();
+        // detail=0 is keyboard/assistive activation, never the pointer click path.
+        if (e.detail === 0 && !this.active) {
+          const a = this.actions.get(b.dataset.action!);
+          if (a && this.available(a) && b.getAttribute('aria-disabled') !== 'true')
+            this.perform(b, a, 'keyboard / assistive');
+        }
+      },
+      { signal: this.abort.signal },
+    );
+    const terminate = () => this.end(true, 'page lifecycle interruption');
+    window.addEventListener('pagehide', terminate, { signal: this.abort.signal });
+    root.addEventListener(
+      'contextmenu',
+      (e) => {
+        if ((e.target as Element).closest('[data-action],.selection-card')) {
+          e.preventDefault();
+          this.end(true, 'native context interruption');
+        }
+      },
+      { signal: this.abort.signal },
+    );
+    const touchEnd = (e: TouchEvent) => {
+      if (this.active?.view.pointerType === 'touch' && e.touches.length === 0)
+        this.end(true, 'terminal native touch fallback');
+    };
+    window.addEventListener('touchend', touchEnd, { signal: this.abort.signal });
+    window.addEventListener(
+      'touchcancel',
+      () => {
+        if (this.active?.view.pointerType === 'touch') this.end(true, 'native touchcancel');
+      },
+      { signal: this.abort.signal },
+    );
+    this.observer = new MutationObserver(() => {
+      if (!root.isConnected) this.destroy();
+      else if (this.active && !this.active.target.isConnected) this.end(true, 'target unmounted');
     });
-    root.addEventListener('click', (e) => {
-      const b = (e.target as Element).closest<HTMLElement>('[data-action]');
-      if (!b) return;
-      e.preventDefault();
-      // detail=0 is keyboard/assistive activation, never the pointer click path.
-      if (e.detail === 0 && !this.active) {
-        const a = this.actions.get(b.dataset.action!);
-        if (a && this.available(a) && b.getAttribute('aria-disabled') !== 'true')
-          this.perform(b, a, 'keyboard / assistive');
-      }
-    });
+    this.observer.observe(document, { childList: true, subtree: true });
   }
   register(id: string, action: Action) {
     this.actions.set(id, action);
@@ -146,7 +203,28 @@ export class InteractionController {
     return x >= r.left - tx && x <= r.right - tx && y >= r.top - ty && y <= r.bottom - ty;
   }
   private down = (e: PointerEvent) => {
-    if (this.active || !e.isPrimary || e.button !== 0) return;
+    if (this.disposed || e.button !== 0) return;
+    if (this.active) {
+      const s = this.active;
+      if (
+        s.carousel &&
+        s.view.pointerType === 'touch' &&
+        e.pointerType === 'touch' &&
+        (e.target as Element).closest('.carousel') === s.carousel
+      ) {
+        this.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+        s.view.valid = false;
+        this.pressed(s, false);
+        try {
+          s.target.setPointerCapture(e.pointerId);
+        } catch {
+          /* synthetic */
+        }
+        e.preventDefault();
+      }
+      return;
+    }
+    if (!e.isPrimary) return;
     const target = e.target as HTMLElement;
     const button = target.closest<HTMLElement>('[data-action]');
     const carousel = button ? null : target.closest<HTMLElement>('.carousel');
@@ -220,6 +298,7 @@ export class InteractionController {
       cardCountBefore: this.cardActivations,
     };
     this.active = s;
+    this.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
     if (card) card.dataset.dragging = 'false';
     try {
       capture.setPointerCapture(e.pointerId);
@@ -236,7 +315,7 @@ export class InteractionController {
       parameters: { ...this.config() },
       start: [e.clientX, e.clientY],
     });
-    if (button) {
+    if (button && action?.instrument !== false) {
       this.diag.check(
         'BTN-DOWN',
         this.count(button) === s.countBefore && button.dataset.pressed === 'true',
@@ -250,6 +329,7 @@ export class InteractionController {
   private armHold(s: Session) {
     clearTimeout(this.holdTimer);
     this.holdTimer = window.setTimeout(() => {
+      this.holdTimer = 0;
       if (this.active !== s || !s.inside || !s.view.valid) return;
       s.holding = true;
       s.holdStart = performance.now();
@@ -261,11 +341,15 @@ export class InteractionController {
         target: s.button?.dataset.action,
         pointerType: s.view.pointerType,
       });
-      this.tick(s);
+      this.tick(s, true);
     }, this.config().holdDelay);
   }
-  private tick(s: Session) {
-    if (this.active !== s || !s.holding) return;
+  private tick(s: Session, first = false) {
+    if (this.active !== s || !s.holding || this.disposed) return;
+    if (!s.target.isConnected || document.hidden) {
+      this.end(true, 'hold target unavailable');
+      return;
+    }
     const now = performance.now(),
       a = s.action!;
     const interval = repeatInterval(now - s.holdStart, this.config());
@@ -300,11 +384,22 @@ export class InteractionController {
       this.diag.log('hold-paused', { ticks: s.ticks });
     }
     this.onChange();
-    this.repeatTimer = window.setTimeout(() => this.tick(s), Math.ceil(interval));
+    // run() can synchronously unmount/navigate/end; never re-arm an ended session.
+    if (this.active !== s || !s.holding || this.disposed) return;
+    const delay =
+      first && s.action?.repeatDelay
+        ? (this.config().repeatMs * this.config().repeatDelayTenths) / 10
+        : interval;
+    this.repeatTimer = window.setTimeout(() => {
+      this.repeatTimer = 0;
+      this.tick(s);
+    }, Math.ceil(delay));
   }
   private move = (e: PointerEvent) => {
     const s = this.active;
-    if (!s || s.view.id !== e.pointerId) return;
+    if (!s || !this.pointers.has(e.pointerId)) return;
+    this.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (s.view.id !== e.pointerId) return;
     e.preventDefault();
     const v = s.view;
     v.x = e.clientX;
@@ -333,7 +428,7 @@ export class InteractionController {
         }
         return;
       }
-      s.inside = this.inside(s.button, v.x, v.y);
+      s.inside = this.inside(s.button, v.x, v.y, true);
       if (s.holding) {
         this.pressed(s, true);
         if (!s.inside)
@@ -343,6 +438,15 @@ export class InteractionController {
             'HOLDING + pressed outside',
             { holding: s.holding, pressed: s.button.dataset.pressed },
           );
+        return;
+      }
+      if (!s.action?.hold) {
+        if (!s.inside) {
+          s.left = true;
+          v.valid = false;
+        }
+        v.phase = v.valid ? 'STRICT_TAP' : 'STRICT_CANCELLED';
+        this.pressed(s, v.valid && s.inside);
         return;
       }
       if (!s.inside) {
@@ -402,13 +506,7 @@ export class InteractionController {
         s.carousel.scrollLeft = clamp(wanted, 0, max);
         const track = s.carousel.querySelector<HTMLElement>('.carousel-track')!;
         const elastic =
-          max > 0
-            ? clamp(
-                (clamp(wanted, 0, max) - wanted) * 0.3,
-                -this.config().overscroll,
-                this.config().overscroll,
-              )
-            : 0;
+          max > 0 ? rubberBand(clamp(wanted, 0, max) - wanted, this.config().overscroll) : 0;
         track.style.transform = `translateX(${elastic}px)`;
         if (max === 0)
           this.diag.check(
@@ -442,31 +540,53 @@ export class InteractionController {
     if (s.button) this.pressed(s, v.valid && s.inside);
     this.onChange();
   };
-  private up = (e: PointerEvent) => {
-    if (this.active?.view.id === e.pointerId) {
-      this.move(e);
-      this.end(false, 'pointerup');
+  private terminal(e: PointerEvent, cancelled: boolean) {
+    const s = this.active;
+    if (!s || !this.pointers.has(e.pointerId)) return;
+    if (!cancelled && s.view.id === e.pointerId) this.move(e);
+    this.pointers.delete(e.pointerId);
+    if (s.carousel && s.view.pointerType === 'touch' && this.pointers.size) {
+      if (s.view.id === e.pointerId) {
+        const [id, p] = this.pointers.entries().next().value!;
+        // Keep owner and cumulative displacement, rebase new finger without a jump.
+        s.view.id = id;
+        s.view.startX = p.x - s.view.dx;
+        s.view.startY = p.y - s.view.dy;
+        s.view.x = p.x;
+        s.view.y = p.y;
+        s.lastX = p.x;
+        s.lastTime = performance.now();
+        s.velocity = 0;
+        s.view.valid = false;
+      }
+      return;
     }
-  };
-  private cancelEvent = (e: PointerEvent) => {
-    if (this.active?.view.id === e.pointerId)
-      this.end(true, e.isTrusted ? 'pointercancel' : 'simulated pointercancel');
-  };
+    this.end(cancelled, cancelled ? (e.isTrusted ? e.type : `simulated ${e.type}`) : 'pointerup');
+  }
+  private up = (e: PointerEvent) => this.terminal(e, false);
+  private cancelEvent = (e: PointerEvent) => this.terminal(e, true);
   end(cancelled: boolean, reason: string) {
     const s = this.active;
-    if (!s) return;
     clearTimeout(this.holdTimer);
+    clearTimeout(this.repeatTimer);
+    this.holdTimer = this.repeatTimer = 0;
+    if (cancelled) cancelAnimationFrame(this.inertiaFrame);
+    if (!s) return;
     clearTimeout(this.repeatTimer);
     const v = s.view,
       wasValid = v.valid;
     this.active = null;
+    const capturedIds = [...this.pointers.keys(), v.id];
+    this.pointers.clear();
     if (s.button) {
       const before = this.count(s.button);
       if (!cancelled && !s.holding && wasValid && s.inside && s.action && this.available(s.action))
         this.perform(s.button, s.action, 'valid pointer release');
       const after = this.count(s.button);
       this.pressed(s, false);
-      if (cancelled)
+      if (s.action?.instrument === false) {
+        /* utility action diagnostics are separate */
+      } else if (cancelled)
         this.diag.check(
           'BTN-CANCEL',
           after === before && s.button.dataset.pressed === 'false',
@@ -527,14 +647,17 @@ export class InteractionController {
           },
         );
       const track = s.carousel.querySelector<HTMLElement>('.carousel-track')!;
+      const overscrolled =
+        track.style.transform && new DOMMatrix(getComputedStyle(track).transform).m41 !== 0;
       track.style.transition = `transform ${this.config().spring}ms ease-out`;
       track.style.transform = 'translateX(0px)';
-      if (!cancelled && v.owner === 'CAROUSEL') this.glide(s);
+      if (!cancelled && !overscrolled && v.owner === 'CAROUSEL') this.glide(s);
     }
     v.phase = cancelled ? 'CANCELLED' : 'ENDED';
     v.valid = false;
     try {
-      if (s.target.hasPointerCapture(v.id)) s.target.releasePointerCapture(v.id);
+      for (const id of capturedIds)
+        if (s.target.hasPointerCapture(id)) s.target.releasePointerCapture(id);
     } catch {
       /* unsupported capture */
     }
@@ -568,6 +691,22 @@ export class InteractionController {
       if (Math.abs(speed) > 0.015) this.inertiaFrame = requestAnimationFrame(step);
     };
     this.inertiaFrame = requestAnimationFrame(step);
+  }
+  lifecycle() {
+    return {
+      active: !!this.active,
+      pendingTimers: Number(!!this.holdTimer) + Number(!!this.repeatTimer),
+      disposed: this.disposed,
+    };
+  }
+  destroy() {
+    if (this.disposed) return;
+    this.end(true, 'controller unmounted');
+    this.disposed = true;
+    this.abort.abort();
+    this.observer.disconnect();
+    cancelAnimationFrame(this.inertiaFrame);
+    this.clearHover();
   }
   status(id: string) {
     const s = this.active;

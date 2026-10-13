@@ -46,7 +46,7 @@ try {
     if (r.status() >= 400) errors.push(`${r.status()} ${r.url()}`);
   });
   await page.goto('http://127.0.0.1:4180/lab/');
-  for (const id of ['carousel', 'actions', 'buttons', 'navigation', 'resize']) {
+  for (const id of ['carousel', 'actions', 'buttons', 'navigation', 'resize', 'draft-recovery']) {
     await page.locator(`.index [data-open="${id}"]`).click();
     assert.ok(await page.locator(`#${id}`).isVisible());
     results.push({ id: `STATIC-${id.toUpperCase()}`, status: 'PASS' });
