@@ -138,12 +138,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1349,
+                      "duration": 2107,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T20:44:35.797Z",
+                      "startTime": "2026-10-13T06:39:04.188Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -172,12 +172,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1737,
+                      "duration": 2689,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T20:44:37.736Z",
+                      "startTime": "2026-10-13T06:39:07.761Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -206,12 +206,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1038,
+                      "duration": 2312,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T20:44:39.487Z",
+                      "startTime": "2026-10-13T06:39:10.495Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -240,12 +240,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1055,
+                      "duration": 1853,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T20:44:40.543Z",
+                      "startTime": "2026-10-13T06:39:12.825Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -274,12 +274,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1582,
+                      "duration": 2377,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T20:44:41.616Z",
+                      "startTime": "2026-10-13T06:39:14.710Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -308,12 +308,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1513,
+                      "duration": 3731,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T20:44:43.247Z",
+                      "startTime": "2026-10-13T06:39:17.121Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -342,12 +342,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1054,
+                      "duration": 3261,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T20:44:44.797Z",
+                      "startTime": "2026-10-13T06:39:20.884Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -376,12 +376,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1114,
+                      "duration": 2322,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T20:44:45.881Z",
+                      "startTime": "2026-10-13T06:39:24.185Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -410,12 +410,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1379,
+                      "duration": 2941,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T20:44:47.011Z",
+                      "startTime": "2026-10-13T06:39:26.525Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -444,12 +444,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1066,
+                      "duration": 2437,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T20:44:48.401Z",
+                      "startTime": "2026-10-13T06:39:29.488Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -478,12 +478,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1019,
+                      "duration": 2013,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T20:44:49.489Z",
+                      "startTime": "2026-10-13T06:39:31.979Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -512,12 +512,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1058,
+                      "duration": 2659,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T20:44:50.524Z",
+                      "startTime": "2026-10-13T06:39:34.015Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -546,12 +546,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1116,
+                      "duration": 2431,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T20:44:51.605Z",
+                      "startTime": "2026-10-13T06:39:36.691Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -580,12 +580,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2225,
+                      "duration": 4394,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T20:44:52.739Z",
+                      "startTime": "2026-10-13T06:39:39.145Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -614,12 +614,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2215,
+                      "duration": 5351,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T20:44:54.991Z",
+                      "startTime": "2026-10-13T06:39:43.580Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -656,12 +656,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1971,
+                      "duration": 4771,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T20:44:57.262Z",
+                      "startTime": "2026-10-13T06:39:49.045Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -690,12 +690,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1169,
+                      "duration": 2413,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T20:44:59.252Z",
+                      "startTime": "2026-10-13T06:39:53.855Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -724,12 +724,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1437,
+                      "duration": 4235,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T20:45:00.437Z",
+                      "startTime": "2026-10-13T06:39:56.297Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -758,12 +758,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 997,
+                      "duration": 3592,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T20:45:01.894Z",
+                      "startTime": "2026-10-13T06:40:00.545Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -800,12 +800,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1180,
+                      "duration": 2615,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T20:45:02.916Z",
+                      "startTime": "2026-10-13T06:40:04.165Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -834,12 +834,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1199,
+                      "duration": 3270,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-10-10T20:45:04.109Z",
+                      "startTime": "2026-10-13T06:40:06.832Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -853,6 +853,1680 @@
               "column": 3
             }
           ]
+        }
+      ]
+    },
+    {
+      "title": "bugfix-03.spec.ts",
+      "file": "bugfix-03.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "BF03 Strict Tap permits large movement wholly inside",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2266,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:40:10.210Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-81de795ae11e857ed136",
+          "file": "bugfix-03.spec.ts",
+          "line": 20,
+          "column": 1
+        },
+        {
+          "title": "BF03 repeat availability isolated from hold availability",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2338,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:40:12.545Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-10bd6f94605ea920ddc8",
+          "file": "bugfix-03.spec.ts",
+          "line": 30,
+          "column": 1
+        },
+        {
+          "title": "BF03 Hidden keeps Next in independent right slot",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2625,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:40:14.955Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-c7efecc6cfba7d60e5df",
+          "file": "bugfix-03.spec.ts",
+          "line": 48,
+          "column": 1
+        },
+        {
+          "title": "BF03 ordinary exit below Slop permanently cancels reentry; fresh press works",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2337,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:40:17.607Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-8cd47cb1544f71de7e04",
+          "file": "bugfix-03.spec.ts",
+          "line": 57,
+          "column": 1
+        },
+        {
+          "title": "BF03 lifecycle initial / up terminates without orphan actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2663,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:40:19.976Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-4c6d26ee08a04886217e",
+          "file": "bugfix-03.spec.ts",
+          "line": 82,
+          "column": 5
+        },
+        {
+          "title": "BF03 lifecycle initial / cancel terminates without orphan actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3043,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:40:22.665Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-4420cc7e228e52344a39",
+          "file": "bugfix-03.spec.ts",
+          "line": 82,
+          "column": 5
+        },
+        {
+          "title": "BF03 lifecycle initial / lostcapture terminates without orphan actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2778,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:40:25.735Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-c4da6a57b8bfa0cd3f41",
+          "file": "bugfix-03.spec.ts",
+          "line": 82,
+          "column": 5
+        },
+        {
+          "title": "BF03 lifecycle initial / blur terminates without orphan actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2592,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:40:28.546Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-343d6b6bf84411b7b880",
+          "file": "bugfix-03.spec.ts",
+          "line": 82,
+          "column": 5
+        },
+        {
+          "title": "BF03 lifecycle initial / hidden terminates without orphan actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3753,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:40:31.192Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-457d81f7ce797fe5381d",
+          "file": "bugfix-03.spec.ts",
+          "line": 82,
+          "column": 5
+        },
+        {
+          "title": "BF03 lifecycle initial / contextmenu terminates without orphan actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2686,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:40:34.957Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-f2f8b8afba03ceb5b820",
+          "file": "bugfix-03.spec.ts",
+          "line": 82,
+          "column": 5
+        },
+        {
+          "title": "BF03 lifecycle initial / pagehide terminates without orphan actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3073,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:40:37.671Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-c6f42c71474720ddf413",
+          "file": "bugfix-03.spec.ts",
+          "line": 82,
+          "column": 5
+        },
+        {
+          "title": "BF03 lifecycle active / up terminates without orphan actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2287,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:40:40.767Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-ca23246ab2f14ee7f957",
+          "file": "bugfix-03.spec.ts",
+          "line": 82,
+          "column": 5
+        },
+        {
+          "title": "BF03 lifecycle active / cancel terminates without orphan actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4631,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:40:43.077Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-e2851396a85d5f3f7b2c",
+          "file": "bugfix-03.spec.ts",
+          "line": 82,
+          "column": 5
+        },
+        {
+          "title": "BF03 lifecycle active / lostcapture terminates without orphan actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3404,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:40:47.721Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-549078ddf49def9ce91d",
+          "file": "bugfix-03.spec.ts",
+          "line": 82,
+          "column": 5
+        },
+        {
+          "title": "BF03 lifecycle active / blur terminates without orphan actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2893,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:40:51.148Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-2bf27c3089420a7428a4",
+          "file": "bugfix-03.spec.ts",
+          "line": 82,
+          "column": 5
+        },
+        {
+          "title": "BF03 lifecycle active / hidden terminates without orphan actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2525,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:40:54.058Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-dd0c4dfb5766df265156",
+          "file": "bugfix-03.spec.ts",
+          "line": 82,
+          "column": 5
+        },
+        {
+          "title": "BF03 lifecycle active / contextmenu terminates without orphan actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2470,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:40:56.616Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-34b811ab76d780fe0df0",
+          "file": "bugfix-03.spec.ts",
+          "line": 82,
+          "column": 5
+        },
+        {
+          "title": "BF03 lifecycle active / pagehide terminates without orphan actions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2550,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:40:59.122Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-e27275de95d0a9666814",
+          "file": "bugfix-03.spec.ts",
+          "line": 82,
+          "column": 5
+        },
+        {
+          "title": "BF03 sixteen initial-delay values preserve recognition and later cadence, steps unchanged",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4154,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:41:01.694Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-051a8afd5e938799c1ee",
+          "file": "bugfix-03.spec.ts",
+          "line": 131,
+          "column": 1
+        },
+        {
+          "title": "BF03 timed availability pause 2 s resume 4 s from trigger",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2308,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:41:05.881Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-a65c4085375a01bb8fa5",
+          "file": "bugfix-03.spec.ts",
+          "line": 166,
+          "column": 1
+        },
+        {
+          "title": "BF03 scoped selection protection keeps editor fields and diagnostic text selectable",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2566,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:41:08.218Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-2d56ea5e4f4cf0abf439",
+          "file": "bugfix-03.spec.ts",
+          "line": 180,
+          "column": 1
+        },
+        {
+          "title": "BF03 Navigation slots first last middle, hidden targets absent, close retains page",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2551,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:41:10.811Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-8df049d253a54ad57cac",
+          "file": "bugfix-03.spec.ts",
+          "line": 190,
+          "column": 1
+        },
+        {
+          "title": "BF03 canonical 1/2/3/4 real cards, 3.5 peek and exact right inset; 5/20 identical width",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4864,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:41:13.421Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-e74ea14c5c55bb4ad3a7",
+          "file": "bugfix-03.spec.ts",
+          "line": 207,
+          "column": 1
+        },
+        {
+          "title": "BF03 unbounded diminishing overscroll, final cancellation springs to zero",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3118,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:41:18.406Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-5e7e2d76418017531638",
+          "file": "bugfix-03.spec.ts",
+          "line": 249,
+          "column": 1
+        },
+        {
+          "title": "BF03 synthetic multitouch owner handoff survives first lift, final lift settles without tap",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3620,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:41:21.544Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-f17f2ab3d03ba5cddd46",
+          "file": "bugfix-03.spec.ts",
+          "line": 302,
+          "column": 1
+        },
+        {
+          "title": "BF03 05 Reset cancels pending resize and preserves other module state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4380,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:41:25.270Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-86ee415a31354385ecd4",
+          "file": "bugfix-03.spec.ts",
+          "line": 341,
+          "column": 1
+        },
+        {
+          "title": "BF03 240x220 reachable Modules / viewport 390x844",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2138,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:41:29.672Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-b088b056a03cb567ee30",
+          "file": "bugfix-03.spec.ts",
+          "line": 368,
+          "column": 3
+        },
+        {
+          "title": "BF03 240x220 reachable Modules / viewport 844x390",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3832,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:41:31.831Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-abbd026b11fe2254bb6f",
+          "file": "bugfix-03.spec.ts",
+          "line": 368,
+          "column": 3
+        },
+        {
+          "title": "BF03 240x220 reachable Modules / viewport 1366x900",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3681,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:41:35.691Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-ac24d3ab37643590ce52",
+          "file": "bugfix-03.spec.ts",
+          "line": 368,
+          "column": 3
+        },
+        {
+          "title": "BF03 Draft all real options render geometric layers; None hides each layer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5152,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:41:39.413Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-e52f4ace7476f6ee41ce",
+          "file": "bugfix-03.spec.ts",
+          "line": 421,
+          "column": 1
+        },
+        {
+          "title": "BF03 incomplete Current autosaves but cannot Apply; labels wait for durable success",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4904,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:41:44.644Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-f94412b070fb638cd3a0",
+          "file": "bugfix-03.spec.ts",
+          "line": 449,
+          "column": 1
+        },
+        {
+          "title": "BF03 autosave latency varies within 1500–2500 and remains configurable",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2866,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:41:49.572Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-f5ca73d09cd43647e68b",
+          "file": "bugfix-03.spec.ts",
+          "line": 464,
+          "column": 1
+        },
+        {
+          "title": "BF03 out-of-order A after B cannot overwrite newer durable draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4822,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:41:52.463Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-ce4ae49fd6f4d68c981f",
+          "file": "bugfix-03.spec.ts",
+          "line": 481,
+          "column": 1
+        },
+        {
+          "title": "BF03 deterministic save failure / retry never claims success early",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6667,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:41:57.309Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-a964f7639d934d0e72da",
+          "file": "bugfix-03.spec.ts",
+          "line": 495,
+          "column": 1
+        },
+        {
+          "title": "BF03 actual storage operation failure reported, successful retry durable",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5844,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:42:04.052Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-c32d133a5b343df4f54a",
+          "file": "bugfix-03.spec.ts",
+          "line": 506,
+          "column": 1
+        },
+        {
+          "title": "BF03 Apply during delayed save commits latest Current and cannot resurrect Draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5734,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:42:09.909Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-45d8252ab33d2da3daff",
+          "file": "bugfix-03.spec.ts",
+          "line": 527,
+          "column": 1
+        },
+        {
+          "title": "BF03 Cancel is three-way modal; Continue preserves current and in-flight save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3900,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:42:15.656Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-ca2bafb89bf956ba3f7b",
+          "file": "bugfix-03.spec.ts",
+          "line": 544,
+          "column": 1
+        },
+        {
+          "title": "BF03 modal Escape continues without discard and background retains live editor",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3462,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:42:19.618Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-6101fcd32766b4e98f62",
+          "file": "bugfix-03.spec.ts",
+          "line": 559,
+          "column": 1
+        },
+        {
+          "title": "BF03 confirmed Discard during save restores Applied, no draft resurrection",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5349,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:42:23.141Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-10aa1dae6ce52ad49613",
+          "file": "bugfix-03.spec.ts",
+          "line": 575,
+          "column": 1
+        },
+        {
+          "title": "BF03 Save for later waits for latest Current; failure stays editing with retry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4098,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:42:28.629Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-4730a1b70d323f97e182",
+          "file": "bugfix-03.spec.ts",
+          "line": 590,
+          "column": 1
+        },
+        {
+          "title": "BF03 Save for later injected failure cannot leave editor or claim success",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6373,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:42:32.780Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-9854aa7e16dd5b6f04ca",
+          "file": "bugfix-03.spec.ts",
+          "line": 607,
+          "column": 1
+        },
+        {
+          "title": "BF03 true reload recovers only durable draft, without changing Applied",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5787,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:42:39.193Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-b2b500b318901f3279d5",
+          "file": "bugfix-03.spec.ts",
+          "line": 632,
+          "column": 1
+        },
+        {
+          "title": "BF03 simulated crash before save genuinely drops volatile Current",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6168,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:42:45.000Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-041129847ab5d9d4aaa6",
+          "file": "bugfix-03.spec.ts",
+          "line": 650,
+          "column": 1
+        },
+        {
+          "title": "BF03 crash after confirmed save, Not now retains draft, Delete needs second confirmation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5031,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:42:51.208Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-f116ce0d0fb953ae950e",
+          "file": "bugfix-03.spec.ts",
+          "line": 660,
+          "column": 1
+        },
+        {
+          "title": "BF03 multiple editing sessions cannot leak old writes; cleanup explicit and isolated",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8550,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:42:56.264Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-d17fe144f4d4ae62ca77",
+          "file": "bugfix-03.spec.ts",
+          "line": 682,
+          "column": 1
+        },
+        {
+          "title": "BF03 independent controller instances isolate availability, unmount, listeners and timers",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1659,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:43:04.863Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-a3e2d578cc20f1162b51",
+          "file": "bugfix-03.spec.ts",
+          "line": 708,
+          "column": 1
+        },
+        {
+          "title": "BF03 Chromium native multitouch handoff keeps CAROUSEL until last finger release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3174,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:43:06.572Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-3dc81fcedfe3fc7dd007",
+          "file": "bugfix-03.spec.ts",
+          "line": 785,
+          "column": 1
+        },
+        {
+          "title": "BF03 Standalone arrow held indefinitely stays tap-only until valid release",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1380,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:43:09.783Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-c19480d4954692d14b74",
+          "file": "bugfix-03.spec.ts",
+          "line": 822,
+          "column": 1
+        },
+        {
+          "title": "BF03 Peek settings resize actual cards; preview ratio survives compact-to-normal resize",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3730,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T06:43:11.178Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "23713b7055b80105ffdd-1bd146c15e2655bf9f2c",
+          "file": "bugfix-03.spec.ts",
+          "line": 839,
+          "column": 1
         }
       ]
     },
@@ -878,12 +2552,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1404,
+                  "duration": 2618,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:05.355Z",
+                  "startTime": "2026-10-13T06:43:14.980Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -912,12 +2586,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 979,
+                  "duration": 1872,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:06.771Z",
+                  "startTime": "2026-10-13T06:43:17.630Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -946,12 +2620,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1008,
+                  "duration": 1516,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:07.765Z",
+                  "startTime": "2026-10-13T06:43:19.534Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -980,12 +2654,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 901,
+                  "duration": 1486,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:08.804Z",
+                  "startTime": "2026-10-13T06:43:21.111Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -999,7 +2673,7 @@
           "column": 1
         },
         {
-          "title": "ordinary Basic button retains irreversible Slop cancellation",
+          "title": "ordinary Basic Strict Tap retains irreversible exit cancellation",
           "ok": true,
           "tags": [],
           "tests": [
@@ -1014,12 +2688,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 968,
+                  "duration": 1420,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:09.722Z",
+                  "startTime": "2026-10-13T06:43:22.620Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1027,7 +2701,7 @@
               "status": "expected"
             }
           ],
-          "id": "d60a0d352cedb73bd581-74050c7c575101c9fa7a",
+          "id": "d60a0d352cedb73bd581-68f184e54c8c371401d2",
           "file": "lab.spec.ts",
           "line": 70,
           "column": 1
@@ -1048,12 +2722,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2015,
+                  "duration": 2518,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:10.708Z",
+                  "startTime": "2026-10-13T06:43:24.076Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1082,12 +2756,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 911,
+                  "duration": 1171,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:12.748Z",
+                  "startTime": "2026-10-13T06:43:26.613Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1116,12 +2790,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1734,
+                  "duration": 2496,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:13.668Z",
+                  "startTime": "2026-10-13T06:43:27.800Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1150,12 +2824,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2038,
+                  "duration": 3053,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:15.422Z",
+                  "startTime": "2026-10-13T06:43:30.313Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1184,12 +2858,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1562,
+                  "duration": 2288,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:17.475Z",
+                  "startTime": "2026-10-13T06:43:33.389Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1218,12 +2892,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1874,
+                  "duration": 2558,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:19.053Z",
+                  "startTime": "2026-10-13T06:43:35.711Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1252,12 +2926,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1215,
+                  "duration": 1920,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:20.945Z",
+                  "startTime": "2026-10-13T06:43:38.297Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1286,12 +2960,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2070,
+                  "duration": 3632,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:22.178Z",
+                  "startTime": "2026-10-13T06:43:40.243Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1320,12 +2994,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1589,
+                  "duration": 1685,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:24.264Z",
+                  "startTime": "2026-10-13T06:43:43.908Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1354,12 +3028,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1622,
+                  "duration": 1982,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:25.871Z",
+                  "startTime": "2026-10-13T06:43:45.619Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1388,12 +3062,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2057,
+                  "duration": 1794,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:27.546Z",
+                  "startTime": "2026-10-13T06:43:47.624Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1422,12 +3096,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1116,
+                  "duration": 1398,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:29.672Z",
+                  "startTime": "2026-10-13T06:43:49.438Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1456,12 +3130,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1191,
+                  "duration": 1648,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:30.823Z",
+                  "startTime": "2026-10-13T06:43:50.867Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1475,7 +3149,7 @@
           "column": 1
         },
         {
-          "title": "overflow has bounded elastic pull and spring return",
+          "title": "overflow has logarithmic resistant pull and spring return",
           "ok": true,
           "tags": [],
           "tests": [
@@ -1490,12 +3164,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1240,
+                  "duration": 1769,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:32.029Z",
+                  "startTime": "2026-10-13T06:43:52.540Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1503,7 +3177,7 @@
               "status": "expected"
             }
           ],
-          "id": "d60a0d352cedb73bd581-347ab986899707cdaaf0",
+          "id": "d60a0d352cedb73bd581-ab4a9ac7d31c16aacdbc",
           "file": "lab.spec.ts",
           "line": 303,
           "column": 1
@@ -1524,12 +3198,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1211,
+                  "duration": 1879,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:33.297Z",
+                  "startTime": "2026-10-13T06:43:54.333Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1558,12 +3232,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 978,
+                  "duration": 1465,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:34.521Z",
+                  "startTime": "2026-10-13T06:43:56.229Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1592,12 +3266,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1105,
+                  "duration": 1621,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:35.518Z",
+                  "startTime": "2026-10-13T06:43:57.706Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1626,12 +3300,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1614,
+                  "duration": 2176,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:36.645Z",
+                  "startTime": "2026-10-13T06:43:59.341Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1660,12 +3334,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1529,
+                  "duration": 2646,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:38.290Z",
+                  "startTime": "2026-10-13T06:44:01.537Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1694,12 +3368,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1067,
+                  "duration": 2991,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:39.851Z",
+                  "startTime": "2026-10-13T06:44:04.214Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1728,12 +3402,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1325,
+                  "duration": 3311,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:40.935Z",
+                  "startTime": "2026-10-13T06:44:07.229Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1762,12 +3436,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2664,
+                  "duration": 5008,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:42.274Z",
+                  "startTime": "2026-10-13T06:44:10.564Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1796,12 +3470,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 975,
+                  "duration": 1479,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:44.953Z",
+                  "startTime": "2026-10-13T06:44:15.591Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1830,12 +3504,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1641,
+                  "duration": 4592,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:45.941Z",
+                  "startTime": "2026-10-13T06:44:17.091Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1864,12 +3538,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1829,
+                  "duration": 3268,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:47.608Z",
+                  "startTime": "2026-10-13T06:44:21.714Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1898,12 +3572,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1608,
+                  "duration": 2515,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:49.447Z",
+                  "startTime": "2026-10-13T06:44:25.021Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1932,12 +3606,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1991,
+                  "duration": 2730,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:51.069Z",
+                  "startTime": "2026-10-13T06:44:27.565Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1966,12 +3640,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1857,
+                  "duration": 5324,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:53.080Z",
+                  "startTime": "2026-10-13T06:44:30.328Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2000,12 +3674,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1038,
+                  "duration": 3588,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:54.952Z",
+                  "startTime": "2026-10-13T06:44:35.690Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2034,12 +3708,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2009,
+                  "duration": 2613,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:56.010Z",
+                  "startTime": "2026-10-13T06:44:39.304Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2068,12 +3742,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1239,
+                  "duration": 2758,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:58.037Z",
+                  "startTime": "2026-10-13T06:44:41.954Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2102,12 +3776,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1116,
+                  "duration": 2667,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-10T20:45:59.295Z",
+                  "startTime": "2026-10-13T06:44:44.731Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -2125,9 +3799,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-10-10T20:44:33.006Z",
-    "duration": 87599.261,
-    "expected": 58,
+    "startTime": "2026-10-13T06:39:01.491Z",
+    "duration": 346268.304,
+    "expected": 107,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0

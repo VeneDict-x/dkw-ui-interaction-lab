@@ -6,11 +6,16 @@ export const fields = {
   slopMin: [4, 1, 50, 1, 'Slop Min · px'],
   slopMax: [18, 1, 100, 1, 'Slop Max · px'],
   holdDelay: [450, 80, 2000, 10, 'HoldDelay · ms'],
+  repeatDelayTenths: [10, 10, 25, 1, 'Initial Repeat delay · tenths (EXPERIMENTAL)'],
   repeatMs: [240, 40, 1500, 10, 'Initial cadence · ms'],
   acceleration: [0.35, 0, 3, 0.05, 'Acceleration · rate/second'],
   maxRate: [12, 1, 30, 0.5, 'Maximum repeat rate · Hz'],
+  cardPreferred: [108, 88, 200, 1, 'Carousel target card width · px'],
+  carouselPeek: [0.5, 0.2, 0.8, 0.05, 'Carousel Peek fraction'],
+  carouselGap: [10, 4, 24, 1, 'Carousel card gap · px'],
+  carouselInset: [4, 0, 16, 1, 'Symmetric carousel inset · px'],
   inertia: [0.88, 0, 0.98, 0.01, 'Inertia retention / 16.7 ms'],
-  overscroll: [32, 0, 100, 1, 'Elastic overscroll limit · px'],
+  overscroll: [32, 0, 100, 1, 'Logarithmic resistance scale · px'],
   spring: [180, 0, 600, 10, 'Spring return · ms'],
   pressDepth: [2, 0, 8, 0.5, 'Pressed depth · px'],
   darkening: [0.2, 0, 0.6, 0.05, 'Pressed darkening'],
@@ -57,6 +62,7 @@ export function sanitize(input: unknown): Config {
   }
   for (const k of ['visualizer', 'snapshot'] as const)
     if (typeof (input as Config)[k] === 'boolean') c[k] = (input as Config)[k];
+  c.repeatDelayTenths = Math.round(c.repeatDelayTenths);
   c.slopMax = Math.max(c.slopMax, c.slopMin);
   c.previewPreferred = Math.max(c.previewPreferred, c.previewMin);
   c.previewMax = Math.max(c.previewMax, c.previewPreferred);

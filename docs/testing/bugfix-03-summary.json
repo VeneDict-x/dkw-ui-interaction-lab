@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-13",
+  "typecheck": "PASS",
+  "build": "PASS",
+  "model": {
+    "pass": 27,
+    "fail": 0
+  },
+  "chromium": {
+    "pass": 107,
+    "fail": 0,
+    "skip": 0,
+    "flaky": 0,
+    "retries": 0
+  },
+  "static": {
+    "pass": 10,
+    "fail": 0
+  },
+  "total": {
+    "pass": 144,
+    "fail": 0,
+    "skip": 0
+  },
+  "browserCoverage": "Chromium mouse/keyboard, synthetic terminal events and browser-delivered CDP touch/multitouch; viewport emulation is not physical iPhone",
+  "physicalSafari": "PENDING",
+  "sourceUnchangedDuringFinalRun": true,
+  "sourceHashes": {
+    "src/draft-ui.ts": "9bc06a1d7fb5c9a7e83e2704f476c9f3667ecf5baccc76426a1aaa5cfcb728f6",
+    "src/config.ts": "7564bf345bf28e732f545ec277ca2768bc256fdcc9dcc286273163f8b8dfd084",
+    "src/style.css": "421eeb29d368f2d3431d4341492c868d6467548689cb07ee9a71deb5e4b0c6c8",
+    "src/main.ts": "537157f8512a1d7059adbd9897c1a517ffc8c9f64056a515381df194f6601b95",
+    "src/carousel.ts": "83d4f4750ffc97d9fbcea0422b15b0e4b18978577c93e4f1a2dd21917dc7755e",
+    "src/interaction.ts": "ddc59207a3e702686cdde9172a5703856ea8a6238cb8519cf48da0986c27ed8d",
+    "src/geometry.ts": "eeb0845b9c665fae8fee04e6bc7efdbcf633d6ae4c68d289fa636f025863c53b",
+    "src/diagnostics.ts": "88679f7460d5e2ea7a584362cfd023f1a5464e3c20bdf26f7b9b17093474d56a",
+    "src/draft.ts": "e0ae3dd067f36a8da01652decd3649c1c947a46e5ed6c72e25f6faf842f54e25",
+    "tests/browser/bugfix-02.spec.ts": "c7ec501b9696458406ac249e930eaed576d387ad70eef2e03cd872bfd6ee8ac1",
+    "tests/browser/lab.spec.ts": "03233e84f34b69f856bc2790a139858a55cb01cd5d2f3531ba4a03a8a3b6c5e8",
+    "tests/browser/bugfix-03.spec.ts": "b8694fc13c61fa1f8132fc921e6e29d7237c94ea703858cd8f0b1fe9373a4be2",
+    "tests/core.test.ts": "570466773ff0daef61902544fd85f2f8915fdcca82244968c1914dee613dc50a"
+  },
+  "deployment": "Previous accepted main preserved; Task 03 review PR does not deploy"
+}
