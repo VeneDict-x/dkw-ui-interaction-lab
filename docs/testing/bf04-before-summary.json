@@ -1,0 +1,19 @@
+{
+  "baselineCommit": "0e1f3a0a653fe28f02c773755b2f966cb84d2fca",
+  "coverage": "Chromium CDP touch before implementation; not physical Safari",
+  "stats": {
+    "startTime": "2026-10-18T14:23:35.885Z",
+    "duration": 9374.026,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  },
+  "cases": [
+    {
+      "title": "BF04 top strip native touch scroll starts on button without activating module",
+      "status": "failed",
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m60\u001b[39m\nReceived:   \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate"
+    }
+  ]
+}

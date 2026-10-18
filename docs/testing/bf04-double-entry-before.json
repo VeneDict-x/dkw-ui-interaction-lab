@@ -1,0 +1,19 @@
+{
+  "sourceCommit": "1a55c9dd6814e29fdbabdac62e3efeb79b2636ce",
+  "coverage": "Chromium real Pointer input; test-only delay before real IndexedDB write",
+  "stats": {
+    "startTime": "2026-10-18T14:56:01.545Z",
+    "duration": 9398.16,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  },
+  "cases": [
+    {
+      "title": "BF04 rapid Event activations during a delayed save cannot suppress first-entry guide",
+      "status": "failed",
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#mini-window')\nExpected: visible\nReceived: hidden\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" locator('#mini-window') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#mini-window')\u001b[22m\n\u001b[2m    14 × locator resolved to <section hidden=\"\" role=\"dialog\" id=\"mini-window\" class=\"event-guide mini-window\" aria-label=\"Памятка зимнего события\">…</section>\u001b[22m\n\u001b[2m       - unexpected value \"hidden\"\u001b[22m\n"
+    }
+  ]
+}

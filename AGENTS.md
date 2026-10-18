@@ -6,6 +6,8 @@ Read docs/BUGFIX_TASK_02.md for the owner's approved ReleaseButton exception and
 the experimental touch-only Slop adjustment; it supersedes the original release
 policy for explicitly declared ReleaseButtons only. Read docs/BUGFIX_TASK_03.md
 for the approved Strict Tap, lifecycle, carousel and Draft & Recovery contracts.
+Read docs/BUGFIX_TASK_04.md for native module-strip scrolling and Module 04 Event Guide,
+sequential reading, local swipe arbitration and independent durable progress.
 
 Non-negotiable contracts:
 - Pointer Events are the primary input; keyboard activation is an additional accessible path.
@@ -41,6 +43,11 @@ Non-negotiable contracts:
   storage itself. Apply/confirmed Discard invalidate obsolete writes.
 - Destructive draft/delete/cleanup choices require explicit in-lab confirmation.
   Simulated crash resets volatile state and rehydrates actual durable storage.
+- Module-strip touch scrolling must start on buttons; scroll never activates a tab.
+- Guide buttons/dots/swipes share page accessibility. Only durable acknowledgment
+  unlocks the next article; completed-open checks differ from reopened reference mode.
+  Guide vertical touch scroll stays native; axis owner locks and one swipe changes
+  at most one page. Reset requires confirmation and fences stale writes in storage.
 - Experimental values remain runtime editable and visibly EXPERIMENTAL.
 - No invented game assets, backend/auth/database, analytics, API keys or secrets.
 - PASS must follow a performed check. Separate synthetic/browser automation,

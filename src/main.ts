@@ -1,4 +1,7 @@
 import './style.css';
+import './event-guide.css';
+import { EventGuide } from './event-guide';
+import { bindModuleStrip } from './module-strip';
 import { bindCarousel } from './carousel';
 import { DraftLab } from './draft-ui';
 import { fields, loadConfig, sanitize, defaults, slop, clamp, type Key } from './config';
@@ -56,8 +59,8 @@ const panels = [
     'navigation',
     'Navigation',
     '04',
-    'Five-page mini-window',
-    'Пять независимых страниц-заглушек; Close закрывает только мини-окно.',
+    'Event Guide & Swipe Navigation',
+    'Мир → зимнее событие → памятка. Читайте, подтверждайте и проверяйте жесты и восстановление.',
   ],
   [
     'resize',
@@ -83,7 +86,7 @@ root.innerHTML = `
 <div id="carousel" class="test-panel" hidden><div class="control-strip"><label>Modules <input id="module-count" type="number" min="1" max="30" value="8"></label><label>Cards / row <input id="card-count" type="number" min="1" max="30" value="7"></label><label>Draft <input id="draft" value="Reference draft"></label></div><div id="workspace-host"><article id="workspace" class="workspace"><header class="workspace-head"><strong>Adaptive Window</strong><output id="geometry-label"></output></header><div id="workspace-body"><div class="preview-frame"><svg id="preview-content" viewBox="0 0 280 180" role="img" aria-label="Нейтральный образец с фиксированным aspect ratio"><rect x="1" y="1" width="278" height="178" rx="12" fill="#212e38" stroke="#49616b"/><path d="M20 90H260M140 20V160" stroke="#49616b" stroke-dasharray="4 6"/><rect x="94" y="40" width="92" height="100" rx="6" fill="#3c5860"/><circle cx="140" cy="80" r="18" fill="#8cbbb6"/><text x="140" y="165" text-anchor="middle" fill="#b4c8cc" font-size="11">REFERENCE · 280 × 180</text></svg><span id="selection-summary"></span></div><div id="modules" class="gesture-modules" aria-label="Вертикальные Modules" tabindex="0"></div></div><footer class="workspace-actions"><button data-action="clear-selection">Clear selections</button><button data-action="lab-release" data-release-policy="geometry">Release action <span id="lab-count">0</span></button></footer></article></div><p class="hint">В Cards Area: |dx| ≥ |dy| → Carousel, включая 45°. Вне карточек → Modules. Владение блокируется до Up / Cancel. Wheel / trackpad также доступны.</p></div>
 <div id="actions" class="test-panel" hidden><div class="demo-surface action-stage"><span class="surface-label">PRESS / RELEASE TARGET</span><button id="release-button" data-action="release" data-release-policy="geometry" class="primary large-target">Release Button</button><p class="hint">Внутри — PRESSED, снаружи — RELEASED. Возвращайтесь сколько угодно раз; Slop не отменяет ReleaseButton. Up внутри — одно действие.</p></div><div class="state-grid"><div><span>ACTIVATIONS</span><output id="action-count">0</output></div><div><span>INTERACTION</span><output id="release-state">IDLE</output></div><div><span>PRESS VISUALS</span><output class="experimental">EXPERIMENTAL</output></div></div></div>
 <div id="buttons" class="test-panel" hidden><div class="gallery"><section class="demo-card"><span class="section-label">01 / BASIC ACTION</span><button data-action="basic">Basic action</button><output id="basic-count">0 actions</output></section><section class="demo-card"><span class="section-label">02 / BOUNDED STEPS</span><div class="control-strip"><label>Min<input id="step-min" type="number" value="0"></label><label>Max<input id="step-max" type="number" value="10"></label><label>Current<input id="step-value" type="number" value="5"></label></div><div class="button-row"><button id="minus" data-action="minus" aria-label="Уменьшить">−</button><output id="step-display">5</output><button id="plus" data-action="plus" aria-label="Увеличить">+</button></div></section><section class="demo-card"><span class="section-label">03 / GENERIC REPEAT</span><button id="repeat-button" data-action="repeat">Tap + repeat</button><output id="repeat-count">0 actions</output><output id="repeat-state">IDLE · READY</output></section><section class="demo-card"><span class="section-label">04 / STANDALONE ARROWS</span><div class="button-row"><button data-action="arrow-left" aria-label="Standalone left arrow">←</button><output id="arrow-count">0</output><button data-action="arrow-right" aria-label="Standalone right arrow">→</button></div><p class="hint">Работают без карусели.</p></section><section class="demo-card hold-card"><span class="section-label">05 / TAP + HOLD SESSION + REPEAT</span><button id="hold-button" data-action="hold" class="primary large-target">Tap / Hold / Repeat</button><label>Initial Repeat delay <input id="repeat-delay" type="range" min="10" max="25" step="1" value="10"><output id="repeat-delay-value">1.0×</output><small>EXPERIMENTAL · baseline repeatMs; Hold recognition unchanged</small></label><label class="toggle"><input id="availability" type="checkbox" checked> Action availability · READY</label><div class="control-strip"><button data-action="pause-after">Pause at 2.0 s → resume at 4.0 s</button></div><p class="hint">Эта кнопка планирует локальный тест availability перед Hold. После распознавания уход указателя не заканчивает сессию.</p><div class="state-grid"><div><span>ACTIONS / TICKS</span><output id="hold-count">0</output></div><div><span>INTERACTION / AVAILABILITY</span><output id="hold-state">IDLE · READY</output></div><div><span>HOLD / EFFECTIVE RATE</span><output id="hold-time">0 ms · 0 Hz</output></div></div></section></div></div>
-<div id="navigation" class="test-panel" hidden><div class="control-strip"><label>Scenario<select id="nav-scenario"><option value="both">Back + Next</option><option value="back">Back only</option></select></label><label>Boundary<select id="nav-boundary"><option value="disabled">Disabled</option><option value="hidden">Hidden</option></select></label><label>Faction<select id="nav-faction"><option>Light</option><option>Dark</option></select></label></div><div id="mini-window" class="mini-window"><header><strong>Placeholder sequence</strong><button data-action="mini-close" aria-label="Закрыть мини-окно">×</button></header><div class="mini-content"><span class="eyebrow">TEST CONTENT · NOT OFFICIAL LORE</span><h3 id="page-title">Page 1 / 5</h3><p id="page-copy"></p></div><footer><button id="page-back" data-action="page-back">← Back</button><button id="page-next" data-action="page-next">Next →</button></footer></div><button id="reopen" data-action="mini-reopen" hidden>Reopen mini-window</button><nav id="dots" class="dots" aria-label="Страницы мини-окна">${[1, 2, 3, 4, 5].map((n) => `<button data-action="page-${n}" aria-label="Страница ${n}" class="dot"><span>${n}</span></button>`).join('')}</nav><output id="page-state"></output></div>
+<div id="navigation" class="test-panel" hidden></div>
 <div id="resize" class="test-panel" hidden><div class="control-strip"><label>Mock width · px<input id="mock-width" type="number" min="240" max="1000" value="520"></label><label>Mock height · px<input id="mock-height" type="number" min="220" max="700" value="350"></label><label>Draft<input id="resize-draft" value="State survives resize"></label></div><div id="resize-surface" class="resize-surface"><div class="mock-world" aria-hidden="true"><span>REFERENCE GRID</span><div></div></div><div id="backdrop" class="backdrop"></div><article id="mock-window" class="mock-window"><header>Functional Bounds <span id="mock-mode"></span></header><div class="mock-body"><div class="mock-preview">Preview<br><span>aspect ratio preserved</span></div><div class="mock-modules">Modules<br><span>Geometry ≠ editor state</span><input id="mock-selection" type="checkbox"><label for="mock-selection">Persist selection</label></div></div><footer><span id="mock-dimensions"></span><button id="resize-handle" aria-label="Изменить размер окна" title="Drag to resize; use numeric inputs on touch">↘</button></footer></article></div><div class="state-grid"><div><span>VIEWPORT</span><output id="actual-viewport"></output></div><div><span>RESIZE LIFECYCLE</span><output id="resize-state">SETTLED</output></div><div><span>FINAL VALIDATION</span><output id="resize-validation">NOT RUN</output></div></div><p class="hint">На узком экране mock-размер ограничен доступной поверхностью. Resize-end: pointerup для ручки; для остальных событий — экспериментальный debounce, браузер не гарантирует resize-end API.</p><output id="mock-feedback" class="hint"></output><div class="preset-row">${[
   [360, 780],
   [375, 812],
@@ -157,6 +160,15 @@ function environment() {
 }
 const diag = new Diagnostics(environment, () => ({ ...config }));
 const controller = new InteractionController(root, () => config, diag);
+const eventGuide = new EventGuide(
+  $('navigation'),
+  controller,
+  () => config,
+  diag,
+  (page) => {
+    model.page = page;
+  },
+);
 const draftLab = new DraftLab($('draft-recovery'), controller, () => config, diag);
 let carouselCleanup: (() => void)[] = [];
 let activePanel = '';
@@ -253,44 +265,6 @@ register('pause-after', () => {
   ];
   diag.log('availability-test-scheduled', { pauseAfterMs: 2000, resumeAfterMs: 4000 });
 });
-register(
-  'page-back',
-  () => changePage(model.page - 1, 'Back'),
-  false,
-  () => model.page > 1,
-);
-register(
-  'page-next',
-  () => changePage(model.page + 1, 'Next'),
-  false,
-  () => model.page < 5,
-);
-register('mini-close', () => {
-  model.closed = true;
-  renderNavigation();
-  diag.log('mini-close', { page: model.page });
-});
-register('mini-reopen', () => {
-  const p = model.page;
-  model.closed = false;
-  renderNavigation();
-  diag.check('NAV-CLOSE', model.page === p && !$('navigation').hidden, 'same page after reopen', {
-    page: model.page,
-    labOpen: true,
-  });
-});
-for (let n = 1; n <= 5; n++)
-  register(`page-${n}`, () => {
-    changePage(n, 'dot');
-    diag.check(
-      'NAV-PAGE',
-      $('page-title').textContent === `Page ${n} / 5` &&
-        document.querySelector(`[data-action="page-${n}"]`)?.getAttribute('aria-current') ===
-          'page',
-      `page ${n} active`,
-      { title: $('page-title').textContent, page: model.page },
-    );
-  });
 function setAvailability(yes: boolean) {
   model.ready = yes;
   ($('availability') as HTMLInputElement).checked = yes;
@@ -334,76 +308,11 @@ for (const [id, key] of [
     syncSteps();
     queueUI();
   });
-function changePage(n: number, source: string) {
-  model.page = clamp(n, 1, 5);
-  renderNavigation();
-  diag.log('navigate', { page: model.page, source });
-}
-function renderNavigation() {
-  $('mini-window').hidden = model.closed;
-  $('reopen').hidden = !model.closed;
-  $('dots').hidden = model.closed;
-  $('page-title').textContent = `Page ${model.page} / 5`;
-  $('page-copy').textContent =
-    `Экран ${model.page}. Нейтральный текст для проверки навигации и сохранения состояния. Этот материал не является официальными правилами или лором игры.`;
-  $('page-state').textContent =
-    `Selected page ${model.page} · page count 5 · ${model.closed ? 'CLOSED' : 'OPEN'}`;
-  const hidden = ($('nav-boundary') as HTMLSelectElement).value === 'hidden';
-  const backOnly = ($('nav-scenario') as HTMLSelectElement).value === 'back';
-  for (const [id, bound] of [
-    ['page-back', model.page === 1],
-    ['page-next', model.page === 5],
-  ] as const) {
-    const el = $(id) as HTMLButtonElement;
-    el.disabled = bound;
-    el.hidden = (bound && hidden) || (id === 'page-next' && backOnly);
-  }
-  for (let n = 1; n <= 5; n++) {
-    const b = document.querySelector<HTMLElement>(`[data-action="page-${n}"]`)!;
-    b.setAttribute('aria-current', model.page === n ? 'page' : 'false');
-    b.dataset.faction = model.faction;
-  }
-}
-for (const id of ['nav-scenario', 'nav-boundary', 'nav-faction'])
-  $(id).addEventListener('change', () => {
-    model.faction = ($('nav-faction') as HTMLSelectElement).value;
-    renderNavigation();
-    diag.log('navigation-setting', {
-      scenario: ($('nav-scenario') as HTMLSelectElement).value,
-      boundary: ($('nav-boundary') as HTMLSelectElement).value,
-      faction: model.faction,
-    });
-  });
-// A boundary check is earned by an actual pointer attempt, even for disabled controls.
-document.addEventListener(
-  'pointerdown',
-  (e) => {
-    if (activePanel !== 'navigation') return;
-    for (const [id, n] of [
-      ['page-back', 1],
-      ['page-next', 5],
-    ] as const) {
-      const b = $(id) as HTMLButtonElement,
-        r = b.getBoundingClientRect();
-      if (
-        !b.hidden &&
-        b.disabled &&
-        e.clientX >= r.left &&
-        e.clientX <= r.right &&
-        e.clientY >= r.top &&
-        e.clientY <= r.bottom
-      )
-        diag.check('NAV-BOUND', model.page === n && b.disabled, 'boundary remains unchanged', {
-          page: model.page,
-          disabled: b.disabled,
-        });
-    }
-  },
-  true,
-);
 function openPanel(id: string) {
   controller.end(true, 'test-window navigation');
+  eventGuide.suspend();
   activePanel = id;
+  if (id === 'navigation') void eventGuide.open();
   if (id === 'draft-recovery') void draftLab.open();
   const p = panels.find((p) => p[0] === id)!;
   $('home').hidden = true;
@@ -428,6 +337,7 @@ document.querySelectorAll<HTMLElement>('[data-open]').forEach((b) => {
   controller.register(id, { run: () => openPanel(b.dataset.open!), instrument: false });
 });
 function closePanel() {
+  eventGuide.suspend();
   controller.end(true, 'test-window closed');
   $('test-shell').hidden = true;
   $('home').hidden = false;
@@ -437,6 +347,7 @@ function closePanel() {
   $('home').tabIndex = -1;
   $('home').focus({ preventScroll: true });
 }
+bindModuleStrip(root.querySelector<HTMLElement>('.index nav')!, () => config, openPanel);
 $('back-index').onclick = closePanel;
 $('close-test').onclick = closePanel;
 function renderModules() {
@@ -835,6 +746,10 @@ $('record-inconclusive').onclick = () => {
       : 'Наблюдаемый PASS / FAIL нельзя заменить этим способом. Используйте Reset для новой сессии.';
 };
 $('reset-test').onclick = () => {
+  if (activePanel === 'navigation') {
+    void eventGuide.reset();
+    return;
+  }
   if (activePanel === 'resize') {
     controller.end(true, 'module 05 reset');
     cancelAnimationFrame(mockFrame);
@@ -866,14 +781,11 @@ $('reset-test').onclick = () => {
   pauseTimers.forEach(clearTimeout);
   model.actionCount = model.basicCount = model.repeatCount = model.holdCount = model.arrow = 0;
   model.step = clamp(5, model.min, model.max);
-  model.page = 1;
-  model.closed = false;
   model.selections = {};
   setAvailability(true);
   controller.counts.clear();
   diag.reset();
   syncSteps();
-  renderNavigation();
   renderSelections();
   queueUI();
 };
@@ -991,7 +903,6 @@ root
     });
   });
 renderModules();
-renderNavigation();
 syncSteps();
 applyConfig();
 renderUI();
