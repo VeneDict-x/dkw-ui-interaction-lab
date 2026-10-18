@@ -487,3 +487,14 @@ test('BF04 occurrence identities isolate future event cycles', () => {
   assert.notEqual(a.eventInstanceId, b.eventInstanceId);
   assert.deepEqual(b.acknowledgedPages, []);
 });
+test('BF04 duplicate Event activation is idempotent until a real world return', () => {
+  let s = eventTransition(initialEvent(), { type: 'enter' });
+  s = eventTransition(s, { type: 'enter' });
+  assert.equal(s.guideOpen, true);
+  s = eventTransition(s, { type: 'close' });
+  s = eventTransition(s, { type: 'enter' });
+  assert.equal(s.guideOpen, false);
+  s = eventTransition(s, { type: 'leave' });
+  s = eventTransition(s, { type: 'enter' });
+  assert.equal(s.guideOpen, false);
+});

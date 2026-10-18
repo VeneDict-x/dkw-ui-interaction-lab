@@ -89,7 +89,7 @@ Keyboard/assistive detail=0 — отдельный доступный путь, 
 | src/main.ts | Подключение модуля 04, suspend при уходе, сохранение общего стенда |
 | tests/browser/bugfix-04.spec.ts | Новые браузерные regression и реальные IDB-сценарии |
 | tests/browser/guide-reference.ts | Реальное прохождение памятки для прежних free-navigation тестов |
-| tests/core.test.ts | Девять новых чистых/model-store проверок |
+| tests/core.test.ts | Десять новых чистых/model-store проверок |
 
 В `lab.spec.ts` и `bugfix-03.spec.ts` изменена только подготовка Navigation:
 теперь сначала выполняются настоящие пять acknowledgment и открывается reference
@@ -157,13 +157,13 @@ Slop остаётся прежним: базовый mouse/pen 7.68 px, touch 9.
 
 ## Проверка и доставка
 
-**Итог: 189 PASS / 0 FAIL / 0 SKIPPED.**
+**Итог: 191 PASS / 0 FAIL / 0 SKIPPED.**
 
 | Команда | PASS | FAIL | Результат |
 |---|---:|---:|---|
 | npm run check | — | — | TypeScript без ошибок |
-| npm test | 36 | 0 | Модель и lifecycle/storage guards |
-| npm run test:e2e | 140 | 0 | Полная Chromium suite, один worker, retries=0, flaky=0 |
+| npm test | 37 | 0 | Модель и lifecycle/storage guards |
+| npm run test:e2e | 141 | 0 | Полная Chromium suite, один worker, retries=0, flaky=0 |
 | npm run build | — | — | Production dist успешно собран |
 | npm run test:static | 13 | 0 | dist под /lab/, включая Event и реальную reload |
 
@@ -171,7 +171,7 @@ Node 24.19.0, Chromium 151.0.7922.173. Итоговая браузерная sui
 Машинный отчёт: [bugfix-04-summary.json](testing/bugfix-04-summary.json),
 [production smoke](testing/bf04-static-results.json).
 Историческая база — 144 PASS: 27 model, 107 browser, 10 production smoke.
-Добавлено 45 проверок: 9 model, 33 browser, 3 production smoke.
+Добавлено 47 проверок: 10 model, 34 browser, 3 production smoke.
 Все прежние тесты сохранены. Форматирование и git diff --check также проходят.
 Секреты, временные файлы и зависимости в коммит не включены.
 [Сравнение ветки с main](https://github.com/VeneDict-x/dkw-ui-interaction-lab/compare/main...bugfix/04-event-guide).
@@ -200,3 +200,12 @@ main; ветка и PR не обновляют сайт. Проверка PR в 
 ниже viewport. Исправлена подготовка ввода (`scrollIntoViewIfNeeded`), ожидаемый
 PASS не менялся. Отдельная повторная проверка подтвердила реальные NAV-BOUND,
 NAV-PAGE и NAV-CLOSE; итоговый полный прогон включает этот сценарий.
+
+Дополнительный review быстрых действий выявил воспроизводимую гонку: две Event
+активации при задержанной первой записи трактовались как два входа; вторая закрывала
+автоматически открытую памятку. Отдельный Chromium тест до исправления получил FAIL
+(ожидалось видимое окно, фактически hidden); свидетельство:
+[bf04-double-entry-before.json](testing/bf04-double-entry-before.json).
+Команда enter теперь идемпотентна, пока screen уже event: новым входом считается
+только переход из world. Это сохраняет правило последующих реальных входов без
+автооткрытия. Добавлены чистый model и браузерный delayed-write regression.

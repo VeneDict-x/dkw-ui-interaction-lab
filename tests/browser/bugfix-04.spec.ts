@@ -676,3 +676,36 @@ test('BF04 reload preserves early closed and completed reference modes without r
   ).toHaveCount(0);
   await expect(page.locator('.guide-page [data-guide-ack]:visible')).toHaveCount(0);
 });
+
+test('BF04 rapid Event activations during a delayed save cannot suppress first-entry guide', async ({
+  page,
+}) => {
+  await open(page);
+  await expect(page.locator('#event-save-status')).toHaveText('SAVED');
+  await page.evaluate(async () => {
+    const path = '/src/event-state.ts';
+    const { EventRepository } = await import(path);
+    const old = EventRepository.prototype.write;
+    EventRepository.prototype.write = async function (
+      ...args: Parameters<import('../../src/event-state').EventRepository['write']>
+    ) {
+      EventRepository.prototype.write = old;
+      await new Promise<void>((resolve) => {
+        (window as typeof window & { releaseEventEnter: () => void }).releaseEventEnter = resolve;
+      });
+      return old.apply(this, args);
+    };
+  });
+  await page.locator('#event-enter').click();
+  await expect(page.locator('#event-save-status')).toHaveText('SAVING');
+  await page.locator('#event-enter').click();
+  await page.evaluate(() =>
+    (window as typeof window & { releaseEventEnter: () => void }).releaseEventEnter(),
+  );
+  await expect(page.locator('#event-save-status')).toHaveText('SAVED');
+  await expect(page.locator('#mini-window')).toBeVisible();
+  expect((await readState(page)).eventEntered).toBe(true);
+  await page.reload();
+  await open(page);
+  await expect(page.locator('#mini-window')).toBeVisible();
+});

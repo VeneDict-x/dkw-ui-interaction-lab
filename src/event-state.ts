@@ -31,6 +31,8 @@ export function eventTransition(state: EventState, command: EventCommand): Event
   const s = structuredClone(state);
   switch (command.type) {
     case 'enter':
+      // Repeated activations queued before the first durable write are not a new visit.
+      if (s.currentScreen === 'event') break;
       s.currentScreen = 'event';
       s.guideOpen = !s.eventEntered;
       if (!s.eventEntered) s.lastPage = 1;
