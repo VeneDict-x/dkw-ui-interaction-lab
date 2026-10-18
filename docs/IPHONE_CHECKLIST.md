@@ -10,7 +10,7 @@ PASS from the desktop Chromium report.
 | IOS-01 | Portrait at real width, Safari bars expanded/collapsed | No horizontal page overflow; targets remain reachable; actual viewport wins |
 | IOS-02 | Landscape, notch / home indicator, rotating repeatedly | Safe-area padding, no clipped actions; draft, selection, page survive |
 | IOS-03 | ReleaseButton: motion inside, repeated exit/return even beyond Slop | Pressed inside, released outside; Down zero actions, Up inside one, Up outside zero |
-| IOS-04 | Card drag then return; other buttons beyond Slop | No resurrected card/ordinary tap; ReleaseButton follows the approved geometry exception |
+| IOS-04 | Card drag then return; ordinary buttons exit/reentry | No resurrected card/ordinary tap; ReleaseButton follows the approved geometry exception |
 | IOS-05 | Horizontal/vertical/45° gesture from card | Correct owner; exact tie Carousel; lock through loop/reversal |
 | IOS-06 | Background Modules gesture; no-overflow carousel | Horizontal ignored outside cards; no meaningless carousel movement |
 | IOS-07 | Fast carousel swipe and end pull | Experimental inertia/elasticity controllable, stable spring-back |
@@ -91,3 +91,50 @@ All items below require an actual iPhone; Chromium/CDP is not physical Safari.
 Record device/iOS version, URL/commit and observation for each PASS/FAIL. Clearing
 site data intentionally removes local Draft/Applied; private-mode/eviction policies
 and browser quota require device confirmation.
+
+## Bugfix 04 + Feature 04 — Safari / Chrome iOS: PENDING
+
+Выполнить на физическом iPhone после разрешённого слияния PR и успешного HTTPS
+deployment. Chromium/CDP, симулированный restart и программная visibility не
+доказывают поведение Safari. Записать URL/commit, модель, iOS, браузер, настройки,
+ожидаемое/наблюдаемое. Проверить Safari и Chrome iOS отдельно.
+
+1. В portrait провести по верхней полосе **прямо с кнопки**, несколько раз в обе
+   стороны. Достичь модулей 05/06. Scroll не выбирает модуль, обычный tap выбирает;
+   выход/возврат без scroll не воскрешает отменённый tap. Повторить после поворота.
+2. Reset Event State: Cancel оставляет прогресс, Confirm сбрасывает только 04.
+   Первый Event открывает памятку поверх зимней сцены. Закрытие оставляет событие,
+   ❓ открывает снова. Back в мир → Event не открывает памятку автоматически.
+3. Прокрутить все пять длинных статей вверх/вниз, включая длинную Академию и вторую
+   иллюстрацию. «Понятно» только в конце статьи, скроллится вместе с текстом. Нет
+   выделения/долгого callout/залипшей подсветки/перехода страницы от вертикального жеста.
+4. Плавно потянуть статью горизонтально: страница следует пальцу, сосед виден.
+   Короткий жест возвращается, длинный меняет ровно одну страницу. Первый край
+   сопротивляется и возвращается. Повторить с разворотом и вертикальным продолжением.
+5. Попробовать закрытую страницу через swipe, dot и Next: выбор остаётся, небольшой
+   упругий возврат; одна мягкая подсказка с утверждённым текстом, не блокирующая ввод.
+   Быстрые повторы обновляют подсказку; нет стопки, звука, случайного «Понятно».
+6. Отметить страницы 1/2: зелёные галочки, доступна 3, 4 закрыта. Закрыть на 3,
+   открыть ❓: та же страница сверху, уже отмеченные страницы без «Понятно».
+   Проверить dots/Back/Next/swipe при Hidden/Disabled и Back-only.
+7. Завершить страницу 5: окно остаётся открытым, пять галочек. Закрыть → ❓:
+   reference mode, все страницы свободны, нет галочек/замков/«Понятно». Проверить
+   Light/Dark/Premium: синяя/красная/золотая dot, зелёная галочка сохраняет значение.
+8. Проверить быстрые tap/double tap/swipe/close/reopen и resize/orientation во время
+   drag. Нет двойного acknowledgment, скачка через две страницы и зависшего жеста.
+9. После SAVED: Simulate App Restart, Reload Page (настоящая reload), закрытие
+   браузера и повторное открытие. Module 04 восстанавливает экран, открытость,
+   страницу и прочитанный prefix сверху; автооткрытие не повторяется.
+10. Background/foreground, блокировка экрана, реальное прерывание во время drag
+    и сохранения. После SAVED прогресс восстанавливается; для незавершённой записи
+    фиксировать реальный результат, не ожидать невозможной crash-гарантии.
+11. Reset во время записи → Confirm → restart/reload: старый прогресс не воскресает.
+    Проверить, что выбор/Current/Draft других модулей не сброшены. Для второй вкладки
+    проверить понятную ошибку потери ownership и перечитывание через Restart.
+12. В узком portrait/landscape и с раскрытой адресной строкой все важные controls
+    достижимы; событие видно вокруг overlay. VoiceOver/клавиатура: названия dots,
+    активная страница, Close, Help и безопасный confirmation читаются и работают.
+
+Оставшиеся риски: native pan arbitration и OS PointerCancel; адресная строка/safe
+area; emoji/font differences; IDB private mode/quota/eviction и реальное завершение
+процесса. Все пункты этого раздела ожидают наблюдений, аппаратных PASS пока нет.

@@ -1,4 +1,5 @@
-> Актуальная реализация Bugfix Task 03: [docs/BUGFIX_TASK_03.md](docs/BUGFIX_TASK_03.md).
+> Актуальная реализация Bugfix 04 + Feature 04: [docs/BUGFIX_TASK_04.md](docs/BUGFIX_TASK_04.md).
+> Task 03 сохранён в [docs/BUGFIX_TASK_03.md](docs/BUGFIX_TASK_03.md).
 > Приведённые ниже результаты относятся к предыдущим этапам.
 
 # Dark Kingdom War — UI Interaction Lab: отчёт

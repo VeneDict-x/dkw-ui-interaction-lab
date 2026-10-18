@@ -136,7 +136,7 @@ need measured tuning. Sanitization normalizes invalid values and dependent bound
   available; multi-segment layout behavior needs device validation.
 - Browser safe-area / address-bar / keyboard behavior must be checked on iPhone.
 - Haptics/audio policy is open; this bench deliberately emits neither.
-- Optional page swipe is not enabled or implemented; required buttons and dots work.
+- Module 04 now supports live page swipe; see Task 04 for its local axis arbitration.
 - Trackpad testing uses Chromium wheel input, not a physical trackpad.
 - The repository's owner configured an existing GitHub Pages workflow. Deployment
   status must be checked per commit; it does not certify physical Safari behavior.
@@ -149,3 +149,22 @@ session/version guards, crash controls, and exact performed checks.
 New source boundaries: carousel.ts (shared geometry/binding), draft.ts
 (repository + editor lifecycle), draft-ui.ts (sixth panel, native modal, SVG).
 Physical Safari acceptance remains PENDING.
+
+## Task 04 additions
+
+See [BUGFIX_TASK_04.md](BUGFIX_TASK_04.md) for the approved Event Guide contracts,
+persistence design, strip root cause, performed tests and experimental values.
+`module-strip.ts` preserves native touch scrolling from module button surfaces;
+local Pointer Events handle tap and mouse drag without altering the shared controller.
+`event-state.ts` owns an independent, occurrence-keyed IndexedDB and ordered commands.
+Only transaction completion publishes progress. Epoch + lease guards run within the
+readwrite transaction; Reset and logical Restart fence delayed writes at storage and UI.
+The last acquired tab owns the event record; stale tabs get explicit write errors.
+
+`event-guide.ts`, `event-articles.ts`, `guide-gesture.ts` and `event-guide.css` build
+the nested world/event/guide simulation. Guide horizontal motion uses a local locked
+axis, pan-y keeps native vertical touch scrolling, and each gesture moves at most
+one page. No Module 01/02/03/05/06 input or geometry controller changes. Old free-nav
+regressions earn completion via actual acknowledgments before reference-mode checks.
+Guide completion/checkmarks and reference mode are separate durable states.
+Real iPhone Safari/Chrome iOS verification remains PENDING.

@@ -1,6 +1,8 @@
 import { test, expect, type Page } from '@playwright/test';
+import { prepareGuideReference } from './guide-reference';
 async function open(page: Page, id: string) {
   await page.locator(`.index [data-open="${id}"]`).click();
+  if (id === 'navigation') await prepareGuideReference(page);
 }
 async function config(page: Page, key: string, value: number) {
   await page.locator('#debug-details').evaluate((e: HTMLDetailsElement) => (e.open = true));

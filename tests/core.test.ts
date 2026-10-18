@@ -340,3 +340,150 @@ test('BF03 configured Peek fraction changes capacity instead of freezing one hal
   assert.ok(Math.abs(cardGeometry(411, 108, 10, 4, 0.2).capacity - 3.2) < 1e-12);
   assert.ok(Math.abs(cardGeometry(411, 108, 10, 4, 0.8).capacity - 2.8) < 1e-12);
 });
+
+import {
+  initialEvent,
+  eventTransition,
+  pageAccessible,
+  EventModel,
+  type EventStore,
+  type EventRecord,
+  type EventCommand,
+} from '../src/event-state.ts';
+test('BF04 first event entry auto-opens exactly once; Help opens later', () => {
+  let s = initialEvent();
+  assert.equal(s.currentScreen, 'world');
+  s = eventTransition(s, { type: 'enter' });
+  assert.equal(s.guideOpen, true);
+  s = eventTransition(s, { type: 'close' });
+  s = eventTransition(s, { type: 'leave' });
+  s = eventTransition(s, { type: 'enter' });
+  assert.equal(s.guideOpen, false);
+  s = eventTransition(s, { type: 'open' });
+  assert.equal(s.guideOpen, true);
+});
+test('BF04 visits cannot acknowledge and locked navigation cannot change page', () => {
+  let s = eventTransition(initialEvent(), { type: 'enter' });
+  for (const page of [2, 3, 5]) {
+    assert.equal(pageAccessible(s, page), false);
+    s = eventTransition(s, { type: 'navigate', page });
+    assert.equal(s.lastPage, 1);
+  }
+  assert.deepEqual(s.acknowledgedPages, []);
+});
+test('BF04 acknowledgment unlocks exactly one next page, repeated old ack does nothing', () => {
+  let s = eventTransition(initialEvent(), { type: 'enter' });
+  s = eventTransition(s, { type: 'ack', page: 1 });
+  assert.equal(s.lastPage, 2);
+  assert.deepEqual(s.acknowledgedPages, [1]);
+  assert.equal(pageAccessible(s, 2), true);
+  assert.equal(pageAccessible(s, 3), false);
+  s = eventTransition(s, { type: 'ack', page: 1 });
+  assert.equal(s.lastPage, 2);
+  assert.deepEqual(s.acknowledgedPages, [1]);
+});
+test('BF04 completed open guide retains checks; close transitions to reference mode', () => {
+  let s = eventTransition(initialEvent(), { type: 'enter' });
+  for (let page = 1; page <= 5; page++) s = eventTransition(s, { type: 'ack', page });
+  assert.equal(s.guideCompleted, true);
+  assert.equal(s.guideOpen, true);
+  assert.equal(s.guideMode, 'completed');
+  s = eventTransition(s, { type: 'close' });
+  assert.equal(s.guideMode, 'reference');
+  s = eventTransition(s, { type: 'open' });
+  assert.equal(s.guideOpen, true);
+  for (let p = 1; p <= 5; p++) assert.ok(pageAccessible(s, p));
+});
+test('BF04 early close and reopen preserve last page and durable prefix', () => {
+  let s = eventTransition(initialEvent(), { type: 'enter' });
+  for (const page of [1, 2]) s = eventTransition(s, { type: 'ack', page });
+  s = eventTransition(s, { type: 'close' });
+  s = eventTransition(s, { type: 'open' });
+  assert.equal(s.lastPage, 3);
+  assert.deepEqual(s.acknowledgedPages, [1, 2]);
+  assert.equal(s.guideCompleted, false);
+  assert.equal(pageAccessible(s, 0), false);
+  assert.equal(pageAccessible(s, 6), false);
+});
+class EventMemoryStore implements EventStore {
+  record: EventRecord = { epoch: 'one', lease: 'lease', version: 0, state: initialEvent() };
+  async acquire() {
+    this.record.lease = crypto.randomUUID();
+    return structuredClone(this.record);
+  }
+  async write(epoch: string, lease: string, cmd: EventCommand) {
+    if (this.record.epoch !== epoch || this.record.lease !== lease) return null;
+    this.record.state = eventTransition(this.record.state, cmd);
+    this.record.version++;
+    return structuredClone(this.record);
+  }
+  async reset() {
+    this.record = {
+      epoch: crypto.randomUUID(),
+      lease: crypto.randomUUID(),
+      version: this.record.version + 1,
+      state: initialEvent(),
+    };
+    return structuredClone(this.record);
+  }
+}
+test('BF04 model exposes acknowledgments only after confirmed write', async () => {
+  const r = new EventMemoryStore(),
+    m = new EventModel(r);
+  await m.restart();
+  await m.command({ type: 'enter' });
+  let release!: () => void;
+  const old = r.write.bind(r);
+  r.write = async (...args) => {
+    await new Promise<void>((resolve) => (release = resolve));
+    return old(...args);
+  };
+  const write = m.command({ type: 'ack', page: 1 });
+  await Promise.resolve();
+  assert.equal(m.saveStatus, 'SAVING');
+  assert.deepEqual(m.state.acknowledgedPages, []);
+  release();
+  await write;
+  assert.deepEqual(m.state.acknowledgedPages, [1]);
+  assert.equal(m.saveStatus, 'SAVED');
+});
+test('BF04 reset fences delayed writes in storage and UI', async () => {
+  const r = new EventMemoryStore(),
+    m = new EventModel(r);
+  await m.restart();
+  await m.command({ type: 'enter' });
+  let release!: () => void;
+  const old = r.write.bind(r);
+  r.write = async (...args) => {
+    await new Promise<void>((resolve) => (release = resolve));
+    return old(...args);
+  };
+  const write = m.command({ type: 'ack', page: 1 });
+  await Promise.resolve();
+  await m.reset();
+  release();
+  await write;
+  assert.equal(m.state.currentScreen, 'world');
+  assert.deepEqual(m.state.acknowledgedPages, []);
+  assert.deepEqual(r.record.state.acknowledgedPages, []);
+});
+test('BF04 restart destroys volatile state and reads durable state with a new lease', async () => {
+  const r = new EventMemoryStore(),
+    m = new EventModel(r);
+  await m.restart();
+  await m.command({ type: 'enter' });
+  await m.command({ type: 'ack', page: 1 });
+  m.state.lastPage = 5;
+  m.state.acknowledgedPages = [1, 2, 3, 4];
+  const lease = r.record.lease;
+  await m.restart();
+  assert.equal(m.state.lastPage, 2);
+  assert.deepEqual(m.state.acknowledgedPages, [1]);
+  assert.notEqual(r.record.lease, lease);
+});
+test('BF04 occurrence identities isolate future event cycles', () => {
+  const a = initialEvent('winter-one'),
+    b = initialEvent('winter-two');
+  assert.notEqual(a.eventInstanceId, b.eventInstanceId);
+  assert.deepEqual(b.acknowledgedPages, []);
+});

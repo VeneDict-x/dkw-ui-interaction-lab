@@ -1,7 +1,9 @@
 import { test, expect, type Page } from '@playwright/test';
+import { prepareGuideReference } from './guide-reference';
 async function open(page: Page, id: string) {
   await page.locator(`.index [data-open="${id}"]`).click();
   await expect(page.locator(`#${id}`)).toBeVisible();
+  if (id === 'navigation') await prepareGuideReference(page);
 }
 async function point(page: Page, selector: string) {
   const target = page.locator(selector);
