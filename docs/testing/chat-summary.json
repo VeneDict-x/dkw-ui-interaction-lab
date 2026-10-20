@@ -1,0 +1,1365 @@
+{
+  "date": "2026-10-20T02:40:15.127706+00:00",
+  "baseCommit": "52d105ff21140bd80188df36d5b7a82beb942e07",
+  "testedImplementationCommit": "3fbb944ba7ce8f6c1c17c6783f189443cb6dc88f",
+  "branch": "feature/module04-chat",
+  "environment": {
+    "node": "24.19.0",
+    "chromium": "151.0.7922.173",
+    "coverage": "Chromium mouse/keyboard/CDP touch; synthetic native input/IME, pointer cancellation and real IDB delay/abort injection. Not physical iPhone."
+  },
+  "typecheck": "PASS",
+  "productionBuild": "PASS",
+  "model": {
+    "passed": 49,
+    "failed": 0,
+    "skipped": 0
+  },
+  "browser": {
+    "passed": 177,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "retries": 0,
+    "stats": {
+      "startTime": "2026-10-20T02:32:36.014Z",
+      "duration": 435423.168,
+      "expected": 177,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "file": "bugfix-02.spec.ts",
+        "title": "01 Down then Up inside activates exactly once",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1510
+      },
+      {
+        "file": "bugfix-02.spec.ts",
+        "title": "02 Down without Up never activates",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1899
+      },
+      {
+        "file": "bugfix-02.spec.ts",
+        "title": "03 movement inside beyond Slop stays pressed and activates once",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1393
+      },
+      {
+        "file": "bugfix-02.spec.ts",
+        "title": "04 Outside then Up outside never activates",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1337
+      },
+      {
+        "file": "bugfix-02.spec.ts",
+        "title": "05 Outside then Inside then Up inside activates once",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1398
+      },
+      {
+        "file": "bugfix-02.spec.ts",
+        "title": "06 repeated exits and returns remain reversible",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1643
+      },
+      {
+        "file": "bugfix-02.spec.ts",
+        "title": "07 large excursion beyond Slop then return activates once",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1465
+      },
+      {
+        "file": "bugfix-02.spec.ts",
+        "title": "08 synthetic PointerCancel clears state and never activates on later Up",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1410
+      },
+      {
+        "file": "bugfix-02.spec.ts",
+        "title": "09 capture preserves immediate PRESSED RELEASED PRESSED visuals and fixed position",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1496
+      },
+      {
+        "file": "bugfix-02.spec.ts",
+        "title": "10 compatibility click and repeated Up cannot double activate",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1368
+      },
+      {
+        "file": "bugfix-02.spec.ts",
+        "title": "functional top edge stays inside during press translation",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1364
+      },
+      {
+        "file": "bugfix-02.spec.ts",
+        "title": "lost capture ends release candidate without activation",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1389
+      },
+      {
+        "file": "bugfix-02.spec.ts",
+        "title": "nested lab Release action uses the same geometry policy",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1405
+      },
+      {
+        "file": "bugfix-02.spec.ts",
+        "title": "Chromium touch exits and returns under capture; touchEnd performs 1 action",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2769
+      },
+      {
+        "file": "bugfix-02.spec.ts",
+        "title": "Chromium touch exits and returns under capture; touchCancel performs 0 action",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2736
+      },
+      {
+        "file": "bugfix-02.spec.ts",
+        "title": "Option 3 touch drag clears temporary states and preserves None",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2617
+      },
+      {
+        "file": "bugfix-02.spec.ts",
+        "title": "Safari-compatible sticky hover regression (forced pseudo-state in Chromium)",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1638
+      },
+      {
+        "file": "bugfix-02.spec.ts",
+        "title": "drag and cancel preserve an actual Option selection and clear the source card",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2245
+      },
+      {
+        "file": "bugfix-02.spec.ts",
+        "title": "mouse hover and keyboard focus are separate from selected and pressed",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1363
+      },
+      {
+        "file": "bugfix-02.spec.ts",
+        "title": "touch slop increases by 25% without changing mouse threshold (synthetic Pointer Events)",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1488
+      },
+      {
+        "file": "bugfix-02.spec.ts",
+        "title": "touch coefficient is experimental, editable and persists with existing settings",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1796
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 Strict Tap permits large movement wholly inside",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1281
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 repeat availability isolated from hold availability",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2588
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 Hidden keeps Next in independent right slot",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 5423
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 ordinary exit below Slop permanently cancels reentry; fresh press works",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2029
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 lifecycle initial / up terminates without orphan actions",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1683
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 lifecycle initial / cancel terminates without orphan actions",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1587
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 lifecycle initial / lostcapture terminates without orphan actions",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1662
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 lifecycle initial / blur terminates without orphan actions",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1693
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 lifecycle initial / hidden terminates without orphan actions",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1639
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 lifecycle initial / contextmenu terminates without orphan actions",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1660
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 lifecycle initial / pagehide terminates without orphan actions",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1609
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 lifecycle active / up terminates without orphan actions",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1838
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 lifecycle active / cancel terminates without orphan actions",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1763
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 lifecycle active / lostcapture terminates without orphan actions",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1776
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 lifecycle active / blur terminates without orphan actions",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1809
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 lifecycle active / hidden terminates without orphan actions",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1880
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 lifecycle active / contextmenu terminates without orphan actions",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1774
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 lifecycle active / pagehide terminates without orphan actions",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1820
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 sixteen initial-delay values preserve recognition and later cadence, steps unchanged",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2884
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 timed availability pause 2 s resume 4 s from trigger",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1192
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 scoped selection protection keeps editor fields and diagnostic text selectable",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1236
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 Navigation slots first last middle, hidden targets absent, close retains page",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2979
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 canonical 1/2/3/4 real cards, 3.5 peek and exact right inset; 5/20 identical width",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2800
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 unbounded diminishing overscroll, final cancellation springs to zero",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1752
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 synthetic multitouch owner handoff survives first lift, final lift settles without tap",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1783
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 05 Reset cancels pending resize and preserves other module state",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 3858
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 240x220 reachable Modules / viewport 390x844",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1633
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 240x220 reachable Modules / viewport 844x390",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1752
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 240x220 reachable Modules / viewport 1366x900",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1783
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 Draft all real options render geometric layers; None hides each layer",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2815
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 incomplete Current autosaves but cannot Apply; labels wait for durable success",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 3129
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 autosave latency varies within 1500–2500 and remains configurable",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1919
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 out-of-order A after B cannot overwrite newer durable draft",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 4258
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 deterministic save failure / retry never claims success early",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 4993
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 actual storage operation failure reported, successful retry durable",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 4931
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 Apply during delayed save commits latest Current and cannot resurrect Draft",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 4335
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 Cancel is three-way modal; Continue preserves current and in-flight save",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2730
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 modal Escape continues without discard and background retains live editor",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1436
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 confirmed Discard during save restores Applied, no draft resurrection",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 4116
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 Save for later waits for latest Current; failure stays editing with retry",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 3426
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 Save for later injected failure cannot leave editor or claim success",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 5263
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 true reload recovers only durable draft, without changing Applied",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 3669
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 simulated crash before save genuinely drops volatile Current",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 3993
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 crash after confirmed save, Not now retains draft, Delete needs second confirmation",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 3650
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 multiple editing sessions cannot leak old writes; cleanup explicit and isolated",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 5170
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 independent controller instances isolate availability, unmount, listeners and timers",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2915
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 Chromium native multitouch handoff keeps CAROUSEL until last finger release",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 3449
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 Standalone arrow held indefinitely stays tap-only until valid release",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1379
+      },
+      {
+        "file": "bugfix-03.spec.ts",
+        "title": "BF03 Peek settings resize actual cards; preview ratio survives compact-to-normal resize",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2976
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 top strip native touch scroll starts on button without activating module",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2365
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 first entry shows winter behind smaller opaque guide and acknowledgment at article bottom",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1618
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 second event entry never auto-opens, Help reopens saved page at top",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2300
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 acknowledging unlocks one page and navigates; revisited ack disappears",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1899
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 locked dots and Next reject consistently; popup refreshes without stacking",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 4457
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 completion stays open with green checks; reopening uses reference mode",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 3273
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 live drag reveals neighbor; short drag and PointerCancel spring back",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 3121
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 one long horizontal gesture changes at most one page; direction works",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 3669
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 locked and first-page swipes resist, return and preserve selection",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2947
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 vertical mouse intent locks and scrolls without changing page",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2127
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 approved chat contract: reload opens world; Help restores guide progress at top",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2867
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 simulated restart reads durable state; reset only clears Event",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2269
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 Light dots retain colored base, lock and green check",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1660
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 Dark dots retain colored base, lock and green check",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1942
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 Premium dots retain colored base, lock and green check",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2389
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 module tabs retain Strict Tap cancellation, capture cancel and keyboard paths",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1806
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 narrow touch tabs allow taps, repeated surface swipes and orientation changes",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 4512
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 native vertical touch article scrolling and live touch page navigation coexist",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 4165
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 dragging from acknowledgment cannot acknowledge or ghost-click; keyboard can",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2386
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 Hidden and Back-only affect buttons, never accessibility through dots or swipes",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2864
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 horizontal owner stays locked after vertical reversal; blur/resize end only temporary state",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 3263
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 all five long articles and essential controls fit mobile 320",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2778
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 all five long articles and essential controls fit mobile 390",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2919
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 rapid acknowledgment taps unlock just one page; reduced motion remains functional",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1995
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 pending acknowledgment is not read until real IndexedDB transaction completes",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2764
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 real storage reset rejects a delayed old-session acknowledgment",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2316
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 real storage restart rejects a delayed old-session acknowledgment",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2109
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 real IndexedDB abort shows failure without marking read; Retry can durably acknowledge",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2182
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 repository fences old leases, reset epochs and separate occurrence records",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1058
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 Reset requires confirmation; cancel preserves progress and a failed reset is retryable",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2997
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 Navigation diagnostics still earn boundary, page and close checks from actual actions",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2100
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 experimental guide settings edit runtime thresholds and persist without changing Slop",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 4222
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 reload preserves early closed and completed reference modes without repeated auto-open",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 4070
+      },
+      {
+        "file": "bugfix-04.spec.ts",
+        "title": "BF04 rapid Event activations during a delayed save cannot suppress first-entry guide",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 3079
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat startup is Module 04 world and empty; focus alone does not schedule seeds",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 3408
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat first pasted world text seeds after 2 seconds with chronological user interleaving",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1470
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat event trigger seeds once, real reload midway resumes remaining stable IDs without duplicates",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 6860
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat manual fake has one insert per press, all producers retain six and display four full originals",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1858
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat live sends only at 4–7 second deadlines, manual insertion works while Live and Stop terminates it",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1493
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat reload restores history/draft/settings but never resumes Live; restart always world",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2622
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat event-only reset preserves settings, history, draft and initial seed schedule",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1933
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat full reset confirms, clears only Module 04 including draft/settings/progression and local diagnostics",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2980
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat emoji toggle and identical picker item are separate; emoji-only interaction never focuses text",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1720
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat picker preserves focus/selection while typing, repeated insertions keep picker and caret",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1685
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat empty/whitespace/tag-only sends are silent; actual placeholder text can be sent",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1595
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat ReleaseButton send rearms on return, stays put, cancels outside and PointerCancel",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1753
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat double diagnostic uses real synchronous claim and one stable accepted transaction",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1382
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat cooldown leaves editing available, warns only for a new nonempty attempt and expires at 2500ms",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1792
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat 500 grapheme cap handles paste without destroying original suffix",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2427
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat 500 grapheme cap handles native-input without destroying original suffix",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1805
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat 500 grapheme cap handles composition without destroying original suffix",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1722
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat 500 grapheme cap handles picker without destroying original suffix",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1920
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat filters typing/paste/rich text directives and renders stored content through text-only APIs",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2229
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat responsive 320: one-line bodies, opaque surfaces and bottom aligned 48px buttons",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2859
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat responsive 390: one-line bodies, opaque surfaces and bottom aligned 48px buttons",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2816
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat responsive 844: one-line bodies, opaque surfaces and bottom aligned 48px buttons",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2516
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat compact area popup excludes input; outside guide interaction dismisses picker without changing guide rules",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1708
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat system text is yellow semibold, user distinct, clan IDs have stable individual badges",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1483
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat home/index strip touch scroll starts on button surface, cancels tap and reaches 06",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 3387
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat reduced-motion snow is nonblocking and unintended scene/preview overscroll is locally contained",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2075
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat actual IndexedDB send abort preserves draft, reports failure and Retry commits once",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1601
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat pending real send keeps synchronous claim; a newer composed draft survives commit",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1850
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat full reset fences delayed producer write and pending seeds in actual storage",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1976
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat full reset is atomic with event progress on transaction abort, then Retry clears both",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1977
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat recovered drafts, fake and system text are all sanitized and rendered inertly",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1649
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat narrow native touch scrolls the constrained picker itself from emoji surfaces",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 3710
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat typing at the grapheme limit keeps suffix and cannot split existing cluster selections",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1599
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat failed full reset cannot contaminate later event-only reset; restart=false",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1744
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat failed full reset cannot contaminate later event-only reset; restart=true",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2036
+      },
+      {
+        "file": "chat.spec.ts",
+        "title": "Chat composer growth uses a real monotonic height transition, without an intermediate auto-height jump",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1582
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "entry, chambers, NOT RUN assertions and no default PASS",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 5251
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "release happens on Up, not Down, and pointer click cannot duplicate it",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1532
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "leave and return below slop visually unpress/repress and activate once",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1486
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "Up outside cancels even below slop",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1355
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "ordinary Basic Strict Tap retains irreversible exit cancellation",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1389
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "simulated PointerCancel resets without activation and lost capture interrupts hold",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2859
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "short tap hold control performs one action",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1808
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "hold survives outside, repeats, terminates on outside Up without extra click",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2238
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "availability pauses active hold and resumes without a backlog",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2757
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "movement before hold recognition cancels repeat and release",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2040
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "secondary pointer is ignored while first holds; blur terminates",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2695
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "plus/minus bounds, generic repeat, standalone arrows work independently",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2338
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "hold reaching step bound preserves session, availability resumes if bound changes",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 3409
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "carousel card tap selects, None clears, horizontal drag does not select",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1661
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "45 degrees selects carousel, locks through later vertical intent; reversal is immediate",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1607
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "vertical intent inside carousel scrolls modules and keeps horizontal position",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1542
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "outside cards starts Modules and ignores horizontal movement",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2119
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "no overflow means no scroll or elastic movement, edge arrows unavailable",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1692
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "overflow has logarithmic resistant pull and spring return",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1786
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "five-page dots, faction colors, back/next and close/reopen preserve page",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 3847
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "navigation boundaries and back-only/hidden setting",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 4197
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "keyboard activates buttons, cards and dots with visible focus semantics",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 3673
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "resize preserves carousel selection, draft, page, step and relevant scroll",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2389
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "mock live resize, blur/dim restore, pointer drag and state preserved",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2449
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "square mock preserves previous H/V mode through hysteresis",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1670
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "config persistence, reset, exports contain environment and performed checks",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2660
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "layout fits 360 px, targets retain safe size, 30 modules remain scrollable",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 5655
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "trackpad/wheel path scrolls horizontal carousel and vertical modules",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1482
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "real Chromium touch input reports touch Pointer Events and nested ownership",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2731
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "visual smoke has no runtime errors or unexpected external requests",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 3220
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "live resize remains live while handle is held without movement; final backdrop assertion passes",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2227
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "backdrop validation waits for completed effects during slower restoration",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2532
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "experimental press and repeat settings affect behavior; all geometry fields are editable",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2617
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "INCONCLUSIVE requires a reason and cannot overwrite an observed PASS",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1942
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "recognized hold PointerCancel stops ticks and cannot trigger a release action",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 2783
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "large experimental UI scale protects action bounds and does not overlap carousel controls",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1768
+      },
+      {
+        "file": "lab.spec.ts",
+        "title": "visualizer shows start, slop boundary, path and permanently cancelled tap",
+        "status": "passed",
+        "attempts": 1,
+        "durationMs": 1499
+      }
+    ]
+  },
+  "productionSmoke": {
+    "environment": "local HTTP server of production dist under /lab/; Chromium; not a real-device or HTTPS test",
+    "time": "2026-10-20T02:33:25.495Z",
+    "results": [
+      {
+        "id": "STATIC-CAROUSEL",
+        "status": "PASS"
+      },
+      {
+        "id": "STATIC-ACTIONS",
+        "status": "PASS"
+      },
+      {
+        "id": "STATIC-BUTTONS",
+        "status": "PASS"
+      },
+      {
+        "id": "STATIC-NAVIGATION",
+        "status": "PASS"
+      },
+      {
+        "id": "STATIC-RESIZE",
+        "status": "PASS"
+      },
+      {
+        "id": "STATIC-DRAFT-RECOVERY",
+        "status": "PASS"
+      },
+      {
+        "id": "STATIC-RELEASE",
+        "status": "PASS"
+      },
+      {
+        "id": "STATIC-CONFIG-PERSISTENCE",
+        "status": "PASS"
+      },
+      {
+        "id": "STATIC-EVENT-FIRST-ENTRY",
+        "status": "PASS"
+      },
+      {
+        "id": "STATIC-EVENT-ACK",
+        "status": "PASS"
+      },
+      {
+        "id": "STATIC-EVENT-RELOAD",
+        "status": "PASS"
+      },
+      {
+        "id": "STATIC-CHAT-SAFE-SEND",
+        "status": "PASS"
+      },
+      {
+        "id": "STATIC-CHAT-RECOVERY",
+        "status": "PASS"
+      },
+      {
+        "id": "STATIC-CHAT-EMOJI",
+        "status": "PASS"
+      },
+      {
+        "id": "STATIC-MOBILE-WIDTH",
+        "status": "PASS"
+      },
+      {
+        "id": "STATIC-ASSETS-RUNTIME",
+        "status": "PASS"
+      }
+    ],
+    "passed": 16,
+    "failed": 0
+  },
+  "total": {
+    "passed": 242,
+    "failed": 0,
+    "skipped": 0
+  },
+  "historicalBaseline": {
+    "model": 37,
+    "browser": 141,
+    "productionSmoke": 13,
+    "total": 191
+  },
+  "addedCoverage": {
+    "model": 12,
+    "browser": 36,
+    "productionSmoke": 3,
+    "total": 51
+  },
+  "physicalIPhone": "PENDING",
+  "deployment": "NOT RUN: branch / PR only, no merge"
+}

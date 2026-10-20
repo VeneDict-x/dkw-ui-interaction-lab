@@ -153,8 +153,22 @@ and keyboard safe areas, bounce and focus on physical iPhone require confirmatio
 
 ## Tests and evidence
 
-Final counts are recorded after the complete suite finishes. Historical baseline:
+**Final: 242 PASS / 0 FAIL / 0 SKIPPED.**
+
+| Command | PASS | FAIL | Result |
+|---|---:|---:|---|
+| npm run check | — | — | TypeScript clean |
+| npm test | 49 | 0 | Pure/model invariants and async pipeline |
+| npm run test:e2e | 177 | 0 | Complete Chromium suite, retries=0, flaky=0 |
+| npm run build | — | — | Production dist successful |
+| npm run test:static | 16 | 0 | Production dist under /lab/ |
+
+Node 24.19.0; Chromium 151.0.7922.173. [Machine summary](testing/chat-summary.json)
+and [production results](testing/chat-static-results.json). Counts describe the
+last complete run, not totals across repeat attempts. Historical baseline:
 37 model + 141 Chromium + 13 production checks = 191 PASS / 0 FAIL.
+Added: 12 model + 36 browser + 3 production = 51 performed checks.
+Formatting and git diff --check pass. No test was skipped or marked flaky.
 
 No old tests were removed. Task 04 reload/restart expectations were updated only
 where the new approved section A changes that contract: world first, retained
