@@ -8,6 +8,8 @@ policy for explicitly declared ReleaseButtons only. Read docs/BUGFIX_TASK_03.md
 for the approved Strict Tap, lifecycle, carousel and Draft & Recovery contracts.
 Read docs/BUGFIX_TASK_04.md for native module-strip scrolling and Module 04 Event Guide,
 sequential reading, local swipe arbitration and independent durable progress.
+Read docs/MODULE04_CHAT_SPEC.md and docs/MODULE04_CHAT_REPORT.md for the approved
+world-first startup/reload policy, durable shared chat, safe text and scoped resets.
 
 Non-negotiable contracts:
 - Pointer Events are the primary input; keyboard activation is an additional accessible path.
@@ -48,6 +50,14 @@ Non-negotiable contracts:
   unlocks the next article; completed-open checks differ from reopened reference mode.
   Guide vertical touch scroll stays native; axis owner locks and one swipe changes
   at most one page. Reset requires confirmation and fences stale writes in storage.
+- Module 04 always starts/reloads/restarts at world without erasing guide progress.
+  Event reset preserves settings/chat; full Module 04 reset atomically clears only
+  Module 04 records and diagnostics after explicit confirmation.
+- Chat input/producers/restore/send treat content as plain text, strip tag-like
+  markup before the 500-grapheme cap and render only through text APIs.
+  Emoji toggle never inserts; emoji items never close the picker or force focus.
+  Send synchronously claims once, deduplicates stable IDs and starts cooldown only
+  on durable acceptance. Seeds resume once; Live never resumes after reload.
 - Experimental values remain runtime editable and visibly EXPERIMENTAL.
 - No invented game assets, backend/auth/database, analytics, API keys or secrets.
 - PASS must follow a performed check. Separate synthetic/browser automation,

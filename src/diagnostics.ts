@@ -56,6 +56,12 @@ export class Diagnostics {
     );
     this.onChange();
   }
+  clearScope(ids: string[], belongs: (event: Record<string, unknown>) => boolean) {
+    for (const id of ids)
+      this.results[id] = { id, description: cases[id], status: 'NOT RUN', source: 'not performed' };
+    this.events = this.events.filter((event) => !belongs(event));
+    this.onChange();
+  }
   log(type: string, details: Record<string, unknown> = {}) {
     this.events.push({ time: new Date().toISOString(), type, ...details });
     if (this.events.length > 150) this.events.shift();

@@ -1,3 +1,5 @@
+> Актуальное расширение: [Module 04 Chat](docs/MODULE04_CHAT_REPORT.md).
+
 > Актуальная реализация Bugfix 04 + Feature 04: [docs/BUGFIX_TASK_04.md](docs/BUGFIX_TASK_04.md).
 > Task 03 сохранён в [docs/BUGFIX_TASK_03.md](docs/BUGFIX_TASK_03.md).
 > Приведённые ниже результаты относятся к предыдущим этапам.

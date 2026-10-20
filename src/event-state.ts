@@ -1,3 +1,4 @@
+import { openModule04DB, type ResetExtra } from './module04-db';
 export const EVENT_OCCURRENCE = 'winter-lab-2026-01';
 export type EventState = {
   eventInstanceId: string;
@@ -72,29 +73,12 @@ export function eventTransition(state: EventState, command: EventCommand): Event
 export interface EventStore {
   acquire(): Promise<EventRecord>;
   write(epoch: string, lease: string, command: EventCommand): Promise<EventRecord | null>;
-  reset(): Promise<EventRecord>;
+  reset(extra?: ResetExtra): Promise<EventRecord>;
 }
 export class EventRepository implements EventStore {
-  private database: Promise<IDBDatabase> | null = null;
   constructor(private occurrence = EVENT_OCCURRENCE) {}
   private open() {
-    return (this.database ??= new Promise<IDBDatabase>((resolve, reject) => {
-      const q = indexedDB.open('dkw-event-guide-v1', 1);
-      q.onupgradeneeded = () => q.result.createObjectStore('events');
-      q.onerror = () => reject(q.error || Error('Event storage unavailable'));
-      q.onblocked = () => reject(Error('Event storage upgrade blocked'));
-      q.onsuccess = () => {
-        const db = q.result;
-        db.onversionchange = () => {
-          db.close();
-          this.database = null;
-        };
-        resolve(db);
-      };
-    }).catch((e) => {
-      this.database = null;
-      throw e;
-    }));
+    return openModule04DB();
   }
   private async transaction<T>(
     change: (record: EventRecord) => { record: EventRecord; result: T },
@@ -164,7 +148,7 @@ export class EventRepository implements EventStore {
       return { record: r, result: r };
     });
   }
-  reset() {
+  reset(extra?: ResetExtra) {
     // Explicit reset is allowed even if stored data is malformed: replace without decoding it.
     return this.open().then(
       (db) =>
@@ -174,13 +158,26 @@ export class EventRepository implements EventStore {
             q = store.get(this.occurrence);
           let record: EventRecord;
           q.onsuccess = () => {
-            record = {
-              epoch: crypto.randomUUID(),
-              lease: crypto.randomUUID(),
-              version: (Number.isSafeInteger(q.result?.version) ? q.result.version : 0) + 1,
-              state: initialEvent(this.occurrence),
-            };
-            store.put(record, this.occurrence);
+            try {
+              record = {
+                epoch: crypto.randomUUID(),
+                lease: crypto.randomUUID(),
+                version: (Number.isSafeInteger(q.result?.version) ? q.result.version : 0) + 1,
+                state: initialEvent(this.occurrence),
+              };
+              if (extra) {
+                store.clear();
+                store.put(extra.value, extra.key);
+              }
+              store.put(record, this.occurrence);
+            } catch (e) {
+              try {
+                tx.abort();
+              } catch {
+                /* already aborted */
+              }
+              reject(e);
+            }
           };
           tx.oncomplete = () => resolve(record);
           tx.onerror = tx.onabort = () => reject(tx.error || Error('Event reset failed'));
@@ -201,6 +198,7 @@ export class EventModel {
   private pending = 0;
   private retryCommand: EventCommand | null = null;
   private retryReset = false;
+  private resetExtra?: ResetExtra;
   constructor(private store: EventStore = new EventRepository()) {}
   private publish(r: EventRecord) {
     this.record = r;
@@ -208,7 +206,7 @@ export class EventModel {
     this.version = r.version;
     this.ready = true;
   }
-  async restart() {
+  async restart(world = false) {
     this.retryReset = false;
     const token = ++this.token;
     this.record = null;
@@ -222,7 +220,13 @@ export class EventModel {
     this.error = '';
     this.onChange();
     try {
-      const r = await this.store.acquire();
+      let r = await this.store.acquire();
+      if (token !== this.token) return;
+      if (world) {
+        const next = await this.store.write(r.epoch, r.lease, { type: 'leave' });
+        if (!next) throw Error('Restart ownership lost');
+        r = next;
+      }
       if (token !== this.token) return;
       this.publish(r);
       this.saveStatus = 'SAVED';
@@ -268,7 +272,8 @@ export class EventModel {
     this.queue = task;
     return task;
   }
-  async reset() {
+  async reset(extra?: ResetExtra) {
+    this.resetExtra = extra;
     this.retryReset = true;
     const token = ++this.token;
     this.ready = false;
@@ -280,7 +285,7 @@ export class EventModel {
     this.retryCommand = null;
     this.onChange();
     try {
-      const r = await this.store.reset();
+      const r = await this.store.reset(extra);
       if (token !== this.token) return;
       this.publish(r);
       this.saveStatus = 'SAVED';
@@ -293,7 +298,7 @@ export class EventModel {
     this.onChange();
   }
   retry() {
-    if (this.retryReset) return this.reset();
+    if (this.retryReset) return this.reset(this.resetExtra);
     if (this.retryCommand) return this.command(this.retryCommand);
     return this.restart();
   }

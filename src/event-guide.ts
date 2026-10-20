@@ -1,3 +1,6 @@
+import { ClanChat } from './chat-ui';
+import { CHAT_KEY, freshChatRecord, type ChatRecord } from './chat-state';
+import './chat.css';
 import { EventModel, pageAccessible, type EventState } from './event-state';
 import { articleMarkup, guideArticles } from './event-articles';
 import { GuideGesture } from './guide-gesture';
@@ -7,6 +10,9 @@ import type { Diagnostics } from './diagnostics';
 const popupText = 'Следующая часть откроется после прочтения текущей';
 export class EventGuide {
   readonly model = new EventModel();
+  readonly chat: ClanChat;
+  private fullReset: ChatRecord | null = null;
+  private resetKind: 'event' | 'module' = 'event';
   private gesture: GuideGesture;
   private ready: Promise<void> | null = null;
   private previous: EventState | null = null;
@@ -23,7 +29,7 @@ export class EventGuide {
     root.innerHTML = `<div class="control-strip event-settings"><label>Scenario<select id="nav-scenario"><option value="both">Back + Next</option><option value="back">Back only</option></select></label><label>Boundary<select id="nav-boundary"><option value="disabled">Disabled</option><option value="hidden">Hidden</option></select></label><label>Theme<select id="nav-faction"><option>Light</option><option>Dark</option><option>Premium</option></select></label></div>
       <div id="event-game" class="event-game" data-theme="Light" aria-label="Учебный игровой экран">
         <section id="event-world" class="game-scene world-scene"><div class="world-resources"><span>🌾 240</span><span>🪵 160</span><span>🪨 90</span></div><button id="event-enter" data-action="event-enter" class="event-entry">☃️ Событие</button><div class="terrain" aria-hidden="true">${Array.from({ length: 12 }, (_, i) => `<i style="--tile:${i}"></i>`).join('')}</div><div class="world-castle" aria-hidden="true">🏰</div><div class="world-avatar" aria-hidden="true">🧙</div><div class="world-caption"><strong>Долина королевства</strong><span>Учебная сцена · условные ресурсы</span></div></section>
-        <section id="winter-event" class="game-scene winter-scene" hidden><header class="event-scene-header"><button data-action="event-world" id="event-back">← Мир</button><strong>Зимнее знакомство</strong><button id="reopen" data-action="mini-reopen" aria-label="Открыть памятку">❓</button></header><div class="snowflakes" aria-hidden="true">${Array.from({ length: 14 }, (_, i) => `<span style="left:${(i * 37 + 9) % 94}%;top:${(i * 19 + 12) % 85}%">❄</span>`).join('')}</div><div class="event-snowman" aria-hidden="true">☃️</div><div class="winter-caption">Тёплые встречи в снежной долине</div></section>
+        <section id="winter-event" class="game-scene winter-scene" hidden><header class="event-scene-header"><button data-action="event-world" id="event-back">← Мир</button><strong>Зимнее знакомство</strong><button id="reopen" data-action="mini-reopen" aria-label="Открыть памятку">❓</button></header><div class="snowflakes" aria-hidden="true">${Array.from({ length: 14 }, (_, i) => `<span style="--flake:${i};left:${(i * 37 + 9) % 94}%;top:${(i * 19 + 12) % 85}%">❄</span>`).join('')}</div><div class="event-snowman" aria-hidden="true">☃️</div><div class="winter-caption">Тёплые встречи в снежной долине</div></section>
         <section id="mini-window" class="event-guide mini-window" role="dialog" aria-label="Памятка зимнего события" hidden><header><div><span class="guide-kicker">ПАМЯТКА СОБЫТИЯ</span><h3 id="page-title">Page 1 / 5</h3></div><button data-action="mini-close" aria-label="Закрыть памятку">×</button></header>
         <div id="guide-pages" class="guide-pages" tabindex="0" aria-label="Статьи памятки"><div id="guide-track" class="guide-track">${guideArticles.map((_, i) => `<section class="guide-page" data-page="${i + 1}"><article class="guide-article-body">${articleMarkup(i + 1)}<div class="guide-ack-row"><button data-guide-ack="${i + 1}" class="primary">Понятно</button></div></article><div class="guide-lock-preview" hidden><span aria-hidden="true">🔒</span><p>Сначала прочитайте текущую часть</p></div></section>`).join('')}</div></div>
         <footer class="guide-footer"><div class="guide-steps"><button id="page-back" data-action="page-back">← Back</button><button id="page-next" data-action="page-next">Next →</button></div><nav id="dots" class="dots" aria-label="Страницы памятки">${[1, 2, 3, 4, 5].map((n) => `<button data-action="page-${n}" aria-label="Страница ${n}" class="dot"><span>${n}</span><i class="guide-dot-overlay" aria-hidden="true"></i></button>`).join('')}</nav><output id="page-state"></output></footer><div id="guide-popup" class="guide-popup" role="status" aria-live="polite" aria-atomic="true"></div></section>
@@ -33,6 +39,29 @@ export class EventGuide {
       'beforeend',
       `<dialog id="event-reset-dialog" aria-labelledby="event-reset-title"><h3 id="event-reset-title">Сбросить событие?</h3><p>Прогресс чтения и сохранённый экран события будут удалены. Другие модули сохранят своё состояние.</p><div class="control-strip"><button data-action="event-reset-cancel" autofocus>Сохранить прогресс</button><button data-action="event-reset-confirm">Сбросить событие</button></div></dialog>`,
     );
+    const chatRoot = document.createElement('section');
+    chatRoot.id = 'clan-chat';
+    this.get('event-game').append(chatRoot);
+    const chatDiagnostics = document.createElement('section');
+    chatDiagnostics.className = 'event-qa';
+    root.append(chatDiagnostics);
+    this.chat = new ClanChat(
+      chatRoot,
+      chatDiagnostics,
+      controller,
+      () => this.model.state.currentScreen === 'world',
+    );
+    this.chat.onSettings = (settings) => {
+      this.get<HTMLSelectElement>('nav-scenario').value = settings.scenario;
+      this.get<HTMLSelectElement>('nav-boundary').value = settings.boundary;
+      this.get<HTMLSelectElement>('nav-faction').value = settings.theme;
+      this.render();
+    };
+    const resetModule = document.createElement('button');
+    resetModule.id = 'module04-reset';
+    resetModule.dataset.action = 'module04-reset';
+    resetModule.textContent = 'Reset 04 Module';
+    this.get('event-reset').after(resetModule);
     const action = (id: string, run: () => unknown) =>
       controller.register(id, {
         run: () => {
@@ -41,13 +70,16 @@ export class EventGuide {
         available: () =>
           this.model.ready ||
           id === 'event-reset' ||
+          id === 'module04-reset' ||
           id.startsWith('event-reset-') ||
           id === 'event-retry' ||
           id === 'event-restart' ||
           id === 'event-reload',
         instrument: false,
       });
-    action('event-enter', () => this.command({ type: 'enter' }));
+    action('event-enter', async () => {
+      if (await this.command({ type: 'enter' })) await this.chat.model.trigger();
+    });
     action('event-world', () => this.command({ type: 'leave' }));
     action('mini-reopen', () => this.command({ type: 'open' }));
     action('mini-close', () => this.command({ type: 'close' }));
@@ -55,6 +87,7 @@ export class EventGuide {
     action('page-next', () => this.navigate(this.model.state.lastPage + 1));
     for (let n = 1; n <= 5; n++) action(`page-${n}`, () => this.navigate(n));
     action('event-reset', () => this.reset());
+    action('module04-reset', () => this.reset('module'));
     action('event-reset-cancel', () => this.get<HTMLDialogElement>('event-reset-dialog').close());
     action('event-reset-confirm', () => {
       this.get<HTMLDialogElement>('event-reset-dialog').close();
@@ -62,7 +95,10 @@ export class EventGuide {
     });
     action('event-restart', () => this.restart());
     action('event-reload', () => location.reload());
-    action('event-retry', () => this.model.retry());
+    action('event-retry', async () => {
+      await this.model.retry();
+      this.finishFullReset();
+    });
     this.gesture = new GuideGesture(
       this.get('guide-pages'),
       this.get('guide-track'),
@@ -76,6 +112,11 @@ export class EventGuide {
     this.model.onChange = () => this.render();
     for (const id of ['nav-scenario', 'nav-boundary', 'nav-faction'])
       this.get(id).addEventListener('change', () => {
+        this.chat.settings({
+          scenario: this.get<HTMLSelectElement>('nav-scenario').value as 'both' | 'back',
+          boundary: this.get<HTMLSelectElement>('nav-boundary').value as 'hidden' | 'disabled',
+          theme: this.get<HTMLSelectElement>('nav-faction').value as 'Light' | 'Dark' | 'Premium',
+        });
         this.render();
         this.diag.log('navigation-setting', {
           scenario: this.get<HTMLSelectElement>('nav-scenario').value,
@@ -144,25 +185,61 @@ export class EventGuide {
     return this.root.querySelector<T>(`#${id}`)!;
   }
   async open() {
-    await (this.ready ??= this.model.restart());
+    await (this.ready ??= Promise.all([this.model.restart(true), this.chat.open()]).then(() => {}));
   }
   suspend() {
     this.gesture.cancel(false);
     this.clearPopup();
+    this.chat.suspend();
   }
   async restart() {
+    this.fullReset = null;
     this.suspend();
-    await this.model.restart();
+    await Promise.all([this.model.restart(true), this.chat.open()]);
   }
-  reset() {
-    this.suspend();
+  reset(kind: 'event' | 'module' = 'event') {
+    this.gesture.cancel(false);
+    this.clearPopup();
+    this.chat.closePicker(true);
+    this.resetKind = kind;
+    this.get('event-reset-title').textContent =
+      kind === 'module' ? 'Сбросить весь модуль 04?' : 'Сбросить событие?';
+    this.get('event-reset-dialog').querySelector('p')!.textContent =
+      kind === 'module'
+        ? 'Будут удалены настройки, чат, черновик и прогресс модуля 04. Другие модули сохранят данные.'
+        : 'Будет удалён только прогресс события. Настройки, чат и черновик сохранятся.';
     const dialog = this.get<HTMLDialogElement>('event-reset-dialog');
     if (!dialog.open) dialog.showModal();
   }
   private async resetConfirmed() {
-    this.suspend();
-    await this.model.reset();
-    this.diag.log('event-reset', { scope: '04 only' });
+    this.gesture.cancel(false);
+    this.clearPopup();
+    if (this.resetKind === 'event' && this.fullReset) {
+      this.fullReset = null;
+      await this.chat.open();
+    }
+    if (this.resetKind === 'module') {
+      this.chat.model.invalidate();
+      this.fullReset = freshChatRecord();
+    }
+    await this.model.reset(this.fullReset ? { key: CHAT_KEY, value: this.fullReset } : undefined);
+    this.finishFullReset();
+    if (this.model.saveStatus === 'SAVED' && this.resetKind === 'event')
+      this.diag.log('event-reset', { scope: '04 event only' });
+  }
+  private finishFullReset() {
+    if (!this.fullReset || this.model.saveStatus !== 'SAVED') return;
+    this.chat.model.adoptReset(this.fullReset);
+    this.chat.resetPresentation();
+    this.fullReset = null;
+    this.root.querySelector('#chat-double-result')!.textContent = '';
+    this.diag.clearScope(
+      ['NAV-PAGE', 'NAV-BOUND', 'NAV-CLOSE'],
+      (e) =>
+        /^(event-|guide-|chat-|navigation-setting)/.test(String(e.type)) ||
+        /^(event-|mini-|page-|chat-|module04-)/.test(String(e.target)) ||
+        (e.type === 'test-window-open' && e.id === 'navigation'),
+    );
   }
   private async command(command: Parameters<EventModel['command']>[0], preserveDrag = false) {
     const pageBefore = this.model.state.lastPage;

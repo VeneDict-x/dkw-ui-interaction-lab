@@ -29,6 +29,7 @@ test('BF04 top strip native touch scroll starts on button without activating mod
   });
   const page = await context.newPage();
   await page.goto('/');
+  await page.locator('#back-index').click();
   await touchSwipe(page, '.index [data-open="actions"]', -120);
   await expect
     .poll(() => page.locator('.index nav').evaluate((el) => el.scrollLeft))
@@ -70,6 +71,7 @@ async function mouseDrag(page: Page, dx: number, dy = 0, release = true) {
 }
 test.beforeEach(async ({ page }) => {
   await page.goto('/');
+  await page.locator('#back-index').click();
 });
 test('BF04 first entry shows winter behind smaller opaque guide and acknowledgment at article bottom', async ({
   page,
@@ -219,7 +221,7 @@ test('BF04 vertical mouse intent locks and scrolls without changing page', async
   await expect(page.locator('#page-title')).toHaveText('Page 1 / 5');
   expect((await readState(page)).acknowledgedPages).toEqual([]);
 });
-test('BF04 real reload restores open guide, active page and acknowledged prefix at top', async ({
+test('BF04 approved chat contract: reload opens world; Help restores guide progress at top', async ({
   page,
 }) => {
   await enter(page);
@@ -228,6 +230,10 @@ test('BF04 real reload restores open guide, active page and acknowledged prefix 
   await page.locator('.guide-page[data-page="3"]').evaluate((e) => (e.scrollTop = 250));
   await page.reload();
   await open(page);
+  await expect(page.locator('#event-world')).toBeVisible();
+  await expect(page.locator('#mini-window')).toBeHidden();
+  await page.locator('#event-enter').click();
+  await page.locator('#reopen').click();
   await expect(page.locator('#mini-window')).toBeVisible();
   await expect(page.locator('#page-title')).toHaveText('Page 3 / 5');
   expect((await readState(page)).acknowledgedPages).toEqual([1, 2]);
@@ -240,9 +246,11 @@ test('BF04 simulated restart reads durable state; reset only clears Event', asyn
   await ack(page, 1);
   const version = (await readState(page)).persistedVersion;
   await page.locator('#event-restart').click();
+  await expect(page.locator('#event-world')).toBeVisible();
+  await expect(page.locator('#mini-window')).toBeHidden();
   await expect(page.locator('#page-title')).toHaveText('Page 2 / 5');
   await expect(page.locator('#event-save-status')).toHaveText('SAVED');
-  expect((await readState(page)).persistedVersion).toBe(version);
+  expect((await readState(page)).persistedVersion).toBe(version + 1);
   await page.locator('#event-reset').click();
   await page.locator('[data-action="event-reset-confirm"]').click();
   await expect(page.locator('#event-world')).toBeVisible();
@@ -312,6 +320,7 @@ test('BF04 narrow touch tabs allow taps, repeated surface swipes and orientation
   });
   const page = await context.newPage();
   await page.goto('/');
+  await page.locator('#back-index').click();
   await page.locator('.index [data-open="actions"]').tap();
   await expect(page.locator('#actions')).toBeVisible();
   await touchSwipe(page, '.index [data-open="actions"]', -130);
@@ -337,6 +346,7 @@ test('BF04 native vertical touch article scrolling and live touch page navigatio
   });
   const page = await context.newPage();
   await page.goto('/');
+  await page.locator('#back-index').click();
   await enter(page);
   await touchSwipe(page, '#guide-pages', 2, -130);
   await expect
@@ -658,8 +668,10 @@ test('BF04 reload preserves early closed and completed reference modes without r
   await expect(page.locator('#event-save-status')).toHaveText('SAVED');
   await page.reload();
   await open(page);
-  await expect(page.locator('#winter-event')).toBeVisible();
+  await expect(page.locator('#event-world')).toBeVisible();
+  await page.locator('#event-enter').click();
   await expect(page.locator('#mini-window')).toBeHidden();
+  if (await page.locator('#event-world').isVisible()) await page.locator('#event-enter').click();
   await page.locator('#reopen').click();
   await expect(page.locator('#page-title')).toHaveText('Page 2 / 5');
   for (let n = 2; n <= 5; n++) await ack(page, n);
@@ -668,6 +680,7 @@ test('BF04 reload preserves early closed and completed reference modes without r
   await page.reload();
   await open(page);
   await expect(page.locator('#mini-window')).toBeHidden();
+  if (await page.locator('#event-world').isVisible()) await page.locator('#event-enter').click();
   await page.locator('#reopen').click();
   await expect(page.locator('#event-save-status')).toHaveText('SAVED');
   expect((await readState(page)).guideMode).toBe('reference');
@@ -707,5 +720,6 @@ test('BF04 rapid Event activations during a delayed save cannot suppress first-e
   expect((await readState(page)).eventEntered).toBe(true);
   await page.reload();
   await open(page);
-  await expect(page.locator('#mini-window')).toBeVisible();
+  await expect(page.locator('#event-world')).toBeVisible();
+  await expect(page.locator('#mini-window')).toBeHidden();
 });
