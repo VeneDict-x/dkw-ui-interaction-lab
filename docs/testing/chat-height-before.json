@@ -1,0 +1,19 @@
+{
+  "implementationCommit": "82250ef",
+  "coverage": "Chromium height animation check; not physical keyboard/bounce proof",
+  "stats": {
+    "startTime": "2026-10-20T02:31:21.416Z",
+    "duration": 4463.465,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  },
+  "cases": [
+    {
+      "title": "Chat composer growth uses a real monotonic height transition, without an intermediate auto-height jump",
+      "status": "failed",
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m0\u001b[39m\nReceived:   \u001b[31m0\u001b[39m"
+    }
+  ]
+}

@@ -220,13 +220,9 @@ export class ClanChat {
     this.sizeFrame = requestAnimationFrame(() => {
       this.sizeFrame = 0;
       const previousScroll = this.input.scrollTop;
-      this.input.style.height = 'auto';
       const style = getComputedStyle(this.input),
         line = parseFloat(style.lineHeight) || 24;
       const padding = parseFloat(style.paddingTop) + parseFloat(style.paddingBottom) + 2;
-      this.input.style.height = `${Math.max(48, Math.min(this.input.scrollHeight + 2, 3 * line + padding))}px`;
-      this.input.style.overflowY =
-        this.input.scrollHeight > this.input.clientHeight ? 'auto' : 'hidden';
       this.input.scrollTop = previousScroll;
       // Event-driven caret measurement; no polling, markup interpretation, or focus calls.
       const mirror = document.createElement('div');
@@ -242,11 +238,17 @@ export class ClanChat {
         whiteSpace: 'pre-wrap',
         overflowWrap: 'anywhere',
       });
+      const full = document.createElement('span');
+      full.textContent = this.input.value + '\u200b';
+      mirror.append(full);
+      this.root.append(mirror);
+      const needed = Math.ceil(mirror.getBoundingClientRect().height) + 2;
+      this.input.style.height = `${Math.max(48, Math.min(needed, 3 * line + padding))}px`;
+      this.input.style.overflowY = needed > 3 * line + padding ? 'auto' : 'hidden';
       mirror.textContent = this.input.value.slice(0, this.selection.end);
       const marker = document.createElement('span');
       marker.textContent = '\u200b';
       mirror.append(marker);
-      this.root.append(mirror);
       const top = marker.getBoundingClientRect().top - mirror.getBoundingClientRect().top;
       mirror.remove();
       if (top < this.input.scrollTop + parseFloat(style.paddingTop))

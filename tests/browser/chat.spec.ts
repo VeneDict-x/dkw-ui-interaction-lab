@@ -805,3 +805,30 @@ for (const restart of [false, true])
     await expect(page.locator('#chat-history')).not.toHaveText('История пуста');
     await expect(page.locator('#event-world')).toBeVisible();
   });
+
+test('Chat composer growth uses a real monotonic height transition, without an intermediate auto-height jump', async ({
+  page,
+}) => {
+  await input(page).fill('one');
+  await page.waitForTimeout(160);
+  const samples = await input(page).evaluate(async (e: HTMLTextAreaElement) => {
+    e.value = 'one\ntwo\nthree';
+    e.dispatchEvent(
+      new InputEvent('input', { bubbles: true, inputType: 'insertText', data: 'one\ntwo\nthree' }),
+    );
+    await new Promise(requestAnimationFrame);
+    const animations = e
+      .getAnimations()
+      .filter((a) => a instanceof CSSTransition && a.transitionProperty === 'height').length;
+    const start = e.getBoundingClientRect().height;
+    await new Promise((r) => setTimeout(r, 40));
+    const middle = e.getBoundingClientRect().height;
+    await new Promise((r) => setTimeout(r, 180));
+    const end = e.getBoundingClientRect().height;
+    return { animations, start, middle, end };
+  });
+  expect(samples.animations).toBeGreaterThan(0);
+  expect(samples.middle).toBeGreaterThan(samples.start);
+  expect(samples.middle).toBeLessThan(samples.end);
+  expect(samples.end).toBe(96);
+});

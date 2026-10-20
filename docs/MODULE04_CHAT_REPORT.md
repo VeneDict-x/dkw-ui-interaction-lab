@@ -185,6 +185,14 @@ Reviewed Chromium screenshots: [world](testing/chat-world-mobile.png),
 No page runtime errors were observed during this capture. These are desktop
 Chromium viewport captures, not native-keyboard or physical-iPhone observations.
 
+A direct height-transition check found an actual presentation defect even though
+final dimensions passed: resetting textarea height to auto for measurement caused
+instant jumps and zero height animations. Full text is now measured in the hidden
+plain-text mirror; the visible textarea receives only numeric heights. A new
+performed check requires a real transition and monotonic intermediate height.
+It failed before the fix and passes after it; see [chat-height-before.json](testing/chat-height-before.json).
+Reduced motion still removes the transition. This is not physical-iOS animation QA.
+
 Machine results and screenshots live in docs/testing with the chat prefix.
 [Physical iPhone checklist](IPHONE_CHECKLIST.md) is separate; no desktop/CDP result
 is a physical Safari/Chrome iOS PASS.
