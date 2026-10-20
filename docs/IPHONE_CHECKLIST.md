@@ -138,3 +138,55 @@ deployment. Chromium/CDP, симулированный restart и програм
 Оставшиеся риски: native pan arbitration и OS PointerCancel; адресная строка/safe
 area; emoji/font differences; IDB private mode/quota/eviction и реальное завершение
 процесса. Все пункты этого раздела ожидают наблюдений, аппаратных PASS пока нет.
+
+## Module 04 Chat — real iPhone Safari / Chrome iOS PENDING
+
+Use the PR's approved merged/deployed commit only; record model, iOS, browser,
+URL/commit, theme and observed result. Chromium/CDP and synthetic IME tests are not
+physical device PASS.
+
+1. Startup/reload/Simulate App Restart: Module 04 world is visible. Settings,
+   guide acknowledgments, last page, complete/reference mode, history and draft
+   survive. Event does not automatically reopen an already-seen guide; Help works.
+2. First empty chat: focus alone stays empty. First pasted/typed/emoji world text
+   OR first Event starts seeds once: ~2 s then ~1–2 s. Send between seeds and
+   reload midway; inspect chronological full History, no duplicate seed IDs.
+3. Live at 4–7 s, manual Random during Live, user sends during Live, Stop, and
+   reload/background: Live never restarts by itself. Four visible/six retained,
+   long system/clan/user text ellipsizes to one line; History keeps full text/emoji.
+4. Composer one → two → three lines then internal scroll. Move caret up/down,
+   insert in earlier lines, rotate with keyboard open: no deleted lines, clipped
+   caret, scene bounce, overlap or button displacement. Both side buttons 48×48
+   remain bottom aligned; send is icon-only and follows Light/Dark/Premium.
+5. Emoji-only composing/send: no keyboard appears. While keyboard is already
+   visible, toggle and repeatedly select emoji at caret/selection without blur/
+   focus flicker. Left 😅 opens/closes only; picker 😅 inserts and stays open.
+   Constrain height/rotate: picker scrolls itself, including from emoji surfaces.
+   Outside world/event/guide closes picker and removes caret without swallowing
+   intended game/guide gestures.
+6. Type/paste 500 graphemes; replace selected text; family/flag/skin-tone/ZWJ/
+   combining emoji; native Russian and other installed IME composition. Extra
+   input is rejected without deleting existing suffix or splitting emoji.
+7. Paste/type `<color=red>`, URL/bold/script/image tags and encoded markup. Tags
+   disappear; surrounding legitimate text and emoji survive. No script, link or
+   style action. Reload draft and send: same filtering. Tag-only and whitespace
+   attempts are silent; literal placeholder phrase remains sendable.
+8. Send: Down without Up zero; Outside → Inside repeatedly re-arms; outside Up/
+   system Cancel zero, inside Up once. Rapid double taps / Simulate Double Send:
+   one accepted, one clear, one cooldown, technical duplicate silent. New nonempty
+   attempts during 2.5 s warn gently; composing remains possible, empty stays silent.
+9. Reset Event State confirm/cancel: settings/history/draft/seeds stay. Reset 04
+   Module cancel stays unchanged; confirm clears only 04, including local QA and
+   first-run seed schedule. Module 03/06 and unrelated global diagnostics survive.
+   Background/reset during pending save then reload: no stale resurrection.
+10. Home/index strip 01–06: horizontal swipe starts directly on any button,
+    tap selects and scroll never selects. Reach 05/06 in portrait and after rotation.
+    Module 01 Preview/Modules: no unintended viewport bounce, intended carousel
+    elasticity/arbitration/owner lock remain. Outer document still scrolls normally.
+11. Winter snow stays behind opaque chat/controls, never blocks taps; reduced
+    motion stops it. Inspect contrast, system yellow semibold without badge border,
+    stable clan colors and blue user identity in world/event and all themes.
+12. VoiceOver/external keyboard: control names, input, picker, guide and safe reset
+    confirmation remain reachable. Test true app switch, lock/call interruption,
+    keyboard bars and Safari process eviction separately; a pending transaction
+    cannot promise crash durability. Inspect storage errors/Retry where available.

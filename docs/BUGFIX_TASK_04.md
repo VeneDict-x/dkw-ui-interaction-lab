@@ -1,3 +1,6 @@
+> Исторический отчёт Task 04. Правила восстановления и сброса дополнены
+> [MODULE04_CHAT_SPEC.md](MODULE04_CHAT_SPEC.md), раздел A: startup/reload/restart открывает world, сохраняя прогресс.
+
 # Bugfix 04 + Feature 04 — Event Guide & Swipe Navigation
 
 Дата: 2026-10-18. База: `main`, `0e1f3a0a653fe28f02c773755b2f966cb84d2fca`.

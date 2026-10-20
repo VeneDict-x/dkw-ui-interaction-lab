@@ -1,0 +1,24 @@
+{
+  "baseline": "pre-fix new chat implementation",
+  "coverage": "Chromium; real IndexedDB transaction abort injection, not physical iOS",
+  "stats": {
+    "startTime": "2026-10-20T02:22:21.097Z",
+    "duration": 18979.686,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  },
+  "cases": [
+    {
+      "title": "Chat failed full reset cannot contaminate later event-only reset; restart=false",
+      "status": "failed",
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#chat-input')\nExpected: \u001b[32m\"keep this draft 😅\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" locator('#chat-input') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#chat-input')\u001b[22m\n\u001b[2m    14 × locator resolved to <textarea rows=\"1\" id=\"chat-input\" spellcheck=\"true\" aria-label=\"Сообщение клану\" placeholder=\"Введите сообщение...\"></textarea>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n"
+    },
+    {
+      "title": "Chat failed full reset cannot contaminate later event-only reset; restart=true",
+      "status": "failed",
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveValue\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#chat-input')\nExpected: \u001b[32m\"keep this draft 😅\"\u001b[39m\nReceived: \u001b[31m\"\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveValue\" locator('#chat-input') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('#chat-input')\u001b[22m\n\u001b[2m    14 × locator resolved to <textarea rows=\"1\" id=\"chat-input\" spellcheck=\"true\" aria-label=\"Сообщение клану\" placeholder=\"Введите сообщение...\"></textarea>\u001b[22m\n\u001b[2m       - unexpected value \"\"\u001b[22m\n"
+    }
+  ]
+}

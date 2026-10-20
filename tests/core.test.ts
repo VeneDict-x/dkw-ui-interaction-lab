@@ -498,3 +498,212 @@ test('BF04 duplicate Event activation is idempotent until a real world return', 
   s = eventTransition(s, { type: 'enter' });
   assert.equal(s.guideOpen, false);
 });
+
+import { graphemes, plainText, cleanDraft, editDraft, reconcileDraft } from '../src/chat-text.ts';
+import {
+  initialChat,
+  chatTransition,
+  ChatModel,
+  freshChatRecord,
+  type ChatStore,
+  type ChatCommand,
+  type ChatRecord,
+} from '../src/chat-state.ts';
+test('Chat grapheme cap keeps family, flags, combining marks and emoji sequences intact', () => {
+  const emoji = '👨‍👩‍👧‍👦';
+  assert.equal(graphemes(emoji).length, 1);
+  assert.equal(graphemes('🇺🇦e\u0301👍🏽❤️').length, 4);
+  assert.equal(cleanDraft(emoji.repeat(501)), emoji.repeat(500));
+  assert.equal(editDraft('a'.repeat(500), 250, 250, emoji).text, 'a'.repeat(500));
+});
+test('Chat replaces selection within cap without losing old suffix or splitting emoji', () => {
+  const text = 'a'.repeat(498) + '👨‍👩‍👧‍👦Z';
+  const result = editDraft(text, 200, 202, '😅😅😅');
+  assert.equal(graphemes(result.text).length, 500);
+  assert.ok(result.text.endsWith('👨‍👩‍👧‍👦Z'));
+  assert.equal(result.caret, 204);
+});
+test('Chat markup is removed before cap; comparison prose and encoded tags stay inert text', () => {
+  assert.equal(
+    plainText(
+      'До <color=red>😅</color><url=https://example.org>текст</url><script>code</script> после',
+    ),
+    'До 😅текстcode после',
+  );
+  assert.equal(
+    plainText('2 < 3 и 5 > 4 &lt;b&gt; https://example.org'),
+    '2 < 3 и 5 > 4 &lt;b&gt; https://example.org',
+  );
+  assert.equal(cleanDraft('<b>'.repeat(600) + 'ok😅' + '</b>'.repeat(600)), 'ok😅');
+});
+test('Chat typed closing tag is filtered before cap, including a previously partial tag', () => {
+  const old = 'a'.repeat(490) + '<color=red';
+  assert.equal(editDraft(old, old.length, old.length, '>').text, 'a'.repeat(490));
+  let text = '';
+  for (const char of '<b>Привет😅</b>') text = editDraft(text, text.length, text.length, char).text;
+  assert.equal(text, 'Привет😅');
+});
+test('Chat native input reconciliation preserves old text under paste and IME overflow', () => {
+  const old = 'a'.repeat(250) + 'END'.repeat(83) + 'z';
+  const proposed = old.slice(0, 250) + '👨‍👩‍👧‍👦'.repeat(100) + old.slice(250);
+  assert.equal(reconcileDraft(old, proposed).text, old);
+});
+test('Chat seed starts once at real input/event and honors initial and subsequent deadlines', () => {
+  let d = initialChat();
+  d = chatTransition(d, { type: 'draft', text: '', trigger: true }, 'epoch', 0).data;
+  assert.equal(d.seed.triggered, false);
+  d = chatTransition(d, { type: 'trigger' }, 'epoch', 10).data;
+  assert.equal(d.seed.dueAt, 2010);
+  d = chatTransition(d, { type: 'trigger' }, 'epoch', 100).data;
+  assert.equal(d.seed.dueAt, 2010);
+  d = chatTransition(d, { type: 'seed', index: 0, delay: 1500 }, 'epoch', 2009).data;
+  assert.equal(d.messages.length, 0);
+  d = chatTransition(d, { type: 'seed', index: 0, delay: 1500 }, 'epoch', 2010).data;
+  assert.equal(d.seed.next, 1);
+  assert.equal(d.seed.dueAt, 3510);
+  const duplicate = chatTransition(d, { type: 'seed', index: 0, delay: 1500 }, 'epoch', 4000).data;
+  assert.equal(duplicate.messages.length, 1);
+});
+test('Chat keeps actual arrival order and only six full messages across every producer', () => {
+  let d = initialChat();
+  d = chatTransition(d, { type: 'trigger' }, 'epoch', 0).data;
+  d = chatTransition(d, { type: 'send', id: 'user-1', text: 'До семян 😅' }, 'epoch', 1).data;
+  d = chatTransition(d, { type: 'seed', index: 0, delay: 1000 }, 'epoch', 2000).data;
+  assert.deepEqual(
+    d.messages.map((m) => m.type),
+    ['user', 'system'],
+  );
+  for (let i = 0; i < 9; i++)
+    d = chatTransition(d, { type: 'fake', author: i % 7 }, 'epoch', 3000 + i).data;
+  assert.equal(d.messages.length, 6);
+  assert.ok(d.messages.some((m) => m.text.length > 160));
+  assert.ok(d.messages.every((m, i) => !i || m.sequence > d.messages[i - 1].sequence));
+});
+test('Chat send boundary filters tags, ignores empty input, rejects duplicate ID and uses 2500ms cooldown', () => {
+  let d = initialChat();
+  let r = chatTransition(d, { type: 'send', id: 'empty', text: '<b></b>' }, 'epoch', 0);
+  assert.equal(r.outcome, 'EMPTY');
+  assert.equal(r.data.cooldownUntil, 0);
+  d = chatTransition(
+    d,
+    { type: 'send', id: 'one', text: 'Введите сообщение...' },
+    'epoch',
+    10,
+  ).data;
+  assert.equal(d.messages[0].text, 'Введите сообщение...');
+  assert.equal(d.cooldownUntil, 2510);
+  assert.equal(
+    chatTransition(d, { type: 'send', id: 'one', text: 'same' }, 'epoch', 5000).outcome,
+    'DUPLICATE',
+  );
+  assert.equal(
+    chatTransition(d, { type: 'send', id: 'two', text: 'new' }, 'epoch', 2509).outcome,
+    'COOLDOWN',
+  );
+  assert.equal(
+    chatTransition(d, { type: 'send', id: 'two', text: 'new' }, 'epoch', 2510).outcome,
+    'APPLIED',
+  );
+});
+class ChatMemoryStore implements ChatStore {
+  record = freshChatRecord();
+  async acquire() {
+    this.record.lease = crypto.randomUUID();
+    return structuredClone(this.record);
+  }
+  async write(epoch: string, lease: string, command: ChatCommand) {
+    if (epoch !== this.record.epoch || lease !== this.record.lease) return null;
+    const next = chatTransition(this.record.data, command, epoch, Date.now());
+    this.record.data = next.data;
+    this.record.version++;
+    return { record: structuredClone(this.record), outcome: next.outcome };
+  }
+}
+test('Chat synchronous claim blocks second immediate real send before persistence, clear, or cooldown', async () => {
+  const store = new ChatMemoryStore(),
+    model = new ChatModel(store);
+  await model.restart();
+  model.setDraft('Привет 😅', false);
+  let release!: () => void;
+  const old = store.write.bind(store);
+  store.write = async (...args) => {
+    if (args[2].type === 'send') await new Promise<void>((resolve) => (release = resolve));
+    return old(...args);
+  };
+  const first = model.send('same');
+  const second = model.send('same');
+  for (let i = 0; i < 8; i++) await Promise.resolve();
+  assert.equal(model.counters.duplicateBlocked, 1);
+  assert.equal(model.counters.accepted, 0);
+  assert.equal(model.draft, 'Привет 😅');
+  assert.equal(model.state.cooldownUntil, 0);
+  release();
+  await Promise.all([first, second]);
+  assert.deepEqual(model.counters, {
+    accepted: 1,
+    duplicateBlocked: 1,
+    draftClears: 1,
+    cooldownStarts: 1,
+  });
+  assert.equal(model.draft, '');
+  model.invalidate();
+});
+test('Chat editing during a pending send preserves the new draft after commit', async () => {
+  const store = new ChatMemoryStore(),
+    model = new ChatModel(store);
+  await model.restart();
+  model.setDraft('old', false);
+  let release!: () => void;
+  const old = store.write.bind(store);
+  store.write = async (...args) => {
+    if (args[2].type === 'send') await new Promise<void>((resolve) => (release = resolve));
+    return old(...args);
+  };
+  const sending = model.send();
+  for (let i = 0; i < 8; i++) await Promise.resolve();
+  model.setDraft('новый черновик', false);
+  release();
+  await sending;
+  for (let i = 0; i < 8; i++) await Promise.resolve();
+  assert.equal(model.draft, 'новый черновик');
+  assert.equal(store.record.data.draft, 'новый черновик');
+  model.invalidate();
+});
+test('Chat failed send keeps text and starts no cooldown; Retry uses same stable transaction', async () => {
+  const store = new ChatMemoryStore(),
+    model = new ChatModel(store);
+  await model.restart();
+  model.setDraft('test', false);
+  const old = store.write.bind(store);
+  let fail = true;
+  store.write = async (...args) => {
+    if (args[2].type === 'send' && fail) {
+      fail = false;
+      throw Error('test abort');
+    }
+    return old(...args);
+  };
+  assert.equal(await model.send('retry-id'), false);
+  assert.equal(model.draft, 'test');
+  assert.equal(model.state.cooldownUntil, 0);
+  assert.equal(await model.retry(), true);
+  assert.equal(model.state.messages[0].id, 'retry-id');
+  model.invalidate();
+});
+test('Module 04 scoped diagnostic reset preserves unrelated observed results and events', () => {
+  const d = new Diagnostics(
+    () => ({}),
+    () => ({}),
+  );
+  d.check('BTN-UP', true, 1, 1);
+  d.check('NAV-PAGE', true, 2, 2);
+  d.log('event-state');
+  d.log('other-module');
+  d.clearScope(['NAV-PAGE'], (e) => e.type === 'event-state');
+  assert.equal(d.results['NAV-PAGE'].status, 'NOT RUN');
+  assert.equal(d.results['BTN-UP'].status, 'PASS');
+  assert.deepEqual(
+    d.events.map((e) => e.type),
+    ['other-module'],
+  );
+});

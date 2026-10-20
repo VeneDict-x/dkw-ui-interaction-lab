@@ -168,3 +168,12 @@ one page. No Module 01/02/03/05/06 input or geometry controller changes. Old fre
 regressions earn completion via actual acknowledgments before reference-mode checks.
 Guide completion/checkmarks and reference mode are separate durable states.
 Real iPhone Safari/Chrome iOS verification remains PENDING.
+
+## Module 04 Chat addition (2026-10-20)
+
+Approved [chat specification](MODULE04_CHAT_SPEC.md) section A supersedes old
+Task 04 restoration: startup/reload/restart opens world in Module 04, retaining
+progress and chat data. See [report](MODULE04_CHAT_REPORT.md) for separate reset
+scopes, shared IDB transaction guards, plain-text/grapheme editing, send claim,
+emoji focus, independent seeds/live timers and actual test results.
+No shared input, carousel geometry, repeat or Module 06 controller changes.
