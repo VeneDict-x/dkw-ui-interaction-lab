@@ -10,8 +10,12 @@ Read docs/BUGFIX_TASK_04.md for native module-strip scrolling and Module 04 Even
 sequential reading, local swipe arbitration and independent durable progress.
 Read docs/MODULE04_CHAT_SPEC.md and docs/MODULE04_CHAT_REPORT.md for the approved
 world-first startup/reload policy, durable shared chat, safe text and scoped resets.
+Read docs/FINAL_QA_01_06_SPEC.md and docs/FINAL_QA_01_06_REPORT.md for the later
+approved index-first Lab startup, native index-card scrolling and unfinished-guide
+auto-resume policy. These supersede the earlier startup/first-entry-only rules.
 
 Non-negotiable contracts:
+
 - Pointer Events are the primary input; keyboard activation is an additional accessible path.
 - Ordinary actions activate on valid release, never PointerDown.
 - Declared ReleaseButtons track untransformed functional bounds under pointer
@@ -46,11 +50,16 @@ Non-negotiable contracts:
 - Destructive draft/delete/cleanup choices require explicit in-lab confirmation.
   Simulated crash resets volatile state and rehydrates actual durable storage.
 - Module-strip touch scrolling must start on buttons; scroll never activates a tab.
+- Lab cold startup/reload shows the six-module index, never auto-opens a module.
+  Index cards retain native document pan, Strict Tap and keyboard activation.
 - Guide buttons/dots/swipes share page accessibility. Only durable acknowledgment
   unlocks the next article; completed-open checks differ from reopened reference mode.
   Guide vertical touch scroll stays native; axis owner locks and one swipe changes
   at most one page. Reset requires confirmation and fences stale writes in storage.
 - Module 04 always starts/reloads/restarts at world without erasing guide progress.
+  Every real World -> Event entry auto-opens incomplete reading at the first
+  durably unacknowledged page. Completed guides open only on Help. Same-visit Help
+  preserves last viewed page; all newly shown articles start at top.
   Event reset preserves settings/chat; full Module 04 reset atomically clears only
   Module 04 records and diagnostics after explicit confirmation.
 - Chat input/producers/restore/send treat content as plain text, strip tag-like
@@ -58,6 +67,8 @@ Non-negotiable contracts:
   Emoji toggle never inserts; emoji items never close the picker or force focus.
   Send synchronously claims once, deduplicates stable IDs and starts cooldown only
   on durable acceptance. Seeds resume once; Live never resumes after reload.
+  Emoji inserts at the live textarea selection even before queued selection events;
+  never force focus. Expanded composer deliberately reveals ~3.5 lines before scroll.
 - Experimental values remain runtime editable and visibly EXPERIMENTAL.
 - No invented game assets, backend/auth/database, analytics, API keys or secrets.
 - PASS must follow a performed check. Separate synthetic/browser automation,

@@ -1,0 +1,53 @@
+{
+  "environment": "Chromium and pure model regression reproduction; not physical iPhone verification",
+  "baseCommit": "61d7a5b1f0f8085a4b63168d5762bac216b2bfa6",
+  "beforeFix": [
+    {
+      "suite": "home focused",
+      "passed": 0,
+      "failed": 2,
+      "observations": [
+        "Cold entry opened Module 04 rather than index",
+        "Native card touch pan document scroll stayed 0; expected >20px"
+      ]
+    },
+    {
+      "suite": "emoji focused",
+      "passed": 2,
+      "failed": 4,
+      "observations": [
+        "Live middle/end selection before queued notification still inserted at 0",
+        "Selected family emoji was not replaced, including at 500-grapheme cap"
+      ]
+    },
+    {
+      "suite": "guide focused",
+      "passed": 0,
+      "failed": 1,
+      "observations": [
+        "After reload and Event entry unfinished guide remained hidden; expected automatic page 3 with acknowledgments [1,2]"
+      ]
+    }
+  ],
+  "isolatedAfterFix": {
+    "home": {
+      "passed": 6,
+      "failed": 0
+    },
+    "emoji": {
+      "passed": 7,
+      "failed": 0
+    },
+    "guide": {
+      "passed": 10,
+      "failed": 0
+    }
+  },
+  "developmentInterruption": {
+    "suite": "guide",
+    "passed": 9,
+    "failed": 1,
+    "cause": "Vite HMR reload during concurrent source edits before planned test reload; trace inspected. Stable rerun passed all10."
+  },
+  "physicalFixedDeviceRetest": "PENDING"
+}

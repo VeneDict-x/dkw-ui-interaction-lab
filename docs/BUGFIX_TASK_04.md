@@ -1,5 +1,8 @@
-> Исторический отчёт Task 04. Правила восстановления и сброса дополнены
-> [MODULE04_CHAT_SPEC.md](MODULE04_CHAT_SPEC.md), раздел A: startup/reload/restart открывает world, сохраняя прогресс.
+> Исторический отчёт Task 04. Сначала правила восстановления дополнены
+> [MODULE04_CHAT_SPEC.md](MODULE04_CHAT_SPEC.md), раздел A. Актуальный
+> [Final QA 01–06](FINAL_QA_01_06_SPEC.md) заменяет startup и first-entry-only:
+> Lab открывает индекс, Module 04 — World; вход в Event автоматически продолжает
+> незавершённое чтение с первой неподтверждённой страницы. Прогресс сохраняется.
 
 # Bugfix 04 + Feature 04 — Event Guide & Swipe Navigation
 

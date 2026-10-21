@@ -350,7 +350,7 @@ import {
   type EventRecord,
   type EventCommand,
 } from '../src/event-state.ts';
-test('BF04 first event entry auto-opens exactly once; Help opens later', () => {
+test('Final QA incomplete guide auto-opens on every real Event entry; Help still opens after close', () => {
   let s = initialEvent();
   assert.equal(s.currentScreen, 'world');
   s = eventTransition(s, { type: 'enter' });
@@ -358,6 +358,8 @@ test('BF04 first event entry auto-opens exactly once; Help opens later', () => {
   s = eventTransition(s, { type: 'close' });
   s = eventTransition(s, { type: 'leave' });
   s = eventTransition(s, { type: 'enter' });
+  assert.equal(s.guideOpen, true);
+  s = eventTransition(s, { type: 'close' });
   assert.equal(s.guideOpen, false);
   s = eventTransition(s, { type: 'open' });
   assert.equal(s.guideOpen, true);
@@ -496,7 +498,7 @@ test('BF04 duplicate Event activation is idempotent until a real world return', 
   assert.equal(s.guideOpen, false);
   s = eventTransition(s, { type: 'leave' });
   s = eventTransition(s, { type: 'enter' });
-  assert.equal(s.guideOpen, false);
+  assert.equal(s.guideOpen, true);
 });
 
 import { graphemes, plainText, cleanDraft, editDraft, reconcileDraft } from '../src/chat-text.ts';
@@ -707,3 +709,25 @@ test('Module 04 scoped diagnostic reset preserves unrelated observed results and
     ['other-module'],
   );
 });
+
+for (const viewed of [1, 2])
+  test(`Final QA Event resume derives first unacknowledged page independently of last viewed ${viewed}`, () => {
+    let s = eventTransition(initialEvent(), { type: 'enter' });
+    for (const page of [1, 2]) s = eventTransition(s, { type: 'ack', page });
+    s = eventTransition(s, { type: 'navigate', page: viewed });
+    assert.equal(s.lastPage, viewed);
+    s = eventTransition(s, { type: 'leave' });
+    s = eventTransition(s, { type: 'enter' });
+    assert.equal(s.guideOpen, true);
+    assert.equal(s.lastPage, 3);
+    assert.deepEqual(s.acknowledgedPages, [1, 2]);
+    assert.equal(pageAccessible(s, 4), false);
+    for (const page of [3, 4, 5]) s = eventTransition(s, { type: 'ack', page });
+    s = eventTransition(s, { type: 'leave' });
+    s = eventTransition(s, { type: 'enter' });
+    assert.equal(s.guideOpen, false);
+    assert.equal(s.guideMode, 'reference');
+    assert.deepEqual(s.acknowledgedPages, [1, 2, 3, 4, 5]);
+    s = eventTransition(s, { type: 'open' });
+    assert.equal(s.guideOpen, true);
+  });

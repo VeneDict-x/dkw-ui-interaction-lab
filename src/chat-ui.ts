@@ -76,8 +76,10 @@ export class ClanChat {
     root.addEventListener(
       'pointerdown',
       (e) => {
-        if ((e.target as Element).closest('#emojiPickerToggle,.emojiPickerItem,#chat-send'))
+        if ((e.target as Element).closest('#emojiPickerToggle,.emojiPickerItem,#chat-send')) {
+          this.rememberSelection();
           e.preventDefault();
+        }
       },
       true,
     );
@@ -88,11 +90,13 @@ export class ClanChat {
       },
       true,
     );
-    const remember = () => {
-      this.selection = { start: this.input.selectionStart, end: this.input.selectionEnd };
-    };
-    for (const event of ['select', 'keyup', 'pointerup', 'focus'] as const)
-      this.input.addEventListener(event, remember);
+    for (const event of ['select', 'selectionchange', 'keyup', 'pointerup', 'focus'] as const)
+      this.input.addEventListener(event, () => this.rememberSelection(true));
+    // Safari can finish native caret/selection-handle movement after pointerup.
+    // Observe selection notifications as well, without any touch interception or focus calls.
+    document.addEventListener('selectionchange', () => {
+      if (document.activeElement === this.input) this.rememberSelection(true);
+    });
     this.input.addEventListener('beforeinput', (e) => {
       if (this.composing || e.isComposing || e.inputType.startsWith('delete') || e.data === null)
         return;
@@ -162,6 +166,14 @@ export class ClanChat {
   settings(settings: ChatSettings) {
     this.model.settings(settings);
   }
+  private rememberSelection(remeasure = false) {
+    const next = { start: this.input.selectionStart, end: this.input.selectionEnd };
+    const changed = next.start !== this.selection.start || next.end !== this.selection.end;
+    this.selection = next;
+    // A picker touchstart only snapshots the range. Relayout here can remove
+    // overflow before native pan starts; accepted edits already schedule size().
+    if (remeasure && changed) this.size();
+  }
   private change(next: { text: string; caret: number }) {
     this.input.value = next.text;
     this.selection = { start: next.caret, end: next.caret };
@@ -170,7 +182,10 @@ export class ClanChat {
     this.size();
   }
   private insert(emoji: string) {
-    this.change(editDraft(this.model.draft, this.selection.start, this.selection.end, emoji));
+    // The DOM range is authoritative even if its select/selectionchange event is still queued.
+    // Reading it also works while blurred; composer controls intentionally preserve input focus.
+    this.rememberSelection();
+    this.change(editDraft(this.input.value, this.selection.start, this.selection.end, emoji));
   }
   private async send(id?: string) {
     const sent = await this.model.send(id);
@@ -243,9 +258,11 @@ export class ClanChat {
       mirror.append(full);
       this.root.append(mirror);
       const needed = Math.ceil(mirror.getBoundingClientRect().height) + 2;
-      this.input.style.height = `${Math.max(48, Math.min(needed, 3 * line + padding))}px`;
-      this.input.style.overflowY = needed > 3 * line + padding ? 'auto' : 'hidden';
-      mirror.textContent = this.input.value.slice(0, this.selection.end);
+      // A half-visible fourth line deliberately advertises the internal scroll.
+      const expanded = 3.5 * line + padding;
+      this.input.style.height = `${Math.max(48, Math.min(needed, expanded))}px`;
+      this.input.style.overflowY = needed > expanded ? 'auto' : 'hidden';
+      mirror.textContent = this.input.value.slice(0, this.input.selectionEnd);
       const marker = document.createElement('span');
       marker.textContent = '\u200b';
       mirror.append(marker);

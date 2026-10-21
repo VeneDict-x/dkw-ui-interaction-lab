@@ -5,25 +5,25 @@ Record iPhone model, iOS/Safari version, portrait/landscape, actual viewport and
 configuration JSON. Export diagnostics after each repeatable sequence. Do not mark
 PASS from the desktop Chromium report.
 
-| ID | Scenario | Expected |
-|---|---|---|
-| IOS-01 | Portrait at real width, Safari bars expanded/collapsed | No horizontal page overflow; targets remain reachable; actual viewport wins |
-| IOS-02 | Landscape, notch / home indicator, rotating repeatedly | Safe-area padding, no clipped actions; draft, selection, page survive |
-| IOS-03 | ReleaseButton: motion inside, repeated exit/return even beyond Slop | Pressed inside, released outside; Down zero actions, Up inside one, Up outside zero |
-| IOS-04 | Card drag then return; ordinary buttons exit/reentry | No resurrected card/ordinary tap; ReleaseButton follows the approved geometry exception |
-| IOS-05 | Horizontal/vertical/45° gesture from card | Correct owner; exact tie Carousel; lock through loop/reversal |
-| IOS-06 | Background Modules gesture; no-overflow carousel | Horizontal ignored outside cards; no meaningless carousel movement |
-| IOS-07 | Fast carousel swipe and end pull | Experimental inertia/elasticity controllable, stable spring-back |
-| IOS-08 | Hold beyond recognition, move outside, Up outside | Pressed Hold continues; Up ends; no extra release action |
-| IOS-09 | Scheduled availability pause/resume while held | HOLDING + WAITING, ticks pause, resume without queued burst |
-| IOS-10 | App switch, screen lock, interruption, lost pointer | Cancel/visibility termination; no stuck hold or action afterwards |
-| IOS-11 | Two-finger interruption / pinch attempts in and around test zone | Secondary pointer never steals session; surrounding page remains usable |
-| IOS-12 | Back/Next boundaries, all five dots, Light/Dark, Close/Reopen | Correct page, blue/red active dot, only mini-window closes |
-| IOS-13 | Numeric mock resize, square geometry and band transitions | Current H/V retained in band; real bounds respected |
-| IOS-14 | Blur/dim live/settled, low-cost mode on/off | Geometry remains live; final effects restored; inspect actual frame performance |
-| IOS-15 | Input keyboard and focus; Safari viewport changes | Controls reachable; state preserved; actual visible viewport observable |
-| IOS-16 | localStorage, Reset, clipboard, export JSON download | Settings retained or explicit limitation; valid JSON; iOS Files/Share workflow usable |
-| IOS-17 | VoiceOver / external keyboard where available | Focus visible, button names and active-page semantics understandable |
+| ID     | Scenario                                                            | Expected                                                                                |
+| ------ | ------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| IOS-01 | Portrait at real width, Safari bars expanded/collapsed              | No horizontal page overflow; targets remain reachable; actual viewport wins             |
+| IOS-02 | Landscape, notch / home indicator, rotating repeatedly              | Safe-area padding, no clipped actions; draft, selection, page survive                   |
+| IOS-03 | ReleaseButton: motion inside, repeated exit/return even beyond Slop | Pressed inside, released outside; Down zero actions, Up inside one, Up outside zero     |
+| IOS-04 | Card drag then return; ordinary buttons exit/reentry                | No resurrected card/ordinary tap; ReleaseButton follows the approved geometry exception |
+| IOS-05 | Horizontal/vertical/45° gesture from card                           | Correct owner; exact tie Carousel; lock through loop/reversal                           |
+| IOS-06 | Background Modules gesture; no-overflow carousel                    | Horizontal ignored outside cards; no meaningless carousel movement                      |
+| IOS-07 | Fast carousel swipe and end pull                                    | Experimental inertia/elasticity controllable, stable spring-back                        |
+| IOS-08 | Hold beyond recognition, move outside, Up outside                   | Pressed Hold continues; Up ends; no extra release action                                |
+| IOS-09 | Scheduled availability pause/resume while held                      | HOLDING + WAITING, ticks pause, resume without queued burst                             |
+| IOS-10 | App switch, screen lock, interruption, lost pointer                 | Cancel/visibility termination; no stuck hold or action afterwards                       |
+| IOS-11 | Two-finger interruption / pinch attempts in and around test zone    | Secondary pointer never steals session; surrounding page remains usable                 |
+| IOS-12 | Back/Next boundaries, all five dots, Light/Dark, Close/Reopen       | Correct page, blue/red active dot, only mini-window closes                              |
+| IOS-13 | Numeric mock resize, square geometry and band transitions           | Current H/V retained in band; real bounds respected                                     |
+| IOS-14 | Blur/dim live/settled, low-cost mode on/off                         | Geometry remains live; final effects restored; inspect actual frame performance         |
+| IOS-15 | Input keyboard and focus; Safari viewport changes                   | Controls reachable; state preserved; actual visible viewport observable                 |
+| IOS-16 | localStorage, Reset, clipboard, export JSON download                | Settings retained or explicit limitation; valid JSON; iOS Files/Share workflow usable   |
+| IOS-17 | VoiceOver / external keyboard where available                       | Focus visible, button names and active-page semantics understandable                    |
 
 Use the 375×812 validation point where a device / available viewport matches it;
 360×780, 390×844 and 430×932 are reference presets, not detected device models.
@@ -55,7 +55,6 @@ earlier defect observations do not count as verification of these fixes.
 
 Record model, iOS/Safari version, URL/build, config and observations. Do not mark
 these checks PASS from Chromium's touch or forced-hover automation.
-
 
 ## Bugfix Task 03 — physical Safari acceptance PENDING
 
@@ -104,7 +103,8 @@ deployment. Chromium/CDP, симулированный restart и програм
    выход/возврат без scroll не воскрешает отменённый tap. Повторить после поворота.
 2. Reset Event State: Cancel оставляет прогресс, Confirm сбрасывает только 04.
    Первый Event открывает памятку поверх зимней сцены. Закрытие оставляет событие,
-   ❓ открывает снова. Back в мир → Event не открывает памятку автоматически.
+   ❓ открывает снова. Back в мир → Event автоматически открывает незавершённую
+   памятку на первой неподтверждённой странице; завершённая остаётся ручной.
 3. Прокрутить все пять длинных статей вверх/вниз, включая длинную Академию и вторую
    иллюстрацию. «Понятно» только в конце статьи, скроллится вместе с текстом. Нет
    выделения/долгого callout/залипшей подсветки/перехода страницы от вертикального жеста.
@@ -123,8 +123,9 @@ deployment. Chromium/CDP, симулированный restart и програм
 8. Проверить быстрые tap/double tap/swipe/close/reopen и resize/orientation во время
    drag. Нет двойного acknowledgment, скачка через две страницы и зависшего жеста.
 9. После SAVED: Simulate App Restart, Reload Page (настоящая reload), закрытие
-   браузера и повторное открытие. Module 04 восстанавливает экран, открытость,
-   страницу и прочитанный prefix сверху; автооткрытие не повторяется.
+   браузера и повторное открытие. Lab показывает индекс; выбрать Module 04 → World.
+   Прочитанный prefix сохраняется. Event автоматически открывает первую
+   неподтверждённую страницу, завершённая памятка открывается через ❓.
 10. Background/foreground, блокировка экрана, реальное прерывание во время drag
     и сохранения. После SAVED прогресс восстанавливается; для незавершённой записи
     фиксировать реальный результат, не ожидать невозможной crash-гарантии.
@@ -145,16 +146,18 @@ Use the PR's approved merged/deployed commit only; record model, iOS, browser,
 URL/commit, theme and observed result. Chromium/CDP and synthetic IME tests are not
 physical device PASS.
 
-1. Startup/reload/Simulate App Restart: Module 04 world is visible. Settings,
+1. Startup/reload: index, then explicitly select Module 04 → World. Simulate App
+   Restart remains inside Module 04 and returns to World. Settings,
    guide acknowledgments, last page, complete/reference mode, history and draft
-   survive. Event does not automatically reopen an already-seen guide; Help works.
+   survive. Event automatically resumes the first unacknowledged page until
+   completion; completed reference opens only through Help.
 2. First empty chat: focus alone stays empty. First pasted/typed/emoji world text
    OR first Event starts seeds once: ~2 s then ~1–2 s. Send between seeds and
    reload midway; inspect chronological full History, no duplicate seed IDs.
 3. Live at 4–7 s, manual Random during Live, user sends during Live, Stop, and
    reload/background: Live never restarts by itself. Four visible/six retained,
    long system/clan/user text ellipsizes to one line; History keeps full text/emoji.
-4. Composer one → two → three lines then internal scroll. Move caret up/down,
+4. Composer one → two → three → ~3.5 visible lines then internal scroll. Move caret up/down,
    insert in earlier lines, rotate with keyboard open: no deleted lines, clipped
    caret, scene bounce, overlap or button displacement. Both side buttons 48×48
    remain bottom aligned; send is icon-only and follows Light/Dark/Premium.
@@ -190,3 +193,12 @@ physical device PASS.
     confirmation remain reachable. Test true app switch, lock/call interruption,
     keyboard bars and Safari process eviction separately; a pending transaction
     cannot promise crash durability. Inspect storage errors/Retry where available.
+
+## Final QA 01–06 — physical iPhone 15 Pro Max retest PENDING
+
+The owner reproduced five issues on this device. No fixed-device PASS is claimed.
+Use the current [six-step manual checklist](FINAL_QA_01_06_REPORT.md#manual-iphone-verification--pending)
+in Safari and Chrome iOS. Record commit/URL, iOS, browser and actual observations.
+It covers index entry/card pan/strips, restored live caret and emoji/3.5 lines,
+all three guide restart methods with backtracking, completed reference mode,
+interruptions/orientation and all six modules/reset isolation.

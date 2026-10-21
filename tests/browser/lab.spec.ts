@@ -19,7 +19,6 @@ async function setConfig(page: Page, key: string, value: number) {
 }
 test.beforeEach(async ({ page }) => {
   await page.goto('/');
-  await page.locator('#back-index').click();
 });
 test('entry, chambers, NOT RUN assertions and no default PASS', async ({ page }) => {
   await expect(page).toHaveTitle(/DKW/);
@@ -501,7 +500,6 @@ test('real Chromium touch input reports touch Pointer Events and nested ownershi
   });
   const page = await context.newPage();
   await page.goto('/');
-  await page.locator('#back-index').click();
   await open(page, 'carousel');
   const p = await point(page, '#carousel-0 [data-card="Option 1"]'),
     cdp = await context.newCDPSession(page);
@@ -527,7 +525,6 @@ test('visual smoke has no runtime errors or unexpected external requests', async
     if (!r.url().startsWith('http://127.0.0.1:4173')) external.push(r.url());
   });
   await page.goto('/');
-  await page.locator('#back-index').click();
   await page.screenshot({ path: 'artifacts/testing/desktop-index.png', fullPage: true });
   await open(page, 'buttons');
   await page.screenshot({ path: 'artifacts/testing/desktop-buttons.png', fullPage: true });

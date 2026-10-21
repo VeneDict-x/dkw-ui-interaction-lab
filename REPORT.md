@@ -1,3 +1,6 @@
+> Актуальный проход исправлений и результаты: [Final QA 01–06](docs/FINAL_QA_01_06_REPORT.md).
+> Ниже сохранены исторические результаты предыдущих этапов.
+
 > Актуальное расширение: [Module 04 Chat](docs/MODULE04_CHAT_REPORT.md).
 
 > Актуальная реализация Bugfix 04 + Feature 04: [docs/BUGFIX_TASK_04.md](docs/BUGFIX_TASK_04.md).
