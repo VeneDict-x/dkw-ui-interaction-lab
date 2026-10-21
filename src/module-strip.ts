@@ -1,5 +1,7 @@
 import { slop, type Config } from './config';
-// Local surface: touch scroll stays native; mouse drag supplements it. No window gesture listeners.
+// Local navigation surfaces (strips or index grid): native touch pan cancels the
+// press via pointercancel; mouse drag supplements horizontal overflow only.
+// Keep these controls out of the custom game gesture controller.
 export function bindModuleStrip(
   strip: HTMLElement,
   config: () => Config,

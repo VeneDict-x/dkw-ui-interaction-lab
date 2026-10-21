@@ -1,0 +1,53 @@
+{
+  "time": "2026-10-21T01:49:18.461109+00:00",
+  "environment": "Node24.19.0;Chromium151.0.7922.173;desktop Chromium with CDP touch/synthetic event ordering;not physical iPhone",
+  "baseCommit": "61d7a5b1f0f8085a4b63168d5762bac216b2bfa6",
+  "branch": "bugfix/01-06-final-qa",
+  "typescript": "PASS",
+  "models": {
+    "passed": 51,
+    "failed": 0,
+    "skipped": 0
+  },
+  "fullChromium": {
+    "passed": 200,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "retries": 0,
+    "durationMs": 438514.75
+  },
+  "productionBuild": "PASS",
+  "productionSmoke": {
+    "passed": 17,
+    "failed": 0,
+    "skipped": 0,
+    "surface": "dist served under /lab/ on local HTTP"
+  },
+  "total": {
+    "passed": 268,
+    "failed": 0,
+    "skipped": 0
+  },
+  "coverageAdded": {
+    "model": 2,
+    "browser": 23,
+    "production": 1
+  },
+  "physicalIphoneFixedDeviceRetest": "PENDING",
+  "testedFilesSha256": {
+    "src/main.ts": "2c262b1a83b581fbce26932888e9f0bf9a756dc7eef40a88381951ae9c732643",
+    "src/module-strip.ts": "59a35284bcc9dbb7d331ab39216bba50ff043cb7c4c11d24ac0db24e9b5929c0",
+    "src/chat-ui.ts": "8095d8145ea1918a132e3b3242c830e66e808f9caaa1840779ebf36386d0faf6",
+    "src/chat.css": "6677fe0f1e0ee1e7b91fe41f55b630467544df002f55540ad7fdbdebfdbc5d48",
+    "src/event-state.ts": "11fc8542ab4e091f28087722e50ebd5770157910d06c2c358b11e0736659de95",
+    "tests/core.test.ts": "6bee4ea2806f8a55f4713ee45f7c4cd0b0de7992e854c962e56b5f9cd2c7a793",
+    "tests/browser/final-qa-home.spec.ts": "5c8faa1d9716e16dfac741efee12a8273ea5adbf3120807f67facd0ae8b18a5d",
+    "tests/browser/final-qa-chat.spec.ts": "29bf7b19e6a4da67f6ea25360c9cbaccee9066c71d417e162764f5c503d9c8ec",
+    "tests/browser/final-qa-guide.spec.ts": "c9af82dddb607b5b48b08a8f0b8e91c2a5b862f493d3256691483e1a31db1b29",
+    "tests/browser/chat.spec.ts": "acd6784ac9a1436eb450b48cc535960d1900b8967dc14b6f2bed0f770e02bb58",
+    "tests/browser/bugfix-04.spec.ts": "9d11f23ef9ce2ffcaf6620ca33cb071a17420e360f52b1924df7ebfe764e8973",
+    "tests/browser/lab.spec.ts": "35942870718a11ea37d59662619cceb525949610d5513e12da52490b726ff399",
+    "scripts/verify-static.mjs": "4f6048879509b491f54503dbdc0ca66c69d2d8bd35b2f92b0e818114e8ce0fb5"
+  }
+}

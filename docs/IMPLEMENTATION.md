@@ -1,18 +1,23 @@
 # Implementation notes and provisional choices
 
+Current policy: [Final QA 01–06](FINAL_QA_01_06_SPEC.md) supersedes older startup
+and first-entry-only statements below. Lab cold startup/reload shows the index;
+Module 04 opens/restarts at World. Incomplete World -> Event entry auto-resumes the
+first unacknowledged article, while completed guides remain manual/reference.
+
 ## Structure
 
-| File | Responsibility |
-|---|---|
-| src/config.ts | Editable, sanitized experimental parameter schema and localStorage |
-| src/geometry.ts | Pure staged allocation, class and H/V hysteresis |
-| src/interaction.ts | Pointer capture, arbitration, release, hold, repeat, inertia |
-| src/diagnostics.ts | Performed assertions, bounded event history, JSON download |
-| src/main.ts | Six persistent test panels, navigation, resize observers, rendering |
-| src/style.css | Neutral skin, safe-area padding, protected touch targets |
-| tests/core.test.ts | Geometry, Slop and repeat invariants |
-| tests/browser/lab.spec.ts | Playwright input / cancellation / layout scenarios |
-| scripts/verify-static.mjs | Local-only production artifact verification |
+| File                      | Responsibility                                                      |
+| ------------------------- | ------------------------------------------------------------------- |
+| src/config.ts             | Editable, sanitized experimental parameter schema and localStorage  |
+| src/geometry.ts           | Pure staged allocation, class and H/V hysteresis                    |
+| src/interaction.ts        | Pointer capture, arbitration, release, hold, repeat, inertia        |
+| src/diagnostics.ts        | Performed assertions, bounded event history, JSON download          |
+| src/main.ts               | Six persistent test panels, navigation, resize observers, rendering |
+| src/style.css             | Neutral skin, safe-area padding, protected touch targets            |
+| tests/core.test.ts        | Geometry, Slop and repeat invariants                                |
+| tests/browser/lab.spec.ts | Playwright input / cancellation / layout scenarios                  |
+| scripts/verify-static.mjs | Local-only production artifact verification                         |
 
 No external fonts, images, runtime SDKs, analytics or network actions. No backend.
 The SVG reference specimen is a neutral UI drawing with intrinsic 280×180 bounds.
@@ -177,3 +182,20 @@ progress and chat data. See [report](MODULE04_CHAT_REPORT.md) for separate reset
 scopes, shared IDB transaction guards, plain-text/grapheme editing, send claim,
 emoji focus, independent seeds/live timers and actual test results.
 No shared input, carousel geometry, repeat or Module 06 controller changes.
+
+## Final QA 01–06 (2026-10-21)
+
+See [report](FINAL_QA_01_06_REPORT.md). The explicit startup openPanel call is gone.
+The existing local module-navigation binding also handles the home card grid;
+scoped touch-action:auto permits native document pan and pointercancel cancels the
+tap. Horizontal strip behavior and the shared game controller stay intact.
+
+Emoji insertion reads textarea selectionStart/End immediately, independently of
+queued selection notifications; selectionchange also updates caret measurement.
+No focus calls or grapheme/text-filter changes. The composer keeps its half-line
+scroll affordance (3.5 lines, 108px at the current 24px line height).
+
+Event entry derives resume from the durable acknowledgment prefix. eventEntered
+still records lifecycle but no longer prevents unfinished auto-opening. lastPage
+still supports ordinary same-visit Help and free reference navigation. No new
+storage schema, writes, migration, reset scope or scheduling mechanism is needed.

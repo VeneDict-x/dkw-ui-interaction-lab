@@ -1,0 +1,26 @@
+{
+  "before": {
+    "height": 98,
+    "maxHeight": "100px",
+    "scrollTop": 0,
+    "scrollHeight": 204
+  },
+  "after": {
+    "height": 204,
+    "maxHeight": "236px",
+    "scrollTop": 0,
+    "scrollHeight": 204
+  },
+  "observation": "Unchanged selection pointerdown resizes picker before vertical pan; expected constrained height100 to staystable.",
+  "firstCompleteRun": {
+    "passed": 199,
+    "failed": 1,
+    "skipped": 0
+  },
+  "afterFixFocused": {
+    "passed": 8,
+    "failed": 0,
+    "skipped": 0,
+    "scope": "existing constrained native picker scroll +7 live-caret regressions; unchanged expectations"
+  }
+}

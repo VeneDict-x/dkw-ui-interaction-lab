@@ -1,5 +1,10 @@
 # Module 04 — Clan Chat, State & Gesture Fixes
 
+> Historical report. [Final QA 01–06](FINAL_QA_01_06_SPEC.md) subsequently changes
+> Lab startup to the index and unfinished Event entry to automatic first-unread
+> resume, fixes live emoji selection and retains a ~3.5-line expanded composer.
+> See the [current report](FINAL_QA_01_06_REPORT.md); counts below describe this older run.
+
 2026-10-20. Approved specification: [MODULE04_CHAT_SPEC.md](MODULE04_CHAT_SPEC.md).
 Base main: `52d105ff21140bd80188df36d5b7a82beb942e07` (owner merged PR #2).
 Branch: `feature/module04-chat`. Deliver through PR; no automatic merge/deployment.

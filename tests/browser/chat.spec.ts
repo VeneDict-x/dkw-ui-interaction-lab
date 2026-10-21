@@ -1,7 +1,13 @@
 import { test, expect, type Page } from '@playwright/test';
 const input = (page: Page) => page.locator('#chat-input');
 const send = (page: Page) => page.locator('#chat-send');
+async function openModule04(page: Page) {
+  await expect(page.locator('#home')).toBeVisible();
+  await page.locator('.index [data-open="navigation"]').click();
+}
 async function ready(page: Page) {
+  await expect(page.locator('#home')).toBeHidden();
+  await expect(page.locator('#navigation')).toBeVisible();
   await expect(page.locator('#event-save-status')).toHaveText('SAVED');
   await expect(page.locator('#chat-save-status')).toHaveText('SAVED');
 }
@@ -54,9 +60,10 @@ async function touchDrag(page: Page, selector: string, dx: number, dy: number) {
 }
 test.beforeEach(async ({ page }) => {
   await page.goto('/');
+  await openModule04(page);
   await ready(page);
 });
-test('Chat startup is Module 04 world and empty; focus alone does not schedule seeds', async ({
+test('Chat explicitly opened Module 04 starts at world and empty; focus alone does not schedule seeds', async ({
   page,
 }) => {
   await expect(page.locator('#navigation')).toBeVisible();
@@ -104,6 +111,7 @@ test('Chat event trigger seeds once, real reload midway resumes remaining stable
   await expect(page.locator('#chat-history')).toContainText('Событие началось!');
   const first = await page.locator('.chat-line').first().getAttribute('data-message-id');
   await page.reload();
+  await openModule04(page);
   await ready(page);
   await expect(page.locator('#event-world')).toBeVisible();
   await expect(page.locator('#mini-window')).toBeHidden();
@@ -115,7 +123,7 @@ test('Chat event trigger seeds once, real reload midway resumes remaining stable
   expect(new Set(ids).size).toBe(3);
   expect(ids.length).toBe(3);
   await page.locator('#event-enter').click();
-  await expect(page.locator('#mini-window')).toBeHidden();
+  await expect(page.locator('#mini-window')).toBeVisible();
   await expect(page.locator('#chat-diagnostics')).toContainText('"next": 3');
 });
 test('Chat manual fake has one insert per press, all producers retain six and display four full originals', async ({
@@ -173,6 +181,7 @@ test('Chat reload restores history/draft/settings but never resumes Live; restar
   await closeGuide(page);
   await page.locator('#chat-live').click();
   await page.reload();
+  await openModule04(page);
   await ready(page);
   await expect(page.locator('#event-world')).toBeVisible();
   await expect(input(page)).toHaveValue('Сохранённый 😅 черновик');
@@ -233,6 +242,7 @@ test('Chat full reset confirms, clears only Module 04 including draft/settings/p
   const report = JSON.parse(Buffer.concat(chunks).toString());
   expect(report.results.find((r: { id: string }) => r.id === 'BTN-UP').status).toBe('PASS');
   await page.reload();
+  await openModule04(page);
   await ready(page);
   await expect(page.locator('.chat-line')).toHaveCount(0);
 });
@@ -400,6 +410,7 @@ for (const path of ['paste', 'native-input', 'composition', 'picker'])
     await expect(input(page)).toHaveValue('a'.repeat(498) + family + 'Z');
     await saved(page);
     await page.reload();
+    await openModule04(page);
     await ready(page);
     await expect(input(page)).toHaveValue('a'.repeat(498) + family + 'Z');
   });
@@ -423,6 +434,7 @@ test('Chat filters typing/paste/rich text directives and renders stored content 
   await input(page).fill('&lt;script&gt;alert(1)&lt;/script&gt; https://example.org');
   await saved(page);
   await page.reload();
+  await openModule04(page);
   await ready(page);
   await expect(input(page)).toHaveValue(
     '&lt;script&gt;alert(1)&lt;/script&gt; https://example.org',
@@ -454,7 +466,16 @@ for (const width of [320, 390, 844])
     }
     expect(dimensions[1]).toBeGreaterThan(dimensions[0]);
     expect(dimensions[2]).toBeGreaterThan(dimensions[1]);
-    expect(dimensions[3]).toBe(dimensions[2]);
+    // The approved expanded field deliberately reveals another half line.
+    expect(dimensions[3] - dimensions[2]).toBe(12);
+    const rows = await input(page).evaluate((e) => {
+      const s = getComputedStyle(e);
+      return (
+        (e.clientHeight - parseFloat(s.paddingTop) - parseFloat(s.paddingBottom)) /
+        parseFloat(s.lineHeight)
+      );
+    });
+    expect(rows).toBe(3.5);
     expect(await input(page).evaluate((e) => e.scrollHeight > e.clientHeight)).toBe(true);
     await expect(page.locator('#clan-chat')).toHaveCSS('background-color', 'rgb(23, 40, 57)');
     await expect(page.locator('#chat-message-area')).toHaveCSS(
@@ -510,6 +531,7 @@ test('Chat home/index strip touch scroll starts on button surface, cancels tap a
   });
   const page = await context.newPage();
   await page.goto('/');
+  await openModule04(page);
   await ready(page);
   await page.locator('#back-index').tap();
   await touchDrag(page, '.home-module-strip [data-open="actions"]', -140, 0);
@@ -567,6 +589,7 @@ test('Chat actual IndexedDB send abort preserves draft, reports failure and Retr
   await expect(page.locator('.chat-user')).toHaveCount(1);
   await expect(input(page)).toHaveValue('');
   await page.reload();
+  await openModule04(page);
   await ready(page);
   await expect(page.locator('#chat-history')).toContainText('durable 😅');
 });
@@ -603,6 +626,7 @@ test('Chat pending real send keeps synchronous claim; a newer composed draft sur
   await expect(input(page)).toHaveValue('next draft');
   await expect(page.locator('.chat-user .chat-body')).toHaveText('first');
   await page.reload();
+  await openModule04(page);
   await ready(page);
   await expect(input(page)).toHaveValue('next draft');
 });
@@ -636,6 +660,7 @@ test('Chat full reset fences delayed producer write and pending seeds in actual 
     () => (window as typeof window & { chatSettled: boolean }).chatSettled,
   );
   await page.reload();
+  await openModule04(page);
   await ready(page);
   await expect(input(page)).toHaveValue('');
   await expect(page.locator('.chat-line')).toHaveCount(0);
@@ -728,6 +753,7 @@ test('Chat recovered drafts, fake and system text are all sanitized and rendered
     });
   });
   await page.reload();
+  await openModule04(page);
   await ready(page);
   await expect(input(page)).toHaveValue('восстановленный😅');
   await expect(page.locator('#chat-history')).toContainText('жёлтый 😅');
@@ -745,6 +771,7 @@ test('Chat narrow native touch scrolls the constrained picker itself from emoji 
   });
   const p = await c.newPage();
   await p.goto('/');
+  await openModule04(p);
   await ready(p);
   await p.locator('#emojiPickerToggle').tap();
   await p.locator('#emoji-picker').evaluate((e: HTMLElement) => (e.style.maxHeight = '100px'));

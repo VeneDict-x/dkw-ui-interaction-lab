@@ -46,6 +46,10 @@ try {
     if (r.status() >= 400) errors.push(`${r.status()} ${r.url()}`);
   });
   await page.goto('http://127.0.0.1:4180/lab/');
+  await expect(page.locator('#home')).toBeVisible();
+  await expect(page.locator('#test-shell')).toBeHidden();
+  await expect(page.locator('.home-grid .experiment-card')).toHaveCount(6);
+  results.push({ id: 'STATIC-INDEX-STARTUP', status: 'PASS' });
   for (const id of ['carousel', 'actions', 'buttons', 'navigation', 'resize', 'draft-recovery']) {
     await page.locator(`.index [data-open="${id}"]`).click();
     assert.ok(await page.locator(`#${id}`).isVisible());
@@ -70,14 +74,17 @@ try {
   await expect(page.locator('#page-title')).toHaveText('Page 2 / 5');
   await expect(page.locator('#event-save-status')).toHaveText('SAVED');
   results.push({ id: 'STATIC-EVENT-ACK', status: 'PASS' });
+  await page.locator('.guide-page[data-page="2"] [data-guide-ack]').click();
+  await expect(page.locator('#page-title')).toHaveText('Page 3 / 5');
+  await page.locator('[data-action="page-1"]').click();
+  await expect(page.locator('#event-save-status')).toHaveText('SAVED');
   await page.reload();
   await page.locator('.index [data-open="navigation"]').click();
   await expect(page.locator('#event-world')).toBeVisible();
   await expect(page.locator('#mini-window')).toBeHidden();
   await page.locator('#event-enter').click();
-  await page.locator('#reopen').click();
   await expect(page.locator('#mini-window')).toBeVisible();
-  await expect(page.locator('#page-title')).toHaveText('Page 2 / 5');
+  await expect(page.locator('#page-title')).toHaveText('Page 3 / 5');
   await expect(page.locator('[data-action="page-1"]')).toHaveAttribute('data-acknowledged', 'true');
   results.push({ id: 'STATIC-EVENT-RELOAD', status: 'PASS' });
   await page.locator('#chat-input').fill('<b>production 😅</b>');
@@ -89,6 +96,8 @@ try {
   await page.locator('#nav-faction').selectOption('Premium');
   await expect(page.locator('#chat-save-status')).toHaveText('SAVED');
   await page.reload();
+  await expect(page.locator('#home')).toBeVisible();
+  await page.locator('.index [data-open="navigation"]').click();
   await expect(page.locator('#event-world')).toBeVisible();
   await expect(page.locator('#chat-input')).toHaveValue('следующий черновик 👨‍👩‍👧‍👦');
   await expect(page.locator('#nav-faction')).toHaveValue('Premium');
@@ -96,7 +105,6 @@ try {
   results.push({ id: 'STATIC-CHAT-RECOVERY', status: 'PASS' });
   await page.locator('#chat-input').evaluate((e) => {
     e.setSelectionRange(e.value.length, e.value.length);
-    e.dispatchEvent(new Event('select'));
   });
   await page.locator('#emojiPickerToggle').click();
   await expect(page.locator('.emojiPickerItem')).toHaveCount(16);

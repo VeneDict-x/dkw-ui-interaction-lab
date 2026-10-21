@@ -29,7 +29,6 @@ test('BF04 top strip native touch scroll starts on button without activating mod
   });
   const page = await context.newPage();
   await page.goto('/');
-  await page.locator('#back-index').click();
   await touchSwipe(page, '.index [data-open="actions"]', -120);
   await expect
     .poll(() => page.locator('.index nav').evaluate((el) => el.scrollLeft))
@@ -71,7 +70,6 @@ async function mouseDrag(page: Page, dx: number, dy = 0, release = true) {
 }
 test.beforeEach(async ({ page }) => {
   await page.goto('/');
-  await page.locator('#back-index').click();
 });
 test('BF04 first entry shows winter behind smaller opaque guide and acknowledgment at article bottom', async ({
   page,
@@ -96,7 +94,7 @@ test('BF04 first entry shows winter behind smaller opaque guide and acknowledgme
   ).toBe(true);
   await expect(page.locator('[data-action="page-2"]')).toHaveAttribute('data-locked', 'true');
 });
-test('BF04 second event entry never auto-opens, Help reopens saved page at top', async ({
+test('Final QA incomplete Event reentry auto-opens first unread page; Help reopens at top', async ({
   page,
 }) => {
   await enter(page);
@@ -109,7 +107,8 @@ test('BF04 second event entry never auto-opens, Help reopens saved page at top',
   await expect(page.locator('#event-world')).toBeVisible();
   await page.locator('#event-enter').click();
   await expect(page.locator('#event-save-status')).toHaveText('SAVED');
-  await expect(page.locator('#mini-window')).toBeHidden();
+  await expect(page.locator('#mini-window')).toBeVisible();
+  await page.locator('[data-action="mini-close"]').click();
   await page.locator('#reopen').click();
   await expect(page.locator('#page-title')).toHaveText('Page 3 / 5');
   expect(await page.locator('.guide-page[data-page="3"]').evaluate((e) => e.scrollTop)).toBe(0);
@@ -221,7 +220,7 @@ test('BF04 vertical mouse intent locks and scrolls without changing page', async
   await expect(page.locator('#page-title')).toHaveText('Page 1 / 5');
   expect((await readState(page)).acknowledgedPages).toEqual([]);
 });
-test('BF04 approved chat contract: reload opens world; Help restores guide progress at top', async ({
+test('Final QA reload opens index then Module 04 world; Event resumes guide progress at top', async ({
   page,
 }) => {
   await enter(page);
@@ -233,7 +232,6 @@ test('BF04 approved chat contract: reload opens world; Help restores guide progr
   await expect(page.locator('#event-world')).toBeVisible();
   await expect(page.locator('#mini-window')).toBeHidden();
   await page.locator('#event-enter').click();
-  await page.locator('#reopen').click();
   await expect(page.locator('#mini-window')).toBeVisible();
   await expect(page.locator('#page-title')).toHaveText('Page 3 / 5');
   expect((await readState(page)).acknowledgedPages).toEqual([1, 2]);
@@ -320,7 +318,6 @@ test('BF04 narrow touch tabs allow taps, repeated surface swipes and orientation
   });
   const page = await context.newPage();
   await page.goto('/');
-  await page.locator('#back-index').click();
   await page.locator('.index [data-open="actions"]').tap();
   await expect(page.locator('#actions')).toBeVisible();
   await touchSwipe(page, '.index [data-open="actions"]', -130);
@@ -346,7 +343,6 @@ test('BF04 native vertical touch article scrolling and live touch page navigatio
   });
   const page = await context.newPage();
   await page.goto('/');
-  await page.locator('#back-index').click();
   await enter(page);
   await touchSwipe(page, '#guide-pages', 2, -130);
   await expect
@@ -659,7 +655,7 @@ test('BF04 experimental guide settings edit runtime thresholds and persist witho
   await expect(page.locator('[data-config="touchSlopMultiplier"]')).toHaveValue('1.25');
   await expect(page.locator('#effective-slop')).toHaveText('7.68 px');
 });
-test('BF04 reload preserves early closed and completed reference modes without repeated auto-open', async ({
+test('Final QA reload resumes unfinished reading automatically; completed reference stays manual', async ({
   page,
 }) => {
   await enter(page);
@@ -670,9 +666,7 @@ test('BF04 reload preserves early closed and completed reference modes without r
   await open(page);
   await expect(page.locator('#event-world')).toBeVisible();
   await page.locator('#event-enter').click();
-  await expect(page.locator('#mini-window')).toBeHidden();
-  if (await page.locator('#event-world').isVisible()) await page.locator('#event-enter').click();
-  await page.locator('#reopen').click();
+  await expect(page.locator('#mini-window')).toBeVisible();
   await expect(page.locator('#page-title')).toHaveText('Page 2 / 5');
   for (let n = 2; n <= 5; n++) await ack(page, n);
   await page.locator('[data-action="mini-close"]').click();

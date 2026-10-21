@@ -1,4 +1,10 @@
 # Dark Kingdom War — UI Interaction Lab
+
+> Later owner-approved [Final QA 01–06](FINAL_QA_01_06_SPEC.md) supersedes the
+> Lab startup and unfinished-guide resume rules below. Lab opens its index;
+> explicitly selected Module 04 starts at World. Incomplete Event entry resumes
+> the first unacknowledged page automatically. Expanded composer reveals ~3.5 lines.
+
 ## Codex Cloud implementation specification: Module 04 chat, state, gesture fixes
 
 **Status:** approved for implementation. **Repository:** `VeneDict-x/dkw-ui-interaction-lab`. **Deployment:** https://venedict-x.github.io/dkw-ui-interaction-lab/.

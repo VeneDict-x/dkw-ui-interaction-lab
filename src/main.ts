@@ -348,7 +348,7 @@ function closePanel() {
   $('home').focus({ preventScroll: true });
 }
 root
-  .querySelectorAll<HTMLElement>('.index nav,.home-module-strip')
+  .querySelectorAll<HTMLElement>('.index nav,.home-module-strip,.home-grid')
   .forEach((strip) => bindModuleStrip(strip, () => config, openPanel));
 $('back-index').onclick = closePanel;
 $('close-test').onclick = closePanel;
@@ -909,5 +909,4 @@ syncSteps();
 applyConfig();
 renderUI();
 
-// Every fresh app start and real reload begins on Module 04 world; durable progress stays independent.
-openPanel('navigation');
+// Lab startup/reload stays at the experiment index. Opening Module 04 starts its world separately.

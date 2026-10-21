@@ -35,8 +35,10 @@ export function eventTransition(state: EventState, command: EventCommand): Event
       // Repeated activations queued before the first durable write are not a new visit.
       if (s.currentScreen === 'event') break;
       s.currentScreen = 'event';
-      s.guideOpen = !s.eventEntered;
-      if (!s.eventEntered) s.lastPage = 1;
+      s.guideOpen = !s.guideCompleted;
+      // Reading progress is the durable acknowledgment prefix, not the last viewed article.
+      // Every real entry resumes the first unread page; Help within a visit keeps lastPage.
+      if (!s.guideCompleted) s.lastPage = s.acknowledgedPages.length + 1;
       s.eventEntered = true;
       break;
     case 'leave':

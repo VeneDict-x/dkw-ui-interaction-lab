@@ -164,7 +164,7 @@
   width: 100%;
   min-height: 48px;
   height: 48px;
-  max-height: 96px;
+  max-height: 108px;
   resize: none;
   padding: 11px 8px;
   line-height: 24px;
@@ -299,6 +299,10 @@
   -webkit-touch-callout: none;
   font-size: 12px;
   box-shadow: none;
+}
+.home-grid button[data-open] {
+  /* The index document must also pan when the finger starts on a large card. */
+  touch-action: auto;
 }
 #chat-messages {
   display: flex;
